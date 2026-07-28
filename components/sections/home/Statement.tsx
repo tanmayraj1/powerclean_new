@@ -11,8 +11,14 @@ export function Statement() {
           className="text-[clamp(24px,3.4vw,40px)] font-semibold leading-[1.35] tracking-[-0.01em]"
         />
       </div>
-      <div className="overflow-hidden pb-[42px] pt-[30px]">
-        <Marquee skew={-2} speed={1.1} reactive trackStyle={{ gap: 56 }}>
+      <div className="overflow-hidden py-10">
+        <Marquee
+          skew={-2}
+          speed={1.1}
+          reactive
+          className="py-2"
+          trackStyle={{ gap: 56 }}
+        >
           <span className="text-[clamp(42px,6.5vw,92px)] font-bold leading-[1.15] tracking-[-0.03em] text-navy">
             PRECISION CLEANING
           </span>

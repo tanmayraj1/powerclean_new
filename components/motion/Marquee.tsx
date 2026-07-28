@@ -72,7 +72,9 @@ export function Marquee({
       pos += dir * s;
       if (pos <= -half) pos += half;
       if (pos > 0) pos -= half;
-      track.style.transform = `skewY(${skew}deg) translate3d(${pos}px,0,0)`;
+      // translate only — the skew lives on the wrapper so the band never
+      // drifts vertically as it scrolls
+      track.style.transform = `translate3d(${pos}px,0,0)`;
       raf = requestAnimationFrame(step);
     };
     raf = requestAnimationFrame(step);
@@ -84,7 +86,14 @@ export function Marquee({
   }, [reduced, speed, skew, reactive]);
 
   return (
-    <div className={className} style={{ overflow: "hidden", ...style }}>
+    <div
+      className={className}
+      style={{
+        overflow: "hidden",
+        transform: skew ? `skewY(${skew}deg)` : undefined,
+        ...style,
+      }}
+    >
       <div
         ref={trackRef}
         className={trackClassName}
@@ -94,7 +103,6 @@ export function Marquee({
           whiteSpace: "nowrap",
           width: "max-content",
           willChange: "transform",
-          transform: skew ? `skewY(${skew}deg)` : undefined,
           ...trackStyle,
         }}
       >
