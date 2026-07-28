@@ -20,7 +20,7 @@ export function Resources() {
           <Reveal key={r.title} dir="up" delay={i * 120}>
             <a
               href="#"
-              className="group block rounded-card border border-line-2 bg-white px-3 pb-5 pt-3 no-underline transition-[transform,box-shadow] duration-[350ms] hover:-translate-y-1.5 hover:shadow-card-lg"
+              className="group block rounded-card bg-[linear-gradient(170deg,#ffffff_0%,#fbfdfc_60%,#f4faf7_100%)] px-3 pb-5 pt-3 no-underline ring-1 ring-inset ring-line-2 transition-[transform,box-shadow,ring-color] duration-[350ms] hover:-translate-y-1.5 hover:shadow-card-lg hover:ring-green/25"
             >
               <div className="relative mb-4 h-[180px] overflow-hidden rounded-img">
                 <ImageSlot brief={r.image} className="absolute inset-0" />

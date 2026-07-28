@@ -9,7 +9,10 @@ export function FaqList({ faqs }: { faqs: Faq[] }) {
   return (
     <div className="flex flex-col gap-2.5">
       {faqs.map((f, i) => (
-        <div key={i} className="overflow-hidden rounded-2xl bg-white">
+        <div
+          key={i}
+          className="overflow-hidden rounded-2xl bg-[linear-gradient(170deg,#ffffff,#fafdfb)] ring-1 ring-inset ring-line-2 transition-shadow duration-300 hover:shadow-[0_10px_28px_-18px_rgba(41,47,110,.35)]"
+        >
           <button
             onClick={() => toggle(i)}
             aria-expanded={open === i}

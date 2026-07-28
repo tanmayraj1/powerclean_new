@@ -5,6 +5,7 @@ import { Reveal } from "@/components/motion/Reveal";
 import { CountUp } from "@/components/motion/CountUp";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { ImageSlot } from "@/components/ui/ImageSlot";
+import { Backdrop } from "@/components/ui/Backdrop";
 import { siteConfig, testimonials } from "@/lib/site-config";
 
 /** Testimonial collage + 3-quote carousel (first quote is the real TVS one). */
@@ -13,7 +14,8 @@ export function Testimonials() {
   const quote = testimonials[t];
 
   return (
-    <div className="mx-auto max-w-[1320px] px-5 py-[clamp(40px,6vw,80px)]">
+    <div className="relative isolate mx-auto max-w-[1320px] px-5 py-[clamp(40px,6vw,80px)]">
+      <Backdrop />
       <Reveal dir="up" className="mb-[18px]">
         <Eyebrow label="TESTIMONIALS" />
       </Reveal>

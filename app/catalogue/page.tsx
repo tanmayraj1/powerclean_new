@@ -5,6 +5,7 @@ import { SectionPanel } from "@/components/ui/SectionPanel";
 import { RippleDivider } from "@/components/ui/RippleDivider";
 import { CtaBanner } from "@/components/ui/CtaBanner";
 import { Reveal } from "@/components/motion/Reveal";
+import { Backdrop } from "@/components/ui/Backdrop";
 import { CatalogueGrid } from "@/components/sections/catalogue/CatalogueGrid";
 import { categories, products } from "@/lib/catalogue";
 import { propertyTags } from "@/lib/solutions";
@@ -56,7 +57,9 @@ export default function CataloguePage() {
       </SectionPanel>
 
       {/* FULL CATALOGUE */}
-      <div className="mx-auto max-w-[1320px] px-5 pb-5 pt-[clamp(40px,6vw,72px)]">
+      <div className="relative isolate mx-auto max-w-[1320px] px-5 pb-5 pt-[clamp(40px,6vw,72px)]">
+        <Backdrop />
+        <Backdrop variant="rings" className="right-[-12%] top-[6%] h-[560px] w-[560px]" />
         <SectionHeading
           eyebrow="ALL PRODUCTS"
           title="Browse the Full Range"

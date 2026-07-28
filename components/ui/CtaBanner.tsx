@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { Reveal } from "@/components/motion/Reveal";
 import { Magnetic } from "@/components/motion/Magnetic";
 import { TransitionLink } from "@/components/layout/TransitionLink";
-import { ImageSlot } from "./ImageSlot";
+import { HeroBackdrop } from "./HeroBackdrop";
 import { Eyebrow } from "./Eyebrow";
 import { Arrow } from "./Arrow";
 
@@ -12,7 +12,8 @@ type CtaBannerProps = {
   body: string;
   ctaLabel: string;
   ctaHref: string;
-  imageBrief: string;
+  /** shot brief, retained on call sites for when real photography lands */
+  imageBrief?: string;
   /** green clip-path wedge on the right (Solutions variant) */
   wedge?: boolean;
   minHeight?: number;
@@ -29,7 +30,6 @@ export function CtaBanner({
   body,
   ctaLabel,
   ctaHref,
-  imageBrief,
   wedge,
   minHeight = 420,
   extra,
@@ -40,8 +40,10 @@ export function CtaBanner({
         className="relative mx-auto flex max-w-[1320px] items-center justify-center overflow-hidden rounded-section bg-[linear-gradient(120deg,#23273f,#292F6E_60%,#333b7e)]"
         style={{ minHeight }}
       >
-        <ImageSlot brief={imageBrief} className="absolute inset-0" />
-        <div className="pointer-events-none absolute inset-0 bg-ink/45" />
+        {/* No photography yet: the branded ripple backdrop reads as a designed
+            panel rather than an empty photo slot. `imageBrief` is kept as the
+            shot brief for when real photography lands. */}
+        <HeroBackdrop />
         {wedge && (
           <div className="pointer-events-none absolute -right-[8%] inset-y-0 w-[30%] bg-[linear-gradient(rgba(0,166,81,.3),rgba(0,166,81,.12))] [clip-path:polygon(38%_0,100%_0,100%_100%,0_100%)]" />
         )}

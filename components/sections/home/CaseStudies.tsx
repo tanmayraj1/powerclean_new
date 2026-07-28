@@ -4,13 +4,16 @@ import { Reveal } from "@/components/motion/Reveal";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { ImageSlot } from "@/components/ui/ImageSlot";
 import { AccordionBody, useAccordion } from "@/components/ui/Accordion";
+import { Backdrop } from "@/components/ui/Backdrop";
 import { caseStudies } from "@/lib/site-config";
 
 /** Case studies & events: featured image card + plus-icon accordion. */
 export function CaseStudies() {
   const { open, toggle } = useAccordion(0);
   return (
-    <div className="mx-auto max-w-[1320px] px-5 py-[clamp(36px,6vw,72px)]">
+    <div className="relative isolate mx-auto max-w-[1320px] px-5 py-[clamp(36px,6vw,72px)]">
+      <Backdrop />
+      <Backdrop variant="rings" className="right-[-8%] top-[-10%] h-[520px] w-[520px]" />
       <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] items-start gap-7">
         <Reveal dir="left">
           <Eyebrow label="CASE STUDIES & EVENTS" className="mb-3.5" />
@@ -36,7 +39,10 @@ export function CaseStudies() {
         </Reveal>
         <Reveal dir="right" className="flex flex-col gap-2.5">
           {caseStudies.map((a, i) => (
-            <div key={i} className="overflow-hidden rounded-2xl bg-white">
+            <div
+              key={i}
+              className="overflow-hidden rounded-2xl bg-[linear-gradient(170deg,#ffffff,#fafdfb)] ring-1 ring-inset ring-line-2"
+            >
               <button
                 onClick={() => toggle(i)}
                 aria-expanded={open === i}

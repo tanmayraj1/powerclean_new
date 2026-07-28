@@ -5,6 +5,7 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
 import { FaqList } from "@/components/ui/FaqList";
 import { Arrow } from "@/components/ui/Arrow";
 import { TransitionLink } from "@/components/layout/TransitionLink";
+import { Backdrop } from "@/components/ui/Backdrop";
 import { homeFaqs, siteConfig } from "@/lib/site-config";
 
 const CHIPS = ["Products", "Safety", "Supply & Logistics"];
@@ -12,7 +13,9 @@ const CHIPS = ["Products", "Safety", "Supply & Logistics"];
 /** FAQ accordion + filter chips + navy promo card. */
 export function HomeFaq() {
   return (
-    <div className="mx-auto max-w-[1320px] px-5 py-[clamp(36px,6vw,72px)]">
+    <div className="relative isolate mx-auto max-w-[1320px] px-5 py-[clamp(36px,6vw,72px)]">
+      <Backdrop />
+      <Backdrop variant="rings" className="left-[-10%] bottom-[-14%] h-[480px] w-[480px]" />
       <Reveal dir="up" className="mb-3.5">
         <Eyebrow label="FAQ" />
       </Reveal>

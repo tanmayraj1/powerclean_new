@@ -107,8 +107,39 @@
     overflow-x: clip;
   }
 
+  /**
+   * Page canvas: azure base + a fine navy dot grid + two soft brand glows.
+   * These read through the 12px gutters between the white section cards, so
+   * the page never falls back to a flat wash — no layout impact.
+   */
   body {
-    background: var(--color-azure);
+    background-color: var(--color-azure);
+    background-image:
+      radial-gradient(
+        ellipse 70% 45% at 12% 0%,
+        rgba(0, 166, 81, 0.07),
+        transparent 60%
+      ),
+      radial-gradient(
+        ellipse 60% 50% at 92% 22%,
+        rgba(41, 47, 110, 0.07),
+        transparent 60%
+      ),
+      radial-gradient(
+        ellipse 70% 40% at 50% 100%,
+        rgba(0, 166, 81, 0.05),
+        transparent 65%
+      ),
+      radial-gradient(
+        rgba(41, 47, 110, 0.07) 1px,
+        transparent 1px
+      );
+    background-size:
+      100% 100%,
+      100% 100%,
+      100% 100%,
+      22px 22px;
+    background-attachment: fixed, fixed, fixed, scroll;
     color: var(--color-ink);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;

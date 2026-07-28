@@ -52,8 +52,8 @@ export function SolutionCard({
       <TiltCard
         className={`rounded-card px-3 pb-5 pt-3 transition-shadow duration-[350ms] ${
           highlight
-            ? "bg-navy hover:shadow-[0_20px_44px_rgba(41,47,110,.3)]"
-            : "border border-line-2 bg-white hover:shadow-card-lg"
+            ? "bg-[linear-gradient(165deg,#2f3578,#292F6E_55%,#232853)] ring-1 ring-inset ring-white/12 hover:shadow-[0_20px_44px_rgba(41,47,110,.32)]"
+            : "bg-[linear-gradient(170deg,#ffffff_0%,#fbfdfc_55%,#f4faf7_100%)] ring-1 ring-inset ring-line-2 hover:shadow-card-lg"
         }`}
         onPointerEnter={aperture}
       >

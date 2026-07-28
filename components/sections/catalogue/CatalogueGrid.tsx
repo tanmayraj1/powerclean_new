@@ -99,8 +99,12 @@ function ProductCard({ product }: { product: CatalogueProduct }) {
   return (
     <TransitionLink
       href={`/catalogue/${product.slug}`}
-      className="group flex h-full flex-col rounded-card border border-line-2 bg-white p-6 no-underline transition-[transform,box-shadow] duration-[350ms] hover:-translate-y-1.5 hover:shadow-card-lg"
+      className="group relative flex h-full flex-col overflow-hidden rounded-card bg-[linear-gradient(170deg,#ffffff_0%,#fbfdfc_60%,#f3faf6_100%)] p-6 no-underline ring-1 ring-inset ring-line-2 transition-[transform,box-shadow,ring-color] duration-[350ms] hover:-translate-y-1.5 hover:shadow-card-lg hover:ring-green/25"
     >
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-green/[0.06] transition-transform duration-500 group-hover:scale-125"
+      />
       <div className="mb-3 flex items-center gap-2">
         <span className="h-[7px] w-[7px] shrink-0 rounded-full bg-green" />
         <span className="font-mono text-[10.5px] uppercase tracking-[0.12em] text-muted">
