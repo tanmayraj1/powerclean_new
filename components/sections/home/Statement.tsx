@@ -1,0 +1,48 @@
+import { Karaoke } from "@/components/motion/Karaoke";
+import { Marquee } from "@/components/motion/Marquee";
+
+/** Karaoke statement + skewed velocity-reactive marquee band. */
+export function Statement() {
+  return (
+    <>
+      <div className="mx-auto max-w-[980px] px-6 py-[clamp(48px,7vw,96px)] text-center">
+        <Karaoke
+          text="Power Clean formulations remove oil, grease, scale and residue — while protecting people, equipment and the environment."
+          className="text-[clamp(24px,3.4vw,40px)] font-semibold leading-[1.35] tracking-[-0.01em]"
+        />
+      </div>
+      <div className="overflow-hidden pb-[42px] pt-[30px]">
+        <Marquee skew={-2} speed={1.1} reactive trackStyle={{ gap: 56 }}>
+          <span className="text-[clamp(42px,6.5vw,92px)] font-bold leading-[1.15] tracking-[-0.03em] text-navy">
+            PRECISION CLEANING
+          </span>
+          <RingGlyph />
+          <span
+            className="text-[clamp(42px,6.5vw,92px)] font-bold tracking-[-0.03em] text-transparent"
+            style={{ WebkitTextStroke: "2px #292F6E" }}
+          >
+            POWERCLEAN
+          </span>
+          <RingGlyph />
+        </Marquee>
+      </div>
+    </>
+  );
+}
+
+function RingGlyph() {
+  return (
+    <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
+      <circle cx="17" cy="17" r="6" fill="none" stroke="#00A651" strokeWidth="2" />
+      <circle
+        cx="17"
+        cy="17"
+        r="13"
+        fill="none"
+        stroke="#00A651"
+        strokeWidth="1.2"
+        opacity=".5"
+      />
+    </svg>
+  );
+}

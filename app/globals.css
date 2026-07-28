@@ -1,26 +1,127 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* ── Power Clean design tokens (from powerclean_1/README.md — use exactly) ── */
+  --color-navy: #292f6e;
+  --color-green: #00a651;
+  --color-green-dark: #00934a;
+  --color-green-bright: #00c161;
+  --color-green-tint: #e6f7ee;
+  --color-azure: #f3f5f7;
+  --color-card-tint: #f8fafb;
+  --color-ink: #1d1f23;
+  --color-muted: #6a7080;
+  --color-muted-2: #8b90a0;
+  --color-muted-3: #4b5060;
+  --color-line: #e2e6ec;
+  --color-line-2: #edf0f4;
+  --color-line-3: #c9d2dd;
+  --color-karaoke-base: #c3c9d6;
+
+  --radius-section: 28px;
+  --radius-card: 20px;
+  --radius-card-lg: 22px;
+  --radius-img: 14px;
+  --radius-img-md: 16px;
+  --radius-img-lg: 18px;
+
+  --shadow-card: 0 18px 40px rgba(29, 31, 35, 0.08);
+  --shadow-card-lg: 0 20px 44px rgba(29, 31, 35, 0.1);
+  --shadow-cta: 0 6px 22px rgba(0, 166, 81, 0.35);
+  --shadow-cta-strong: 0 6px 22px rgba(0, 166, 81, 0.4);
+  --shadow-nav: 0 4px 28px rgba(29, 31, 35, 0.09);
+
+  --ease-site: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --font-sans: var(--font-poppins), sans-serif;
+  --font-mono: var(--font-plex-mono), monospace;
+
+  /* nav breakpoint: mobile menu below 940px (do not use lg) */
+  --breakpoint-nav: 940px;
+
+  --animate-pc-float: pcFloat 7s ease-in-out infinite;
+  --animate-pc-pulse: pcPulse 2.2s ease-in-out infinite;
+  --animate-pc-drift: pcDrift 12s ease-in-out infinite;
+  --animate-pc-rip-drift: pcRipDrift 26s ease-in-out infinite alternate;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@keyframes pcFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes pcPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 1;
+  }
+}
+@keyframes pcSheen {
+  0% {
+    transform: translateX(-130%) skewX(-18deg);
+  }
+  100% {
+    transform: translateX(230%) skewX(-18deg);
+  }
+}
+@keyframes pcDrift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+@keyframes pcRipDrift {
+  from {
+    transform: translate(-1.5%, -1.5%) scale(1);
+  }
+  to {
+    transform: translate(1.5%, 1.5%) scale(1.05);
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-azure);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-green);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: var(--color-green-tint);
+  color: var(--color-navy);
+}
+
+/* kill pure-CSS motion loops for reduced-motion users */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }

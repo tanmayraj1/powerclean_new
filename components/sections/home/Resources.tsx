@@ -1,0 +1,39 @@
+import { Reveal } from "@/components/motion/Reveal";
+import { SectionPanel } from "@/components/ui/SectionPanel";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { ImageSlot } from "@/components/ui/ImageSlot";
+import { resources } from "@/lib/site-config";
+
+/** Resources grid — 3 article cards (PLACEHOLDER articles). */
+export function Resources() {
+  return (
+    <SectionPanel id="resources" outerClassName="p-3">
+      <SectionHeading
+        eyebrow="RESOURCES"
+        title="The Cleaning Knowledge Center"
+        lede="Application notes and guides from our technical team."
+        className="mb-10 max-w-[620px]"
+      />
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-5">
+        {resources.map((r, i) => (
+          <Reveal key={r.title} dir="up" delay={i * 120}>
+            <a
+              href="#"
+              className="block rounded-card bg-card-tint px-3 pb-5 pt-3 no-underline transition-[transform,box-shadow] duration-[350ms] hover:-translate-y-1.5 hover:shadow-card-lg"
+            >
+              <div className="relative mb-4 h-[180px] overflow-hidden rounded-img">
+                <ImageSlot brief={r.image} className="absolute inset-0" />
+              </div>
+              <div className="px-2">
+                <h3 className="mb-2.5 text-base font-semibold leading-[1.4] text-navy">
+                  {r.title}
+                </h3>
+                <div className="text-xs text-muted">{r.byline}</div>
+              </div>
+            </a>
+          </Reveal>
+        ))}
+      </div>
+    </SectionPanel>
+  );
+}
