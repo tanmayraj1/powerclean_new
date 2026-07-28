@@ -12,7 +12,7 @@ import { Arrow } from "@/components/ui/Arrow";
 import { Reveal } from "@/components/motion/Reveal";
 import { Magnetic } from "@/components/motion/Magnetic";
 import { TransitionLink } from "@/components/layout/TransitionLink";
-import { contactFaqs, heroImages, siteConfig } from "@/lib/site-config";
+import { contactFaqs, siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -35,10 +35,6 @@ export default function ContactPage() {
         title="Let's Solve Your Cleaning Challenge"
         eyebrow="GET IN TOUCH"
         blurb="Program inquiries, trial requests, and partnership opportunities — our technical team replies within one business day."
-        image={{
-          src: heroImages.contact,
-          brief: "Hero photo — technical team in discussion on a plant floor",
-        }}
         minHeight="min(56vh, 480px)"
         titleClassName="text-[clamp(34px,4.8vw,70px)]"
       />
@@ -223,7 +219,7 @@ export default function ContactPage() {
                 <Magnetic>
                   <TransitionLink
                     href="/solutions"
-                    className="group inline-block rounded-full bg-green px-6 py-3 text-[13.5px] font-semibold text-white no-underline transition-colors hover:bg-green-bright"
+                    className="group inline-block rounded-full bg-green-cta px-6 py-3 text-[13.5px] font-semibold text-white no-underline transition-colors hover:bg-green-bright"
                   >
                     Explore Our Solutions <Arrow />
                   </TransitionLink>

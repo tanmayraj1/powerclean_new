@@ -153,7 +153,7 @@ export function InquiryForm({ variant }: InquiryFormProps) {
           <button
             type="submit"
             disabled={pending}
-            className="group cursor-pointer rounded-full border-none bg-green px-[26px] py-[13px] font-sans text-sm font-semibold text-white shadow-cta transition-colors hover:bg-green-dark active:scale-[.96] disabled:opacity-70"
+            className="group cursor-pointer rounded-full border-none bg-green-cta px-[26px] py-[13px] font-sans text-sm font-semibold text-white shadow-cta transition-colors hover:bg-green-cta-dark active:scale-[.96] disabled:opacity-70"
           >
             {pending
               ? "Sending…"

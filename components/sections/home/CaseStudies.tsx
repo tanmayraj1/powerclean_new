@@ -43,7 +43,7 @@ export function CaseStudies() {
                 className="flex w-full cursor-pointer items-center justify-between gap-3.5 border-none bg-transparent px-5 py-[18px] text-left font-sans"
               >
                 <span className="flex items-center gap-3.5">
-                  <span className="text-[11px] font-semibold tracking-[0.1em] text-green">
+                  <span className="text-[11px] font-semibold tracking-[0.1em] text-green-deep">
                     {a.kind}
                   </span>
                   <span className="text-[15px] font-semibold text-navy">

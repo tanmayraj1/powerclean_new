@@ -91,7 +91,7 @@ export function SolutionCard({
             }`}
           >
             View Details{" "}
-            <span className="flex h-[26px] w-[26px] items-center justify-center rounded-full bg-green text-[13px] text-white">
+            <span className="flex h-[26px] w-[26px] items-center justify-center rounded-full bg-green-cta text-[13px] text-white">
               <Arrow />
             </span>
           </TransitionLink>

@@ -1,14 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Parallax } from "@/components/motion/Parallax";
 import { Reveal } from "@/components/motion/Reveal";
 import { CountUp } from "@/components/motion/CountUp";
 import { Scramble } from "@/components/motion/Scramble";
 import { Magnetic } from "@/components/motion/Magnetic";
 import { TransitionLink } from "@/components/layout/TransitionLink";
-import { ImageSlot } from "@/components/ui/ImageSlot";
-import { siteConfig, heroImages } from "@/lib/site-config";
+import { HeroBackdrop } from "@/components/ui/HeroBackdrop";
+import { siteConfig } from "@/lib/site-config";
 
 /** Home hero — 2-line clipped headline, rotating industry word, glass stat card. */
 export function HomeHero() {
@@ -22,18 +21,9 @@ export function HomeHero() {
 
   return (
     <div className="px-3 pt-3">
-      <div className="relative flex min-h-[min(88vh,780px)] overflow-hidden rounded-section bg-[linear-gradient(135deg,#23273f_0%,#292F6E_45%,#3a4188_100%)]">
-        <Parallax className="absolute inset-0">
-          <ImageSlot
-            brief="Hero photo — technician in navy workwear spray-cleaning a large metal part on a factory floor"
-            src={heroImages.home}
-            className="absolute inset-0"
-            sizes="100vw"
-            eager
-          />
-        </Parallax>
-        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,rgba(29,31,35,.78)_0%,rgba(29,31,35,.28)_45%,rgba(41,47,110,.18)_100%)]" />
-        <div className="pointer-events-none relative z-[2] flex w-full flex-wrap items-end justify-between gap-7 self-end p-[clamp(24px,4vw,56px)]">
+      <div className="relative flex min-h-[min(84vh,720px)] overflow-hidden rounded-section bg-[linear-gradient(135deg,#23273f_0%,#292F6E_45%,#3a4188_100%)]">
+        <HeroBackdrop />
+        <div className="relative z-[2] flex w-full flex-wrap items-center justify-between gap-10 self-center p-[clamp(24px,4vw,56px)] pt-[clamp(104px,12vw,150px)]">
           <div className="min-w-[min(100%,320px)] max-w-[680px] flex-[1_1_420px]">
             <div className="overflow-hidden">
               <Reveal
@@ -78,7 +68,7 @@ export function HomeHero() {
           <Reveal
             dir="right"
             delay={500}
-            className="pointer-events-auto max-w-[360px] flex-[0_1_360px]"
+            className="max-w-[360px] flex-[0_1_360px]"
           >
             <div className="mb-4 rounded-img-lg border border-white/18 bg-white/12 px-[18px] py-4 backdrop-blur-[14px]">
               <div className="flex items-baseline gap-1.5">
@@ -109,7 +99,7 @@ export function HomeHero() {
               <Magnetic>
                 <TransitionLink
                   href="/contact"
-                  className="inline-block rounded-full bg-green px-6 py-[13px] text-sm font-semibold text-white no-underline shadow-cta-strong transition-colors hover:bg-green-dark"
+                  className="inline-block rounded-full bg-green-cta px-6 py-[13px] text-sm font-semibold text-white no-underline shadow-cta-strong transition-colors hover:bg-green-cta-dark"
                 >
                   Request a Consultation
                 </TransitionLink>

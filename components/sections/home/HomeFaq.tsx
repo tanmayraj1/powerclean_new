@@ -57,7 +57,7 @@ export function HomeFaq() {
               <Magnetic>
                 <TransitionLink
                   href="/contact"
-                  className="group inline-block rounded-full bg-green px-6 py-3 text-[13.5px] font-semibold text-white no-underline transition-colors hover:bg-green-bright"
+                  className="group inline-block rounded-full bg-green-cta px-6 py-3 text-[13.5px] font-semibold text-white no-underline transition-colors hover:bg-green-bright"
                 >
                   Contact Our Team <Arrow />
                 </TransitionLink>

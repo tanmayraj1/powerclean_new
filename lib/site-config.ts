@@ -295,12 +295,3 @@ export const industryOptions = [
   "General Engineering",
   "Other",
 ];
-
-// Temporary stock hero images (loremflickr) — swap for real photography.
-export const heroImages = {
-  home: "https://loremflickr.com/1920/1080/factory,worker?lock=101",
-  about: "https://loremflickr.com/1920/900/engineer,plant?lock=118",
-  solutions: "https://loremflickr.com/1920/900/industrial,machine?lock=130",
-  detail: "https://loremflickr.com/1920/900/machinery,washing?lock=138",
-  contact: "https://loremflickr.com/1920/800/engineers,meeting?lock=150",
-} as const;

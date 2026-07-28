@@ -58,7 +58,7 @@ export function CtaBanner({
             <Magnetic>
               <TransitionLink
                 href={ctaHref}
-                className="group inline-block rounded-full bg-green px-7 py-[13px] text-sm font-semibold text-white no-underline shadow-cta transition-colors hover:bg-green-dark"
+                className="group inline-block rounded-full bg-green-cta px-7 py-[13px] text-sm font-semibold text-white no-underline shadow-cta transition-colors hover:bg-green-cta-dark"
               >
                 {ctaLabel} <Arrow />
               </TransitionLink>

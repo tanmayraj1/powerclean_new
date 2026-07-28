@@ -12,7 +12,7 @@ import { CountUp } from "@/components/motion/CountUp";
 import { DrawPath } from "@/components/motion/DrawPath";
 import { TransitionLink } from "@/components/layout/TransitionLink";
 import { Milestones } from "@/components/sections/about/Milestones";
-import { heroImages, siteConfig, team } from "@/lib/site-config";
+import { siteConfig, team } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "About",
@@ -57,11 +57,6 @@ export default function AboutPage() {
         title="Engineering Cleaner Manufacturing"
         eyebrow="ABOUT POWER CLEAN"
         blurb="Helping Indian manufacturers clean better, spend less, and meet every compliance bar — with chemistry built in-house."
-        image={{
-          src: heroImages.about,
-          brief:
-            "Hero photo — engineers reviewing a cleaning line inside a modern plant",
-        }}
         minHeight="min(66vh, 560px)"
       />
 

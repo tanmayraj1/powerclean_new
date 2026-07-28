@@ -50,7 +50,7 @@ export function SiteFooter() {
               />
               <button
                 type="button"
-                className="cursor-pointer rounded-full border-none bg-green px-5 py-2.5 font-sans text-[13px] font-semibold text-white transition-colors hover:bg-green-dark"
+                className="cursor-pointer rounded-full border-none bg-green-cta px-5 py-2.5 font-sans text-[13px] font-semibold text-white transition-colors hover:bg-green-cta-dark"
               >
                 Subscribe
               </button>

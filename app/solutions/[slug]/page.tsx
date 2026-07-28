@@ -23,7 +23,6 @@ import {
   packagingRows,
   solutions,
 } from "@/lib/solutions";
-import { heroImages } from "@/lib/site-config";
 
 export function generateStaticParams() {
   return solutions.map((s) => ({ slug: s.slug }));
@@ -59,7 +58,6 @@ export default async function SolutionDetailPage(props: {
         title={solution.name}
         eyebrow="SOLUTION DETAILS"
         blurb={solution.tagline}
-        image={{ src: heroImages.detail, brief: solution.heroBrief }}
         minHeight="min(58vh, 500px)"
         titleClassName="text-[clamp(34px,4.6vw,66px)]"
       />
@@ -122,7 +120,7 @@ export default async function SolutionDetailPage(props: {
             <Magnetic style={{ display: "block" }}>
               <TransitionLink
                 href="/contact"
-                className="group block rounded-full bg-green p-[13px] text-center text-sm font-semibold text-white no-underline shadow-[0_6px_20px_rgba(0,166,81,.3)] transition-colors hover:bg-green-dark"
+                className="group block rounded-full bg-green-cta p-[13px] text-center text-sm font-semibold text-white no-underline shadow-[0_6px_20px_rgba(0,166,81,.3)] transition-colors hover:bg-green-cta-dark"
               >
                 Request a Sample <Arrow />
               </TransitionLink>
@@ -298,7 +296,11 @@ export default async function SolutionDetailPage(props: {
                 <div className="text-[15px] font-semibold text-navy">
                   {row.title}
                 </div>
-                <div className="mt-0.5 text-[12.5px] text-muted">{row.body}</div>
+                <div
+                  className={`mt-0.5 text-[12.5px] ${row.highlight ? "text-muted-3" : "text-muted"}`}
+                >
+                  {row.body}
+                </div>
               </div>
               {row.highlight ? (
                 <span className="rounded-full bg-white px-3 py-[5px] text-xs font-semibold text-navy">

@@ -6,7 +6,7 @@ import { SolutionCard } from "@/components/ui/SolutionCard";
 import { RippleDivider } from "@/components/ui/RippleDivider";
 import { CtaBanner } from "@/components/ui/CtaBanner";
 import { Reveal } from "@/components/motion/Reveal";
-import { heroImages, industries } from "@/lib/site-config";
+import { industries } from "@/lib/site-config";
 import { solutions } from "@/lib/solutions";
 import { IndustryIcon } from "@/components/sections/solutions/IndustryIcon";
 
@@ -23,10 +23,6 @@ export default function SolutionsPage() {
         title="Solutions Built Around Your Line"
         eyebrow="POWER CLEAN SOLUTIONS"
         blurb="Water-based chemistry, solvent replacements, and rust protection — matched to your metals, soils, equipment, and compliance requirements."
-        image={{
-          src: heroImages.solutions,
-          brief: "Hero photo — parts washer in operation, components in solution",
-        }}
         minHeight="min(62vh, 540px)"
       />
 

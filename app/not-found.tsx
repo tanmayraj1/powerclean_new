@@ -16,7 +16,7 @@ export default function NotFound() {
         </p>
         <TransitionLink
           href="/"
-          className="rounded-full bg-green px-7 py-[13px] text-sm font-semibold text-white no-underline shadow-cta transition-colors hover:bg-green-dark"
+          className="rounded-full bg-green-cta px-7 py-[13px] text-sm font-semibold text-white no-underline shadow-cta transition-colors hover:bg-green-cta-dark"
         >
           Back to Home
         </TransitionLink>
