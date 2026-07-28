@@ -1,27 +1,27 @@
 # Client logos
 
-Drop the official logo files here using the exact filenames listed in
-`lib/site-config.ts` → `siteConfig.clients`:
+All seven client marks are present and render in colour. `ClientLogo` checks
+`public/logos/<file>` (filenames mapped in `lib/site-config.ts`) at build time
+and falls back to a same-size wordmark if a file is missing.
 
-| Client              | Filename            |
-| ------------------- | ------------------- |
-| BOSCH               | `bosch.svg`         |
-| TVS Group           | `tvs.svg`           |
-| Bharat Forge        | `bharat-forge.svg`  |
-| Murugappa Group     | `murugappa.svg`     |
-| Minda Group         | `minda.svg`         |
-| Sandhar Group       | `sandhar.svg`       |
-| Amalgamation Group  | `amalgamation.svg`  |
+| Client             | File                | Source                                        |
+| ------------------ | ------------------- | --------------------------------------------- |
+| BOSCH              | `bosch.svg`         | Wikimedia Commons (public domain)             |
+| TVS Group          | `tvs.svg`           | tvsmotor.com header lockup (colour)           |
+| Bharat Forge       | `bharat-forge.png`  | bharatforge.com via Wayback (dark/colour)     |
+| Murugappa Group    | `murugappa.svg`     | murugappa.com header lockup (#E3000F)         |
+| Minda Group        | `minda.png`         | unominda.com — **verify entity, see below**   |
+| Sandhar Group      | `sandhar.png`       | sandhargroup.com via Wayback (dark)           |
+| Amalgamation Group | `amalgamation.gif`  | Wikimedia Commons (public domain)             |
 
-Any file present is picked up automatically on the next build; names without a
-file fall back to a same-size typographic wordmark, so the strip always stays
-visually consistent.
+## Notes
 
-**Guidance**
-
-- Prefer SVG (PNG with transparency also works — change the extension in
-  `site-config.ts` to match).
-- Supply the horizontal/landscape lockup; marks are normalised to a 38px
-  optical height and rendered grayscale, going full colour on hover.
-- Use logos obtained from each company's official brand/press kit, and only
-  with their permission to show the relationship publicly.
+- **Minda is ambiguous.** The file is **UNO Minda** (formerly Minda Industries).
+  If the client is **Spark Minda** (Minda Corporation), replace `minda.png`.
+- Two sites only publish reversed (white) lockups for light-on-dark headers;
+  the versions here are the dark/colour variants suitable for the light strip.
+  Verified: no mark renders with an average luminance above 200.
+- Prefer replacing any of these with assets from the company's own brand kit
+  when available, and confirm each client is happy to be named publicly.
+- Marks are normalised to a 52px optical height in a 190px box and loaded
+  eagerly (the marquee moves them by transform, so lazy loading never fires).

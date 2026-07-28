@@ -23,7 +23,9 @@ export function ClientLogo({ name, file }: { name: string; file: string }) {
         <img
           src={`/logos/${file}`}
           alt={name}
-          loading="lazy"
+          // eager: the marquee moves marks by transform, so lazy-loaded logos
+          // that start off-screen never trigger a load
+          loading="eager"
           decoding="async"
           className="max-h-full max-w-full object-contain opacity-90 transition-opacity duration-300 hover:opacity-100"
         />

@@ -43,10 +43,10 @@ export const siteConfig = {
   clients: [
     { name: "BOSCH", file: "bosch.svg" },
     { name: "TVS GROUP", file: "tvs.svg" },
-    { name: "BHARAT FORGE", file: "bharat-forge.svg" },
+    { name: "BHARAT FORGE", file: "bharat-forge.png" },
     { name: "MURUGAPPA GROUP", file: "murugappa.svg" },
     { name: "MINDA GROUP", file: "minda.png" },
-    { name: "SANDHAR GROUP", file: "sandhar.svg" },
+    { name: "SANDHAR GROUP", file: "sandhar.png" },
     { name: "AMALGAMATION GROUP", file: "amalgamation.gif" },
   ],
 
