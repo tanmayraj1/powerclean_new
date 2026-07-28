@@ -34,15 +34,20 @@ export const siteConfig = {
     cityBbox: "77.52%2C12.87%2C77.80%2C13.08",
   },
 
-  // REAL — confirmed clients of Roovel Solutions / Power Clean
+  /**
+   * REAL — confirmed clients of Roovel Solutions / Power Clean.
+   * `file` points at public/logos/<file>; when the official asset is present
+   * it renders in place of the wordmark. Drop real logos there to upgrade —
+   * every mark is normalised to the same optical size by <ClientLogo>.
+   */
   clients: [
-    "BOSCH",
-    "TVS GROUP",
-    "BHARAT FORGE",
-    "MURUGAPPA GROUP",
-    "MINDA GROUP",
-    "SANDHAR GROUP",
-    "AMALGAMATION GROUP",
+    { name: "BOSCH", file: "bosch.svg" },
+    { name: "TVS GROUP", file: "tvs.svg" },
+    { name: "BHARAT FORGE", file: "bharat-forge.svg" },
+    { name: "MURUGAPPA GROUP", file: "murugappa.svg" },
+    { name: "MINDA GROUP", file: "minda.svg" },
+    { name: "SANDHAR GROUP", file: "sandhar.svg" },
+    { name: "AMALGAMATION GROUP", file: "amalgamation.svg" },
   ],
 
   stats: {
