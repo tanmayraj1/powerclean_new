@@ -8,7 +8,7 @@ const QUICK_LINKS = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Solutions", href: "/solutions" },
-  { label: "Products", href: "/solutions/power-clean-xl" },
+  { label: "Catalogue", href: "/catalogue" },
   { label: "Contact", href: "/contact" },
 ];
 

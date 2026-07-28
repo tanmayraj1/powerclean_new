@@ -45,9 +45,9 @@ export const siteConfig = {
     { name: "TVS GROUP", file: "tvs.svg" },
     { name: "BHARAT FORGE", file: "bharat-forge.svg" },
     { name: "MURUGAPPA GROUP", file: "murugappa.svg" },
-    { name: "MINDA GROUP", file: "minda.svg" },
+    { name: "MINDA GROUP", file: "minda.png" },
     { name: "SANDHAR GROUP", file: "sandhar.svg" },
-    { name: "AMALGAMATION GROUP", file: "amalgamation.svg" },
+    { name: "AMALGAMATION GROUP", file: "amalgamation.gif" },
   ],
 
   stats: {

@@ -11,13 +11,14 @@ const LINKS = [
   { key: "home", label: "Home", href: "/" },
   { key: "about", label: "About", href: "/about" },
   { key: "solutions", label: "Solutions", href: "/solutions" },
-  { key: "industries", label: "Industries", href: "/solutions#industries" },
+  { key: "catalogue", label: "Catalogue", href: "/catalogue" },
   { key: "resources", label: "Resources", href: "/#resources" },
 ];
 
 function activeKey(pathname: string): string {
   if (pathname === "/") return "home";
   if (pathname === "/about") return "about";
+  if (pathname.startsWith("/catalogue")) return "catalogue";
   if (pathname.startsWith("/solutions")) return "solutions";
   return "none";
 }
