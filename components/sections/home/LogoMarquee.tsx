@@ -26,7 +26,7 @@ export function LogoMarquee() {
       <Marquee
         speed={0.6}
         reactive={false}
-        trackStyle={{ gap: 72, opacity: 0.55 }}
+        trackStyle={{ gap: 72 }}
       >
         {siteConfig.clients.map((c, i) => (
           <span

@@ -18,19 +18,17 @@ type SolutionCardProps = {
   delay?: number;
   /** taller image on the Solutions index (210px vs 200px) */
   imageHeight?: number;
-  /** card surface — Home uses card-tint, Solutions index uses white */
-  surface?: "tint" | "white";
 };
 
 /**
  * Solution card: pointer tilt + ring-aperture image reveal
  * (clip-path circle 13% → 125%) + shadow lift + arrow nudge.
+ * The highlighted product renders as a navy accent card.
  */
 export function SolutionCard({
   solution,
   delay = 0,
   imageHeight = 200,
-  surface = "tint",
 }: SolutionCardProps) {
   const imgRef = useRef<HTMLDivElement>(null);
   const reduced = usePrefersReducedMotion();
@@ -48,14 +46,15 @@ export function SolutionCard({
   };
 
   const highlight = solution.highlight;
-  const bg = highlight
-    ? "bg-green-tint hover:shadow-[0_20px_44px_rgba(0,166,81,.16)]"
-    : `${surface === "white" ? "bg-white" : "bg-card-tint"} hover:shadow-card-lg`;
 
   return (
     <Reveal dir="up" delay={delay}>
       <TiltCard
-        className={`rounded-card px-3 pb-5 pt-3 transition-shadow duration-[350ms] ${bg}`}
+        className={`rounded-card px-3 pb-5 pt-3 transition-shadow duration-[350ms] ${
+          highlight
+            ? "bg-navy hover:shadow-[0_20px_44px_rgba(41,47,110,.3)]"
+            : "border border-line-2 bg-white hover:shadow-card-lg"
+        }`}
         onPointerEnter={aperture}
       >
         <div
@@ -66,24 +65,30 @@ export function SolutionCard({
           <ImageSlot brief={solution.cardImage} className="absolute inset-0" />
         </div>
         <div className="px-2">
-          <h3 className="mb-2 text-[19px] font-semibold text-navy">
+          <h3
+            className={`mb-2 text-[19px] font-semibold ${highlight ? "text-white" : "text-navy"}`}
+          >
             {solution.name}
           </h3>
           <p
-            className={`${highlight ? "mb-3.5 text-muted-3" : "mb-3 text-muted"} text-[13px] leading-[1.6]`}
+            className={`mb-3.5 text-[13px] leading-[1.6] ${highlight ? "text-white/75" : "text-muted"}`}
           >
             {solution.cardBlurb}
           </p>
-          {!highlight && (
-            <div className="mb-3.5 flex flex-wrap items-center gap-2 text-[12px] text-muted-3">
-              <span>{solution.cardTags[0]}</span>
-              <span className="h-1 w-1 rounded-full bg-green" />
-              <span>{solution.cardTags[1]}</span>
-            </div>
-          )}
+          <div
+            className={`mb-3.5 flex flex-wrap items-center gap-2 text-[12px] ${highlight ? "text-white/80" : "text-muted-3"}`}
+          >
+            <span>{solution.cardTags[0]}</span>
+            <span className="h-1 w-1 rounded-full bg-green" />
+            <span>{solution.cardTags[1]}</span>
+          </div>
           <TransitionLink
             href={`/solutions/${solution.slug}`}
-            className="group flex items-center justify-between rounded-full bg-white px-[18px] py-[11px] text-[13px] font-semibold text-navy no-underline transition-[transform,box-shadow,color] duration-300 hover:translate-x-1.5 hover:text-green hover:shadow-[0_10px_24px_rgba(29,31,35,.12)]"
+            className={`group flex items-center justify-between rounded-full px-[18px] py-[11px] text-[13px] font-semibold no-underline transition-[transform,box-shadow,color] duration-300 hover:translate-x-1.5 ${
+              highlight
+                ? "bg-white text-navy hover:text-green"
+                : "bg-azure text-navy hover:text-green hover:shadow-[0_10px_24px_rgba(29,31,35,.12)]"
+            }`}
           >
             View Details{" "}
             <span className="flex h-[26px] w-[26px] items-center justify-center rounded-full bg-green text-[13px] text-white">

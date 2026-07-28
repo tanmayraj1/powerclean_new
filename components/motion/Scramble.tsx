@@ -6,7 +6,8 @@ import { usePrefersReducedMotion } from "@/hooks/useMediaQuery";
 
 /**
  * Eyebrow decode-through-glyphs (~16 frames) — port of motion.js `scramble`.
- * SSRs the real text; scrambles post-mount only (no hydration mismatch).
+ * SSRs the real text; scrambles post-mount only. Screen readers get the real
+ * text via an sr-only twin; the animated glyphs stay aria-hidden.
  */
 export function Scramble({
   text,
@@ -60,7 +61,8 @@ export function Scramble({
   }, [text, reduced]);
 
   return (
-    <span ref={ref} className={className} aria-label={text}>
+    <span ref={ref} className={className}>
+      <span className="sr-only">{text}</span>
       <span aria-hidden="true">{display}</span>
     </span>
   );

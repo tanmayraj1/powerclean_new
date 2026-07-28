@@ -45,7 +45,6 @@ export default function SolutionsPage() {
               solution={s}
               delay={(i % 3) * 120}
               imageHeight={210}
-              surface="white"
             />
           ))}
         </div>
@@ -53,12 +52,13 @@ export default function SolutionsPage() {
 
       <RippleDivider />
 
-      {/* INDUSTRIES */}
-      <SectionPanel id="industries" outerClassName="p-3">
+      {/* INDUSTRIES — navy dark moment */}
+      <SectionPanel id="industries" tone="navy" outerClassName="p-3">
         <SectionHeading
           eyebrow="INDUSTRIES"
           title="Every Industry, One Standard"
           lede="Different soils, substrates, and compliance regimes — the same measured approach."
+          light
           className="mb-[42px] max-w-[620px]"
         />
         <div className="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-4">
@@ -67,15 +67,17 @@ export default function SolutionsPage() {
               key={ind.title}
               dir="up"
               delay={(i % 3) * 80}
-              className="rounded-img-lg bg-card-tint p-6 transition-[transform,box-shadow] duration-300 hover:-translate-y-[5px] hover:shadow-[0_14px_32px_rgba(29,31,35,.08)]"
+              className="rounded-img-lg bg-white/6 p-6 ring-1 ring-white/10 transition-[transform,background] duration-300 hover:-translate-y-[5px] hover:bg-white/10"
             >
-              <div className="mb-4 flex h-[42px] w-[42px] items-center justify-center rounded-xl bg-green-tint">
-                <IndustryIcon name={ind.icon} />
+              <div className="mb-4 flex h-[42px] w-[42px] items-center justify-center rounded-xl bg-green/20">
+                <IndustryIcon name={ind.icon} light />
               </div>
-              <h3 className="mb-2 text-base font-semibold text-navy">
+              <h3 className="mb-2 text-base font-semibold text-white">
                 {ind.title}
               </h3>
-              <p className="text-[13px] leading-[1.6] text-muted">{ind.body}</p>
+              <p className="text-[13px] leading-[1.6] text-white/65">
+                {ind.body}
+              </p>
             </Reveal>
           ))}
         </div>

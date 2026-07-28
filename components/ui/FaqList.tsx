@@ -16,7 +16,7 @@ export function FaqList({ faqs }: { faqs: Faq[] }) {
             className="flex w-full cursor-pointer items-center justify-between gap-3.5 border-none bg-transparent px-5 py-[18px] text-left font-sans"
           >
             <span className="flex items-center gap-4">
-              <span className="text-[13px] font-semibold text-muted-2">
+              <span className="text-[13px] font-semibold text-muted">
                 {`0${i + 1}`}
               </span>
               <span className="text-[15px] font-semibold text-navy">

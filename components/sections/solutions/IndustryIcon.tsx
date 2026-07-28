@@ -37,14 +37,20 @@ const PATHS: Record<string, React.ReactNode> = {
 };
 
 /** Inline stroke icons for the industries grid. */
-export function IndustryIcon({ name }: { name: string }) {
+export function IndustryIcon({
+  name,
+  light,
+}: {
+  name: string;
+  light?: boolean;
+}) {
   return (
     <svg
       width="20"
       height="20"
       viewBox="0 0 24 24"
       fill="none"
-      stroke="#292F6E"
+      stroke={light ? "#ffffff" : "#292F6E"}
       strokeWidth="1.8"
       aria-hidden="true"
     >

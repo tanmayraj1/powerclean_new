@@ -6,7 +6,10 @@ const nextConfig: NextConfig = {
   },
   images: {
     // Temporary stock hero images (see lib/site-config.ts) — replace with real photography.
-    remotePatterns: [new URL("https://loremflickr.com/**")],
+    remotePatterns: [
+      { protocol: "https", hostname: "loremflickr.com", pathname: "/**" },
+      { protocol: "https", hostname: "*.loremflickr.com", pathname: "/**" },
+    ],
     maximumRedirects: 5,
   },
 };

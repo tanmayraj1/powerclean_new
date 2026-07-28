@@ -66,10 +66,10 @@ export function IntroCurtain() {
     return () => cancelAnimationFrame(raf);
   }, [stage]);
 
-  // rings expand, hold 620ms, then wipe up
+  // rings expand while the 620ms hold runs, then the panel wipes up
   useEffect(() => {
     if (stage !== "rings") return;
-    const t = setTimeout(() => setStage("exit"), 1000 + 620);
+    const t = setTimeout(() => setStage("exit"), 620);
     return () => clearTimeout(t);
   }, [stage]);
 

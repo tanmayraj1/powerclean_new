@@ -146,7 +146,7 @@ export function CoreValues() {
               <span className="text-[12.5px] font-semibold text-navy">
                 Precision Engineering
               </span>
-              <span className="text-sm font-bold text-green">
+              <span className="text-sm font-bold text-green-deep">
                 <CountUp to={5} prefix="< " suffix=" µm" />
               </span>
             </div>

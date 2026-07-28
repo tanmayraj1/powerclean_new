@@ -5,6 +5,7 @@
   --color-navy: #292f6e;
   --color-green: #00a651;
   --color-green-dark: #00934a;
+  --color-green-deep: #007a3d; /* AA-passing green for small text on white */
   --color-green-bright: #00c161;
   --color-green-tint: #e6f7ee;
   --color-azure: #f3f5f7;
@@ -16,7 +17,8 @@
   --color-line: #e2e6ec;
   --color-line-2: #edf0f4;
   --color-line-3: #c9d2dd;
-  --color-karaoke-base: #c3c9d6;
+  /* unread karaoke words — dark enough for 3:1 large-text contrast on azure */
+  --color-karaoke-base: #7b8294;
 
   --radius-section: 28px;
   --radius-card: 20px;

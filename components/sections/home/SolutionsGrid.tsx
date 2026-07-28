@@ -3,10 +3,10 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { SolutionCard } from "@/components/ui/SolutionCard";
 import { solutions } from "@/lib/solutions";
 
-/** Six real Power Clean products in the signature tilt/aperture card grid. */
+/** Six real Power Clean products on a green-tint wash panel. */
 export function SolutionsGrid() {
   return (
-    <SectionPanel id="solutions" outerClassName="px-3 pb-3">
+    <SectionPanel id="solutions" tone="tint" outerClassName="px-3 pb-3">
       <SectionHeading
         eyebrow="SOLUTIONS"
         title="Cleaning Solutions for Every Industry"

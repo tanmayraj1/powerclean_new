@@ -104,7 +104,7 @@ export default async function SolutionDetailPage(props: {
             <div className="mb-[22px] grid grid-cols-2 gap-x-5 gap-y-4">
               {solution.specs.map((s) => (
                 <div key={s.label}>
-                  <div className="mb-[3px] text-[11px] text-muted-2">
+                  <div className="mb-[3px] text-[11px] text-muted">
                     {s.label}
                   </div>
                   <div className="font-mono text-[12.5px] font-semibold tracking-[-0.02em] text-ink">
@@ -132,14 +132,14 @@ export default async function SolutionDetailPage(props: {
       </div>
 
       {/* DILUTION MOTION GRAPHIC */}
-      <SectionPanel outerClassName="p-3">
+      <SectionPanel tone="tint" outerClassName="p-3">
         <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] items-center gap-9">
           <Reveal dir="left">
             <Eyebrow label="DILUTION" className="mb-3.5" />
             <h2 className="mb-4 text-[clamp(26px,3.2vw,40px)] font-semibold leading-[1.15] tracking-[-0.02em] text-navy">
               {solution.dilution.heading}
             </h2>
-            <p className="mb-6 text-[14.5px] leading-[1.7] text-muted">
+            <p className="mb-6 text-[14.5px] leading-[1.7] text-muted-3">
               {solution.dilution.body}
             </p>
             <div className="flex flex-wrap gap-[34px]">
@@ -153,12 +153,12 @@ export default async function SolutionDetailPage(props: {
                       suffix={s.suffix ?? ""}
                     />
                   </div>
-                  <div className="text-xs text-muted">{s.caption}</div>
+                  <div className="text-xs text-muted-3">{s.caption}</div>
                 </div>
               ))}
             </div>
           </Reveal>
-          <Reveal dir="right" className="rounded-card-lg bg-card-tint p-[30px]">
+          <Reveal dir="right" className="rounded-card-lg bg-white p-[30px] shadow-card">
             <div className="mb-[22px] text-[13px] font-semibold text-navy">
               {solution.dilution.barsTitle}
             </div>
@@ -167,7 +167,7 @@ export default async function SolutionDetailPage(props: {
                 <div className="mb-2 flex justify-between text-xs text-muted">
                   <span>{b.label}</span>
                   <span
-                    className={`font-semibold ${b.color === "green" ? "text-green" : "text-navy"}`}
+                    className={`font-semibold ${b.color === "green" ? "text-green-deep" : "text-navy"}`}
                   >
                     {b.value}
                   </span>
@@ -250,7 +250,9 @@ export default async function SolutionDetailPage(props: {
                   >
                     <span
                       className={`flex h-[30px] w-[30px] shrink-0 items-center justify-center rounded-full text-xs font-bold text-white ${
-                        "highlight" in s && s.highlight ? "bg-green" : "bg-navy"
+                        "highlight" in s && s.highlight
+                          ? "bg-green-deep"
+                          : "bg-navy"
                       }`}
                     >
                       {s.num}
@@ -361,7 +363,7 @@ export default async function SolutionDetailPage(props: {
             <Reveal key={r.slug} dir="up" delay={i * 120}>
               <TransitionLink
                 href={`/solutions/${r.slug}`}
-                className="block rounded-card bg-white px-3 pb-5 pt-3 no-underline transition-[transform,box-shadow] duration-[350ms] hover:-translate-y-1.5 hover:shadow-card-lg"
+                className="group block rounded-card border border-line-2 bg-white px-3 pb-5 pt-3 no-underline transition-[transform,box-shadow] duration-[350ms] hover:-translate-y-1.5 hover:shadow-card-lg"
               >
                 <div className="relative mb-4 h-[170px] overflow-hidden rounded-img">
                   <ImageSlot brief={r.cardImage} className="absolute inset-0" />

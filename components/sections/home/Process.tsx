@@ -41,14 +41,15 @@ const STEPS = [
   },
 ];
 
-/** 5-step engagement process — step 03 (the trial) carries the accent. */
+/** 5-step engagement process — a navy dark moment; step 03 carries the accent. */
 export function Process() {
   return (
-    <SectionPanel outerClassName="p-3">
+    <SectionPanel tone="navy" outerClassName="p-3">
       <SectionHeading
         eyebrow="PROCESS"
         title="How an Engagement Works"
         lede="A structured path from first site audit to a running, supported cleaning program."
+        light
         className="mb-[42px] max-w-[620px]"
       />
       <div className="mx-auto max-w-[980px]">
@@ -59,34 +60,34 @@ export function Process() {
               dir={s.dir}
               delay={i * 80}
               className={`flex items-start gap-[18px] rounded-img-lg px-[22px] py-5 transition-transform duration-300 hover:translate-x-1.5 ${
-                s.highlight ? "bg-green-tint" : "bg-card-tint"
+                s.highlight
+                  ? "bg-green/15 ring-1 ring-green/40"
+                  : "bg-white/6 ring-1 ring-white/10"
               }`}
             >
               <span
-                className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-full text-[15px] font-bold text-white ${
-                  s.highlight ? "bg-green" : "bg-navy"
+                className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-full text-[15px] font-bold ${
+                  s.highlight ? "bg-green-deep text-white" : "bg-white text-navy"
                 }`}
               >
                 {s.num}
               </span>
               <div className="flex-1">
                 <div className="flex flex-wrap justify-between gap-3">
-                  <h3 className="text-[17px] font-semibold text-navy">
+                  <h3 className="text-[17px] font-semibold text-white">
                     {s.title}
                   </h3>
                   <span
-                    className={`rounded-full bg-white px-3 py-[5px] font-mono text-[11px] ${
-                      s.highlight ? "font-semibold text-navy" : "text-muted"
+                    className={`rounded-full px-3 py-[5px] font-mono text-[11px] ${
+                      s.highlight
+                        ? "bg-white font-semibold text-navy"
+                        : "bg-white/12 text-white/80"
                     }`}
                   >
                     {s.time}
                   </span>
                 </div>
-                <p
-                  className={`mt-2 text-[13.5px] leading-[1.6] ${
-                    s.highlight ? "text-muted-3" : "text-muted"
-                  }`}
-                >
+                <p className="mt-2 text-[13.5px] leading-[1.6] text-white/65">
                   {s.body}
                 </p>
               </div>

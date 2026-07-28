@@ -144,7 +144,7 @@ export function InquiryForm({ variant }: InquiryFormProps) {
         </div>
       </div>
       <div className="mt-[18px] flex flex-wrap items-center justify-between gap-3.5">
-        <span className="max-w-[300px] text-xs text-muted-2">
+        <span className="max-w-[300px] text-xs text-muted">
           {variant === "home"
             ? "Our technical team responds within one business day."
             : "Our team will review your submission and contact you with next steps."}

@@ -62,9 +62,9 @@ export function SiteFooter() {
           </div>
           <div className="grid grid-cols-2 gap-7">
             <div>
-              <h4 className="mb-3.5 text-[15px] font-semibold text-navy">
+              <h3 className="mb-3.5 text-[15px] font-semibold text-navy">
                 Quick Links
-              </h4>
+              </h3>
               <div className="flex flex-col gap-2.5">
                 {QUICK_LINKS.map((l) => (
                   <TransitionLink
@@ -78,9 +78,9 @@ export function SiteFooter() {
               </div>
             </div>
             <div>
-              <h4 className="mb-3.5 text-[15px] font-semibold text-navy">
+              <h3 className="mb-3.5 text-[15px] font-semibold text-navy">
                 Social Media
-              </h4>
+              </h3>
               <div className="flex flex-col gap-2.5">
                 {SOCIAL_LINKS.map((l) => (
                   <a

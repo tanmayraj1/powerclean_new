@@ -2,12 +2,13 @@ import { Reveal } from "@/components/motion/Reveal";
 import { SectionPanel } from "@/components/ui/SectionPanel";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ImageSlot } from "@/components/ui/ImageSlot";
+import { Arrow } from "@/components/ui/Arrow";
 import { resources } from "@/lib/site-config";
 
-/** Resources grid — 3 article cards (PLACEHOLDER articles). */
+/** Resources grid on a green-tint wash — 3 article cards (PLACEHOLDER articles). */
 export function Resources() {
   return (
-    <SectionPanel id="resources" outerClassName="p-3">
+    <SectionPanel id="resources" tone="tint" outerClassName="p-3">
       <SectionHeading
         eyebrow="RESOURCES"
         title="The Cleaning Knowledge Center"
@@ -19,7 +20,7 @@ export function Resources() {
           <Reveal key={r.title} dir="up" delay={i * 120}>
             <a
               href="#"
-              className="block rounded-card bg-card-tint px-3 pb-5 pt-3 no-underline transition-[transform,box-shadow] duration-[350ms] hover:-translate-y-1.5 hover:shadow-card-lg"
+              className="group block rounded-card border border-line-2 bg-white px-3 pb-5 pt-3 no-underline transition-[transform,box-shadow] duration-[350ms] hover:-translate-y-1.5 hover:shadow-card-lg"
             >
               <div className="relative mb-4 h-[180px] overflow-hidden rounded-img">
                 <ImageSlot brief={r.image} className="absolute inset-0" />
@@ -28,7 +29,12 @@ export function Resources() {
                 <h3 className="mb-2.5 text-base font-semibold leading-[1.4] text-navy">
                   {r.title}
                 </h3>
-                <div className="text-xs text-muted">{r.byline}</div>
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-muted">{r.byline}</span>
+                  <span className="flex h-[26px] w-[26px] items-center justify-center rounded-full bg-green-tint text-[12px] text-green">
+                    <Arrow />
+                  </span>
+                </div>
               </div>
             </a>
           </Reveal>

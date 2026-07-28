@@ -156,7 +156,7 @@ export default function AboutPage() {
       </SectionPanel>
 
       {/* STORY + STATS */}
-      <SectionPanel outerClassName="p-3">
+      <SectionPanel tone="tint" outerClassName="p-3">
         <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] items-start gap-9">
           <Reveal dir="left">
             <Eyebrow label="OUR STORY" className="mb-3.5" />
@@ -165,7 +165,7 @@ export default function AboutPage() {
               precision cleaning — with technical know-how originally sourced
               from the USA and chemistry engineered in-house.
             </p>
-            <p className="mb-7 text-[14.5px] leading-[1.7] text-muted">
+            <p className="mb-7 text-[14.5px] leading-[1.7] text-muted-3">
               We don&apos;t just sell a chemical. Roovel Solutions engineers the
               complete cleaning process — the right chemical, the right
               machine, and the right process, delivered as one solution — down
@@ -185,7 +185,7 @@ export default function AboutPage() {
                   <div className="text-[clamp(34px,3.4vw,46px)] font-bold text-navy">
                     <CountUp to={s.count} suffix={s.suffix} />
                   </div>
-                  <div className="text-[13px] text-muted">{s.caption}</div>
+                  <div className="text-[13px] text-muted-3">{s.caption}</div>
                 </div>
               ))}
             </div>
