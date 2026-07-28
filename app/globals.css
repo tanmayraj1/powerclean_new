@@ -101,6 +101,12 @@
 /* Base styles MUST live in @layer base — unlayered rules outrank Tailwind's
    @layer utilities, which would silently override text-* colors on links. */
 @layer base {
+  /* Guard both html and body: clipping only body still lets a transient
+     wide child expand the layout viewport and shrink the page on mobile. */
+  html {
+    overflow-x: clip;
+  }
+
   body {
     background: var(--color-azure);
     color: var(--color-ink);

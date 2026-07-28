@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { poppins, plexMono } from "./fonts";
 import { LenisProvider } from "@/components/providers/LenisProvider";
@@ -24,6 +24,18 @@ export const metadata: Metadata = {
     siteConfig.name,
     siteConfig.company,
   ],
+};
+
+/**
+ * Layout always matches device width and starts at 1:1 — never zoomed out.
+ * Pinch-zoom IN stays available (up to 5×) as WCAG 1.4.4 requires; we never
+ * set user-scalable=no or maximum-scale=1.
+ */
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
 };
 
 export default function RootLayout({
