@@ -23,6 +23,9 @@ export function CaseStudies() {
           <div className="relative h-[300px] overflow-hidden rounded-card-lg">
             <ImageSlot
               brief="Photo — production line in operation, wide shot"
+              src="/production-line.png"
+              alt="Automated production line carrying cleaned aluminium housings through a plant"
+              sizes="(max-width: 940px) 100vw, 50vw"
               className="absolute inset-0"
             />
             <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,rgba(29,31,35,.7),transparent_55%)]" />

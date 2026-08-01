@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { Reveal } from "@/components/motion/Reveal";
 import { CountUp } from "@/components/motion/CountUp";
 import { Scramble } from "@/components/motion/Scramble";
@@ -22,6 +23,21 @@ export function HomeHero() {
   return (
     <div className="px-3 pt-3">
       <div className="relative flex min-h-[min(84vh,720px)] overflow-hidden rounded-section bg-[linear-gradient(135deg,#23273f_0%,#292F6E_45%,#3a4188_100%)]">
+        {/* Hero photograph — LCP image, so it loads eagerly at high priority. */}
+        <Image
+          src="/hero-bg.png"
+          alt=""
+          aria-hidden="true"
+          fill
+          sizes="100vw"
+          quality={90}
+          loading="eager"
+          fetchPriority="high"
+          className="object-cover object-center"
+        />
+        {/* Scrim: keeps the headline and stat card readable over the photo and
+            carries the navy/green brand cast. */}
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(105deg,rgba(29,31,35,.86)_0%,rgba(41,47,110,.72)_45%,rgba(35,39,63,.55)_100%)]" />
         <HeroBackdrop />
         <div className="relative z-[2] flex w-full flex-wrap items-center justify-between gap-10 self-center p-[clamp(24px,4vw,56px)] pt-[clamp(104px,12vw,150px)]">
           <div className="min-w-[min(100%,320px)] max-w-[680px] flex-[1_1_420px]">

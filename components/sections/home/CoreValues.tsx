@@ -139,6 +139,9 @@ export function CoreValues() {
         >
           <ImageSlot
             brief="Macro photo — foam breaking down grime on brushed steel"
+            src="/parts-cleaned.png"
+            alt="Precision-cleaned machined components — aluminium housing, copper connecting rod and stator — after a Power Clean wash cycle"
+            sizes="(max-width: 940px) 100vw, 33vw"
             className="absolute inset-0"
           />
           <div className="pointer-events-none absolute bottom-3.5 left-3.5 right-3.5 rounded-img-md bg-white/90 px-4 py-3.5 backdrop-blur-[10px]">

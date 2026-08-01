@@ -104,7 +104,12 @@ export function SiteFooter() {
           </div>
         </div>
 
-        {/* giant wordmark — SVG <text textLength> so it can never clip */}
+        {/* Giant wordmark. The brand logo uses a crossbar-less "A" (a
+            flat-topped Λ), so that glyph is drawn as a path while the rest
+            stays live text. Each run keeps its own textLength, so the mark
+            still stretches to exactly 988 units and can never clip.
+            Run widths come from the real Poppins-700 advances at this size,
+            scaled by 988/964.77. */}
         <Reveal
           dir="up"
           delay={120}
@@ -116,20 +121,32 @@ export function SiteFooter() {
             role="img"
             aria-label="POWERCLEAN"
           >
-            <text
-              x="500"
-              y="122"
-              textAnchor="middle"
-              textLength="988"
-              lengthAdjust="spacingAndGlyphs"
+            <g
+              fill="#00A651"
               fontFamily="var(--font-poppins), sans-serif"
               fontWeight="700"
               fontSize="148"
               letterSpacing="-6"
-              fill="#00A651"
             >
-              POWERCLEAN
-            </text>
+              <text
+                x="6"
+                y="122"
+                textLength="774.6"
+                lengthAdjust="spacingAndGlyphs"
+              >
+                POWERCLE
+              </text>
+              {/* crossbar-less A, matching the logo lockup */}
+              <path d="M780.4 122 L817.5 18.4 L849.3 18.4 L886.4 122 L863.6 122 L833.4 37.7 L803.2 122 Z" />
+              <text
+                x="886.2"
+                y="122"
+                textLength="107.8"
+                lengthAdjust="spacingAndGlyphs"
+              >
+                N
+              </text>
+            </g>
           </svg>
         </Reveal>
 
