@@ -2,53 +2,61 @@ import { Reveal } from "@/components/motion/Reveal";
 import { SectionPanel } from "@/components/ui/SectionPanel";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
+// REAL — Roovel's published End-to-End Partnership process
 const STEPS = [
   {
     num: "01",
-    title: "Discovery & Site Audit",
-    time: "1–2 weeks",
-    body: "We walk your line, sample soils and substrates, and document the current wash process, chemistry, and costs.",
+    title: "Requirement Mapping",
+    time: "on-site",
+    body: "Understand your components, contaminants, process requirements, and cleaning objectives.",
     dir: "left" as const,
   },
   {
     num: "02",
-    title: "Formulation Match",
-    time: "2–3 weeks",
-    body: "Our lab matches or custom-blends chemistry against your samples, validating dilution, temperature, and contact time.",
+    title: "Contaminant & Part Study",
+    time: "your parts",
+    body: "Analyze parts and contaminants to identify the most effective cleaning solution.",
     dir: "right" as const,
   },
   {
     num: "03",
-    title: "Supervised Plant Trial",
-    time: "1 week · on your line",
-    body: "A live trial on your equipment with our applications engineer on-site — measured against agreed pass/fail criteria before you commit.",
+    title: "Lab Validation",
+    time: "our lab",
+    body: "Validate cleaning performance, compatibility, bath life, and overall process efficiency.",
     dir: "left" as const,
-    highlight: true,
   },
   {
     num: "04",
-    title: "Deployment",
-    time: "1–2 weeks",
-    body: "Dosing setup, operator training, SOPs, and safety documentation — handed over with your first production supply.",
+    title: "Solution Recommendation",
+    time: "matched grade",
+    body: "Recommend the ideal formulation based on testing and application requirements.",
     dir: "right" as const,
   },
   {
     num: "05",
-    title: "Ongoing Support",
-    time: "continuous",
-    body: "Bath monitoring, scheduled resupply, and quarterly optimization reviews to keep cost-per-part trending down.",
+    title: "Trial & Feedback",
+    time: "on your line",
+    body: "Conduct onsite trials and optimize performance using real production feedback — free chemical samples for qualified applications.",
     dir: "left" as const,
+    highlight: true,
+  },
+  {
+    num: "06",
+    title: "Supply & Support",
+    time: "continuous",
+    body: "Ensure reliable supply with continuous technical guidance and after-sales support.",
+    dir: "right" as const,
   },
 ];
 
-/** 5-step engagement process — a navy dark moment; step 03 carries the accent. */
+/** Real six-step End-to-End Partnership — a navy dark moment; the trial step carries the accent. */
 export function Process() {
   return (
     <SectionPanel tone="navy" outerClassName="p-3">
       <SectionHeading
         eyebrow="PROCESS"
-        title="How an Engagement Works"
-        lede="A structured path from first site audit to a running, supported cleaning program."
+        title="An End-to-End Partnership"
+        lede="Roovel doesn’t just sell a chemical — our published six-step process takes you from requirement mapping to a running, supported cleaning program."
         light
         className="mb-[42px] max-w-[620px]"
       />

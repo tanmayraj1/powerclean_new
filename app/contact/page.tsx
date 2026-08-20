@@ -13,11 +13,14 @@ import { Reveal } from "@/components/motion/Reveal";
 import { Magnetic } from "@/components/motion/Magnetic";
 import { TransitionLink } from "@/components/layout/TransitionLink";
 import { contactFaqs, siteConfig } from "@/lib/site-config";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { faqJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Contact",
   description:
     "Reach Power Clean (Roovel Solutions Pvt. Ltd., Bangalore) for program inquiries, free chemical samples, and supervised plant trials.",
+  alternates: { canonical: "/contact" },
 };
 
 const CAPABILITY_CHIPS = [
@@ -31,6 +34,7 @@ const FAQ_CHIPS = ["Products & Trials", "Company Details", "Supply & Logistics"]
 export default function ContactPage() {
   return (
     <>
+      <JsonLd data={faqJsonLd([...contactFaqs])} />
       <PageHero
         title="Let's Solve Your Cleaning Challenge"
         eyebrow="GET IN TOUCH"
@@ -156,10 +160,32 @@ export default function ContactPage() {
                 </svg>
               </div>
               <div className="mb-1.5 text-[15px] font-semibold text-navy">
-                Mahadevapura, Bangalore
+                {siteConfig.contact.offices[0].label}
               </div>
               <div className="text-[12.5px] leading-[1.6] text-muted">
-                {siteConfig.contact.address}
+                {siteConfig.contact.offices[0].address}
+                <br />
+                {siteConfig.contact.offices[0].phone}
+              </div>
+            </Reveal>
+            <Reveal
+              dir="up"
+              delay={360}
+              className="rounded-img-lg bg-card-tint p-[26px] text-center transition-transform duration-300 hover:-translate-y-[5px]"
+            >
+              <div className="mx-auto mb-3.5 flex h-11 w-11 items-center justify-center rounded-full bg-green-tint">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#292F6E" strokeWidth="1.8" aria-hidden="true">
+                  <rect x="3" y="8" width="18" height="13" rx="2" />
+                  <path d="M8 8V5a2 2 0 012-2h4a2 2 0 012 2v3M3 13h18" />
+                </svg>
+              </div>
+              <div className="mb-1.5 text-[15px] font-semibold text-navy">
+                {siteConfig.contact.offices[1].label}
+              </div>
+              <div className="text-[12.5px] leading-[1.6] text-muted">
+                {siteConfig.contact.offices[1].address}
+                <br />
+                {siteConfig.contact.offices[1].phone}
               </div>
             </Reveal>
           </div>

@@ -37,8 +37,13 @@ export async function generateMetadata(props: {
   const solution = getSolution(slug);
   if (!solution) return {};
   return {
-    title: solution.name,
+    title: `${solution.name} — Industrial Cleaning Solution`,
     description: solution.tagline,
+    alternates: { canonical: `/solutions/${slug}` },
+    openGraph: {
+      title: `${solution.name} · Power Clean`,
+      description: solution.tagline,
+    },
   };
 }
 
@@ -113,7 +118,7 @@ export default async function SolutionDetailPage(props: {
             </div>
             <InspectImage className="relative mb-5 h-[150px] overflow-hidden rounded-img">
               <ImageSlot
-                brief="[PRODUCT PHOTO PLACEHOLDER — 20L pail / 210L drum, to be replaced with real photography]"
+                brief="[PRODUCT PHOTO PLACEHOLDER — 35L pail / 200L barrel, to be replaced with real photography]"
                 className="absolute inset-0"
               />
             </InspectImage>

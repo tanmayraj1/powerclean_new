@@ -9,11 +9,14 @@ import { Reveal } from "@/components/motion/Reveal";
 import { industries } from "@/lib/site-config";
 import { solutions } from "@/lib/solutions";
 import { IndustryIcon } from "@/components/sections/solutions/IndustryIcon";
+import { TactPrinciple } from "@/components/sections/solutions/TactPrinciple";
+import { TceComparison } from "@/components/sections/solutions/TceComparison";
 
 export const metadata: Metadata = {
   title: "Solutions",
   description:
     "Water-based cleaners, degreasers, solvent replacements, and rust preventives from Power Clean — matched to your metals, soils, equipment, and compliance requirements.",
+  alternates: { canonical: "/solutions" },
 };
 
 export default function SolutionsPage() {
@@ -45,6 +48,9 @@ export default function SolutionsPage() {
           ))}
         </div>
       </div>
+
+      {/* TACT PRINCIPLE — real methodology */}
+      <TactPrinciple />
 
       <RippleDivider />
 
@@ -78,6 +84,9 @@ export default function SolutionsPage() {
           ))}
         </div>
       </SectionPanel>
+
+      {/* TCE COMPARISON — real replace-tce content */}
+      <TceComparison />
 
       {/* CTA */}
       <CtaBanner

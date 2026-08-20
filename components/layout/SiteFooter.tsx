@@ -35,8 +35,11 @@ export function SiteFooter() {
               height={52}
               className="mb-5 block h-[52px] w-auto"
             />
-            <p className="mb-[22px] max-w-[420px] text-[clamp(18px,2vw,22px)] font-medium leading-[1.45] text-ink [text-wrap:pretty]">
+            <p className="mb-1.5 max-w-[420px] text-[clamp(18px,2vw,22px)] font-medium leading-[1.45] text-ink [text-wrap:pretty]">
               {siteConfig.tagline}
+            </p>
+            <p className="mb-[22px] text-[13px] font-semibold uppercase tracking-[0.14em] text-green-deep">
+              {siteConfig.motto}
             </p>
             <form
               className="flex max-w-[380px] gap-2 rounded-full bg-azure p-1.5 pl-5"
@@ -160,8 +163,10 @@ export function SiteFooter() {
           <span className="text-[13px] text-muted">
             {siteConfig.contact.phones.join(" / ")}
           </span>
-          <span className="text-[13px] text-muted">
+          <span className="max-w-[560px] text-[13px] leading-[1.6] text-muted">
             {siteConfig.company} — {siteConfig.contact.address}
+            <br />
+            Registered office: {siteConfig.contact.offices[1].address}
           </span>
         </div>
         <div className="mt-3 flex flex-wrap justify-between gap-x-8 gap-y-2">

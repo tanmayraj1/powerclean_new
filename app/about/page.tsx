@@ -18,6 +18,7 @@ export const metadata: Metadata = {
   title: "About",
   description:
     "Power Clean is a brand of Roovel Solutions Pvt. Ltd. — ISO 9001 certified, Bangalore-based, with 25+ years of precision cleaning solutions for Indian manufacturing.",
+  alternates: { canonical: "/about" },
 };
 
 const MISSION_POINTS = [

@@ -55,53 +55,67 @@ const SHARED_GALLERY: [string, string, string, string] = [
 ];
 
 export const deploySteps = [
+  // REAL — Roovel's published End-to-End Partnership process
   {
     num: "01",
-    title: "Soil & substrate test",
-    body: "Your sample parts are tested in our lab against the matching grades.",
+    title: "Requirement mapping",
+    body: "Understand your components, contaminants, process requirements, and cleaning objectives.",
   },
   {
     num: "02",
-    title: "Dilution & cycle spec",
-    body: "Concentration, temperature, and wash time set for your machine.",
+    title: "Contaminant & part study",
+    body: "Analyze parts and contaminants to identify the most effective cleaning solution.",
   },
   {
     num: "03",
-    title: "On-line trial",
-    body: "A supervised trial on your washer against agreed pass criteria.",
-    highlight: true,
+    title: "Lab validation",
+    body: "Validate cleaning performance, compatibility, bath life, and overall process efficiency.",
   },
   {
     num: "04",
-    title: "Bath monitoring",
-    body: "Titration kit and schedule keep concentration in the working band.",
+    title: "Solution recommendation",
+    body: "Recommend the ideal formulation based on testing and application requirements.",
   },
   {
     num: "05",
-    title: "Resupply & review",
-    body: "Scheduled delivery plus quarterly cost-per-part reviews.",
+    title: "Trial & feedback",
+    body: "Conduct onsite trials and optimize performance using real production feedback.",
+    highlight: true,
+  },
+  {
+    num: "06",
+    title: "Supply & support",
+    body: "Ensure reliable supply with continuous technical guidance and after-sales support.",
   },
 ] as const;
 
 export const packagingRows = [
+  // REAL packing sizes: 35L, 50L, 200L, 1000L — custom packing available
   {
-    size: "20 L",
-    title: "Pail — pilot & low-volume lines",
-    body: "Ships in 5 working days · ideal for first supervised trials",
+    size: "35 L",
+    title: "Pail — trials & low-volume lines",
+    body: "Ideal for first supervised trials and pilot programs",
     tag: "Best for trials",
     highlight: false,
   },
   {
-    size: "210 L",
-    title: "Drum — standard production supply",
-    body: "Monthly delivery on supply programs · drum pump compatible",
+    size: "50 L",
+    title: "Drum — small production supply",
+    body: "For single-washer lines and steady low-volume use",
+    tag: "Compact supply",
+    highlight: false,
+  },
+  {
+    size: "200 L",
+    title: "Barrel — standard production supply",
+    body: "Scheduled delivery on supply programs · drum pump compatible",
     tag: "Most common",
     highlight: true,
   },
   {
     size: "1000 L",
     title: "IBC tote — high-volume & multi-washer plants",
-    body: "Direct-dosed via metering pump · returnable container program",
+    body: "Direct-dosed via metering pump · custom packing also available",
     tag: "High-volume supply",
     highlight: false,
   },
@@ -141,15 +155,15 @@ export const solutions: Solution[] = [
       { label: "Base", value: "Water-based alkaline" },
       { label: "Dilution", value: "Up to 1:100" },
       { label: "Rust inhibited", value: "Yes" },
-      { label: "Packaging", value: "20L · 210L · IBC" },
+      { label: "Packaging", value: "35L · 50L · 200L · 1000L" },
       { label: "Properties", value: "Biodegradable, Zero VOC" },
     ],
     dilution: {
       heading: "A Little Concentrate Goes a Long Way",
-      body: "Dilutable up to 1:100, one 20-litre pail of POWER CLEAN XL makes up to 2,000 litres of ready-to-use cleaning bath. Dosing pumps hold the ratio steady, so cost-per-part stays predictable.",
+      body: "Dilutable up to 1:100, one 35-litre pail of POWER CLEAN XL makes up to 3,500 litres of ready-to-use cleaning bath. Dosing pumps hold the ratio steady, so cost-per-part stays predictable.",
       stats: [
         { count: 100, prefix: "1:", caption: "maximum dilution ratio" },
-        { count: 2000, suffix: "L", caption: "bath from one 20L pail" },
+        { count: 3500, suffix: "L", caption: "bath from one 35L pail" },
         { count: 100, suffix: "%", caption: "water-based chemistry" },
       ],
       barsTitle: "Working bath composition",
@@ -200,15 +214,15 @@ export const solutions: Solution[] = [
       { label: "Metals", value: "Aluminium · Brass · Copper" },
       { label: "Dilution", value: "3:100" },
       { label: "pH", value: "Neutral" },
-      { label: "Packaging", value: "20L · 210L · IBC" },
+      { label: "Packaging", value: "35L · 50L · 200L · 1000L" },
       { label: "Properties", value: "Rinse-free, prevents white rust" },
     ],
     dilution: {
       heading: "Gentle on Metal, Strong on Soils",
-      body: "At its 3:100 working dilution, one 20-litre pail of NF-14 makes over 650 litres of ready-to-use bath — rinse-free in most applications, so cycle time stays short.",
+      body: "At its 3:100 working dilution, one 35-litre pail of NF-14 makes over 1,150 litres of ready-to-use bath — rinse-free in most applications, so cycle time stays short.",
       stats: [
         { count: 3, suffix: ":100", caption: "working dilution" },
-        { count: 660, suffix: "L", caption: "bath from one 20L pail" },
+        { count: 1150, suffix: "L", caption: "bath from one 35L pail" },
         { count: 7, caption: "neutral pH — safe on soft metals" },
       ],
       barsTitle: "Working bath composition",
@@ -258,15 +272,15 @@ export const solutions: Solution[] = [
       { label: "Base", value: "Water-based, no-foam" },
       { label: "Dilution", value: "Up to 1:100" },
       { label: "Rust preventive", value: "Built in" },
-      { label: "Packaging", value: "20L · 210L · IBC" },
+      { label: "Packaging", value: "35L · 50L · 200L · 1000L" },
       { label: "Properties", value: "Non-flammable, dilutable & reusable" },
     ],
     dilution: {
       heading: "Zero Foam at Full Pressure",
-      body: "At up to 1:100 dilution, one 20-litre pail of LF makes up to 2,000 litres of working bath that stays foam-free even at high jet pressure — with rust protection included in the same stage.",
+      body: "At up to 1:100 dilution, one 35-litre pail of LF makes up to 3,500 litres of working bath that stays foam-free even at high jet pressure — with rust protection included in the same stage.",
       stats: [
         { count: 100, prefix: "1:", caption: "maximum dilution ratio" },
-        { count: 2000, suffix: "L", caption: "bath from one 20L pail" },
+        { count: 3500, suffix: "L", caption: "bath from one 35L pail" },
         { count: 0, caption: "foam — even at full jet pressure" },
       ],
       barsTitle: "Working bath composition",
@@ -316,15 +330,15 @@ export const solutions: Solution[] = [
       { label: "Metals", value: "Mild steel · Cast iron" },
       { label: "Dilution", value: "3:100" },
       { label: "Protection", value: "Multi-day rust protection" },
-      { label: "Packaging", value: "20L · 210L · IBC" },
+      { label: "Packaging", value: "35L · 50L · 200L · 1000L" },
       { label: "Properties", value: "Non-corrosive, water-based" },
     ],
     dilution: {
       heading: "Clean and Protect in One Pass",
-      body: "At its 3:100 working dilution, one 20-litre pail of SP makes over 650 litres of bath — and every part leaves the wash with multi-day rust protection already on it.",
+      body: "At its 3:100 working dilution, one 35-litre pail of SP makes over 1,150 litres of bath — and every part leaves the wash with multi-day rust protection already on it.",
       stats: [
         { count: 3, suffix: ":100", caption: "working dilution" },
-        { count: 660, suffix: "L", caption: "bath from one 20L pail" },
+        { count: 1150, suffix: "L", caption: "bath from one 35L pail" },
         { count: 100, suffix: "%", caption: "water-based chemistry" },
       ],
       barsTitle: "Working bath composition",
@@ -374,7 +388,7 @@ export const solutions: Solution[] = [
       { label: "Chemistry", value: "n-propyl bromide" },
       { label: "Replaces", value: "TCE · Perchloroethylene" },
       { label: "Flash point", value: "High" },
-      { label: "Packaging", value: "20L · 210L" },
+      { label: "Packaging", value: "35L · 50L · 200L" },
       { label: "Use", value: "As supplied — no dilution" },
     ],
     dilution: {
@@ -431,7 +445,7 @@ export const solutions: Solution[] = [
       { label: "Base", value: "Oil-based" },
       { label: "Protection", value: "3–6 months" },
       { label: "Touch-dry", value: "10–15 min" },
-      { label: "Packaging", value: "20L · 210L" },
+      { label: "Packaging", value: "35L · 50L · 200L" },
       { label: "Use", value: "As supplied — thin film" },
     ],
     dilution: {
@@ -468,14 +482,6 @@ export const solutions: Solution[] = [
 export function getSolution(slug: string): Solution | undefined {
   return solutions.find((s) => s.slug === slug);
 }
-
-// Full published catalogue (REAL) — beyond the six featured products above.
-export const fullCatalogue = [
-  { group: "Aqueous Cleaners & Degreasers", items: ["POWER CLEAN XL", "POWER CLEAN NF-14", "POWER CLEAN DE-34", "POWER CLEAN SP", "POWER CLEAN LF", "POWER CLEAN FC235", "POWER CLEAN HD", "POWER CLEAN CR21", "POWER CLEAN GC", "POWER CLEAN AR", "POWER CLEAN BW-77", "POWER CLEAN CD", "POWER CLEAN SS", "POWER CLEAN HI32", "POWER CLEAN SIP"] },
-  { group: "Cooling Tower & Heat Exchanger", items: ["POWER CLEAN DE46", "POWER CLEAN SA17"] },
-  { group: "Solvent Cleaners & Degreasers", items: ["PC-S 312", "PC-S 342"] },
-  { group: "Rust Protection", items: ["PC RP-14", "PC RP-636", "PC RR-27"] },
-] as const;
 
 // REAL — property tags from the live site
 export const propertyTags = [

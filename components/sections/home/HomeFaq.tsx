@@ -7,6 +7,8 @@ import { Arrow } from "@/components/ui/Arrow";
 import { TransitionLink } from "@/components/layout/TransitionLink";
 import { Backdrop } from "@/components/ui/Backdrop";
 import { homeFaqs, siteConfig } from "@/lib/site-config";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { faqJsonLd } from "@/lib/seo";
 
 const CHIPS = ["Products", "Safety", "Supply & Logistics"];
 
@@ -14,6 +16,7 @@ const CHIPS = ["Products", "Safety", "Supply & Logistics"];
 export function HomeFaq() {
   return (
     <div className="relative isolate mx-auto max-w-[1320px] px-5 py-[clamp(36px,6vw,72px)]">
+      <JsonLd data={faqJsonLd([...homeFaqs])} />
       <Backdrop />
       <Backdrop variant="rings" className="left-[-10%] bottom-[-14%] h-[480px] w-[480px]" />
       <Reveal dir="up" className="mb-3.5">

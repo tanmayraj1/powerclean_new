@@ -15,7 +15,10 @@ import {
   getProduct,
   products,
   productsByCategory,
+  seriesOf,
 } from "@/lib/catalogue";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { SITE_URL, breadcrumbJsonLd, productJsonLd } from "@/lib/seo";
 import { getSolution, packagingRows } from "@/lib/solutions";
 
 export function generateStaticParams() {
@@ -30,7 +33,17 @@ export async function generateMetadata(props: {
   const { slug } = await props.params;
   const product = getProduct(slug);
   if (!product) return {};
-  return { title: product.name, description: product.tagline };
+  const category = categoryOf(product.category);
+  return {
+    title: `${product.name}${product.sku ? ` (SKU ${product.sku})` : ""} — ${category.short} Cleaning Chemical`,
+    description: `${product.tagline} ${product.description.slice(0, 110)}…`,
+    alternates: { canonical: `/catalogue/${slug}` },
+    openGraph: {
+      title: `${product.name} · Power Clean`,
+      description: product.tagline,
+      url: `${SITE_URL}/catalogue/${slug}`,
+    },
+  };
 }
 
 export default async function ProductPage(props: {
@@ -50,6 +63,25 @@ export default async function ProductPage(props: {
 
   return (
     <>
+      <JsonLd
+        data={[
+          productJsonLd({
+            name: product.name,
+            slug: product.slug,
+            description: product.description,
+            sku: product.sku,
+            category: category.label,
+          }),
+          breadcrumbJsonLd([
+            { name: "Catalogue", url: `${SITE_URL}/catalogue` },
+            { name: category.short, url: `${SITE_URL}/catalogue#range` },
+            {
+              name: product.name,
+              url: `${SITE_URL}/catalogue/${product.slug}`,
+            },
+          ]),
+        ]}
+      />
       <PageHero
         title={product.name}
         eyebrow={category.short.toUpperCase()}
@@ -68,6 +100,8 @@ export default async function ProductPage(props: {
         </TransitionLink>
         <span className="mx-2 text-line-3">/</span>
         <span className="text-navy">{category.short}</span>
+        <span className="mx-2 text-line-3">/</span>
+        <span className="text-navy">{seriesOf(product.seriesKey).label}</span>
         <span className="mx-2 text-line-3">/</span>
         <span className="text-navy">{product.name}</span>
       </nav>

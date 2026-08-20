@@ -105,11 +105,18 @@ function ProductCard({ product }: { product: CatalogueProduct }) {
         aria-hidden="true"
         className="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-green/[0.06] transition-transform duration-500 group-hover:scale-125"
       />
-      <div className="mb-3 flex items-center gap-2">
-        <span className="h-[7px] w-[7px] shrink-0 rounded-full bg-green" />
-        <span className="font-mono text-[10.5px] uppercase tracking-[0.12em] text-muted">
-          {cat.short}
+      <div className="mb-3 flex items-center justify-between gap-2">
+        <span className="flex items-center gap-2">
+          <span className="h-[7px] w-[7px] shrink-0 rounded-full bg-green" />
+          <span className="font-mono text-[10.5px] uppercase tracking-[0.12em] text-muted">
+            {cat.short}
+          </span>
         </span>
+        {product.sku && (
+          <span className="rounded-md bg-navy/[0.06] px-2 py-0.5 font-mono text-[10px] font-semibold text-muted-3">
+            SKU {product.sku}
+          </span>
+        )}
       </div>
       <h3 className="mb-2 text-[18px] font-semibold leading-[1.25] text-navy">
         {product.name}
@@ -118,7 +125,7 @@ function ProductCard({ product }: { product: CatalogueProduct }) {
         {product.tagline}
       </p>
       <div className="mb-4 flex flex-wrap gap-1.5">
-        {product.specs.slice(0, 2).map((s) => (
+        {product.specs.filter((sp) => sp.label !== "SKU").slice(0, 2).map((s) => (
           <span
             key={s.label}
             className="rounded-full bg-azure px-2.5 py-1 font-mono text-[10.5px] text-muted-3"

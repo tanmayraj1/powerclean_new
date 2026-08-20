@@ -7,6 +7,7 @@ import { CtaBanner } from "@/components/ui/CtaBanner";
 import { Reveal } from "@/components/motion/Reveal";
 import { Backdrop } from "@/components/ui/Backdrop";
 import { CatalogueGrid } from "@/components/sections/catalogue/CatalogueGrid";
+import { RangeHierarchy } from "@/components/sections/catalogue/RangeHierarchy";
 import { categories, products } from "@/lib/catalogue";
 import { propertyTags } from "@/lib/solutions";
 
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
   title: "Catalogue",
   description:
     "The full Power Clean product catalogue — aqueous cleaners and degreasers, cooling tower descalers and biocides, solvent degreasers including a TCE replacement, and rust protection.",
+  alternates: { canonical: "/catalogue" },
 };
 
 export default function CataloguePage() {
@@ -40,20 +42,35 @@ export default function CataloguePage() {
               key={c.key}
               dir="up"
               delay={i * 80}
-              className="rounded-img-lg bg-card-tint p-6"
+              className="rounded-img-lg p-6 ring-1 ring-inset ring-line-2"
+              style={{ background: c.accentSoft }}
             >
               <div className="mb-2.5 flex items-baseline gap-2">
-                <span className="font-mono text-[22px] font-semibold text-green-deep">
+                <span
+                  className="font-mono text-[22px] font-semibold"
+                  style={{ color: c.accentText }}
+                >
                   {String(products.filter((p) => p.category === c.key).length).padStart(2, "0")}
                 </span>
                 <h3 className="text-[15px] font-semibold leading-tight text-navy">
                   {c.label}
                 </h3>
               </div>
-              <p className="text-[13px] leading-[1.6] text-muted">{c.blurb}</p>
+              <p className="text-[13px] leading-[1.6] text-muted-3">{c.blurb}</p>
             </Reveal>
           ))}
         </div>
+      </SectionPanel>
+
+      {/* THE RANGE — full hierarchy on one page */}
+      <SectionPanel outerClassName="p-3" id="range">
+        <SectionHeading
+          eyebrow="THE RANGE AT A GLANCE"
+          title="Category → Series → Product"
+          lede="The complete Power Clean range, organised the way our chemists think about it. Open a family, pick a series, and jump straight to any product — every code links to its own page."
+          className="mb-9 max-w-[680px]"
+        />
+        <RangeHierarchy />
       </SectionPanel>
 
       {/* FULL CATALOGUE */}

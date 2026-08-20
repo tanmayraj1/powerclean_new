@@ -9,6 +9,7 @@ export const siteConfig = {
   company: "Roovel Solutions Pvt. Ltd.",
   tagline:
     "High-performance industrial cleaning solutions, engineered for modern manufacturing.",
+  motto: "Cleaner. Safer. Better.", // REAL brand line
 
   // REAL — replace-all-placeholder contact block from powerclean.in
   contact: {
@@ -24,6 +25,21 @@ export const siteConfig = {
       facebook: "https://facebook.com/POWER-CLEAN-226680044565032",
       twitter: "https://x.com/powercleanindia",
     },
+    // REAL — from powerclean.in/contact.aspx
+    offices: [
+      {
+        label: "Office & Factory — Bangalore",
+        address:
+          "P11, ITI Ancillary Industrial Estate, 2nd Main Rd, Mahadevapura Post, Bangalore 560048, Karnataka",
+        phone: "+91-9731726123",
+      },
+      {
+        label: "Registered Office — Chennai",
+        address:
+          "#14, Old #18, Sayee Nagar Annexe, 1st Main Rd, Virugambakkam, Chennai 600092, Tamil Nadu",
+        phone: "+91-9731727868",
+      },
+    ],
   },
 
   // Bangalore (Mahadevapura) — OpenStreetMap embed bounding boxes
@@ -100,7 +116,7 @@ export type Faq = { q: string; a: string };
 export const homeFaqs: Faq[] = [
   {
     q: "Can one product cover multiple wash processes?",
-    a: "Often, yes. Many of our degreasers work across spray, soak, and ultrasonic equipment at different dilutions. During the audit we map every wash point and consolidate chemistry where it is safe to do so.",
+    a: "Often, yes. Many of our degreasers work across spray, soak, and ultrasonic equipment at different dilutions — and optimum wash temperatures sit at just 55–65 °C, versus 90–100 °C for TCE. During the audit we map every wash point and consolidate chemistry where it is safe to do so.",
   },
   {
     q: "Are your formulations safe on aluminium and alloys?",
@@ -116,7 +132,7 @@ export const homeFaqs: Faq[] = [
   },
   {
     q: "What are your supply lead times?",
-    a: "Standard products ship within 5 working days across India. Scheduled supply programs include buffer stock held at our facility for next-day dispatch.",
+    a: "We supply nationwide from Bangalore and through distributors in major metropolitan cities — every enquiry is answered within 24 hours, and scheduled supply programs keep buffer stock for your line.",
   },
 ];
 
@@ -127,7 +143,7 @@ export const contactFaqs: Faq[] = [
   },
   {
     q: "Do you serve plants outside Bangalore?",
-    a: "Yes — we supply facilities across India with a 5-working-day standard lead time. Scheduled supply programs include buffer stock for next-day dispatch.",
+    a: "Yes — we supply plants across India and have distributors in major metropolitan cities. Call us and we will connect you with your nearest distributor; every enquiry is answered within 24 hours.",
   },
   {
     q: "Can you match a competitor product?",
@@ -135,7 +151,7 @@ export const contactFaqs: Faq[] = [
   },
   {
     q: "Is there a minimum order quantity?",
-    a: "You can begin with a single 20L pail per product line. Trials and chemical samples are supplied free of charge for qualified applications.",
+    a: "You can begin with a single 35L pail per product line — packing runs 35L, 50L, 200L and 1000L, with custom packing available. Trials and chemical samples are supplied free of charge for qualified applications.",
   },
   {
     q: "What documentation comes with each product?",
