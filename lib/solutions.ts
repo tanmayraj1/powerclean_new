@@ -43,6 +43,13 @@ export type Solution = {
     note: string;
   };
   beforeAfterCaption: string;
+  /** use-case-matched representative imagery for the wipe slider */
+  beforeAfter: {
+    before: string;
+    after: string;
+    beforeAlt: string;
+    afterAlt: string;
+  };
   gallery: [string, string, string, string];
   related: [string, string, string];
   cta: { heading: string; body: string };
@@ -191,6 +198,12 @@ export const solutions: Solution[] = [
     },
     beforeAfterCaption:
       "Drag the slider to compare a sample part before and after a single spray cycle.",
+        beforeAfter: {
+      before: "/photos/ba-xl-before.webp",
+      after: "/photos/ba-xl-after.webp",
+      beforeAlt: "Pile of gears caked in oily grime before degreasing",
+      afterAlt: "Bright, residue-free machined parts after an aqueous wash",
+    },
     gallery: SHARED_GALLERY,
     related: ["power-clean-sp", "power-clean-lf", "pc-rp-636"],
     cta: {
@@ -251,6 +264,12 @@ export const solutions: Solution[] = [
     },
     beforeAfterCaption:
       "Drag the slider to compare an aluminium part before and after a single wash cycle.",
+        beforeAfter: {
+      before: "/photos/ba-nf14-before.webp",
+      after: "/photos/ba-nf14-after.webp",
+      beforeAlt: "Corroded, tarnished non-ferrous metal surface before cleaning",
+      afterAlt: "Smooth bright metal surface after tarnish removal",
+    },
     gallery: SHARED_GALLERY,
     related: ["power-clean-xl", "power-clean-sp", "pc-rp-636"],
     cta: {
@@ -310,6 +329,12 @@ export const solutions: Solution[] = [
     },
     beforeAfterCaption:
       "Drag the slider to compare a part before and after one high-pressure spray cycle.",
+        beforeAfter: {
+      before: "/photos/ba-lf-before.webp",
+      after: "/photos/ba-lf-after.webp",
+      beforeAlt: "Engine components covered in baked-on grime before spray washing",
+      afterAlt: "Gleaming engine components after a low-foam spray cycle",
+    },
     gallery: SHARED_GALLERY,
     related: ["power-clean-xl", "power-clean-nf-14", "pc-rp-636"],
     cta: {
@@ -369,6 +394,12 @@ export const solutions: Solution[] = [
     },
     beforeAfterCaption:
       "Drag the slider to compare a cast iron part before and after a single wash cycle.",
+        beforeAfter: {
+      before: "/photos/ba-sp-before.webp",
+      after: "/photos/ba-sp-after.webp",
+      beforeAlt: "Rusted ring gear assembly before cleaning",
+      afterAlt: "Clean machined steel ring with no flash rust",
+    },
     gallery: SHARED_GALLERY,
     related: ["power-clean-xl", "pc-rp-636", "power-clean-lf"],
     cta: {
@@ -427,6 +458,12 @@ export const solutions: Solution[] = [
     },
     beforeAfterCaption:
       "Drag the slider to compare a part before and after one degreasing cycle.",
+        beforeAfter: {
+      before: "/photos/ba-342-before.webp",
+      after: "/photos/ba-342-after.webp",
+      beforeAlt: "Greasy gear drive coated in compound before solvent cleaning",
+      afterAlt: "Polished gear teeth after solvent degreasing",
+    },
     gallery: SHARED_GALLERY,
     related: ["power-clean-xl", "power-clean-lf", "power-clean-sp"],
     cta: {
@@ -485,6 +522,12 @@ export const solutions: Solution[] = [
     },
     beforeAfterCaption:
       "Drag the slider to compare a protected part against an untreated one after storage.",
+        beforeAfter: {
+      before: "/photos/before-soiled.webp",
+      after: "/photos/after-clean.webp",
+      beforeAlt: "Heavily rusted chain links left unprotected",
+      afterAlt: "Clean protected steel chain links",
+    },
     gallery: SHARED_GALLERY,
     related: ["power-clean-sp", "power-clean-xl", "power-clean-lf"],
     cta: {

@@ -219,7 +219,12 @@ export default async function SolutionDetailPage(props: {
           size="md"
           className="mb-9 max-w-[620px]"
         />
-        <BeforeAfterSlider />
+        <BeforeAfterSlider
+          before={solution.beforeAfter.before}
+          after={solution.beforeAfter.after}
+          beforeAlt={solution.beforeAfter.beforeAlt}
+          afterAlt={solution.beforeAfter.afterAlt}
+        />
       </SectionPanel>
 
       {/* HOW WE DEPLOY */}
