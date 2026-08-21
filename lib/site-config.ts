@@ -316,3 +316,61 @@ export const industryOptions = [
   "General Engineering",
   "Other",
 ];
+
+// REAL — the applications list published on the live powerclean.in homepage,
+// grouped for the home-page applications index.
+export const applicationsIndex: { group: string; items: string[] }[] = [
+  {
+    group: "Component Cleaning",
+    items: [
+      "Automotive components cleaning",
+      "Carburettor & piston cleaning",
+      "Engine cleaning & degreasing",
+      "Piston ring degreasing",
+      "Brake cleaning",
+      "Axle & wheel cleaning",
+      "Bearing manufacturing",
+      "Electrical & electronics parts",
+      "Carbon deposit removal",
+    ],
+  },
+  {
+    group: "Wash Processes",
+    items: [
+      "Ultrasonic cleaning",
+      "Spray wash cleaning",
+      "Dip tank cleaning",
+      "Immersion cleaning",
+      "Bin & tray washing",
+      "Buffing & lapping paste removal",
+    ],
+  },
+  {
+    group: "Chemistry Needs",
+    items: [
+      "Heavy-duty degreasers",
+      "Neutral pH cleaners",
+      "Low pH & alkaline cleaners",
+      "Citrus degreasers",
+      "Safety solvents",
+      "Rust inhibitors & rust removers",
+      "Rinse & drying agents",
+      "Ink & adhesive removers",
+      "Defluxers & rosin removers",
+      "Paint strippers",
+      "Aluminium cleaners & brighteners",
+      "Copper & brass cleaners",
+    ],
+  },
+  {
+    group: "Fleet & Facility",
+    items: [
+      "Military aircraft & ship maintenance",
+      "Railways & locomotive cleaning",
+      "Airline fleet cleaning",
+      "Interior tank-truck cleaning",
+      "AHU & HVAC coil cleaning",
+      "Industrial floor cleaning",
+    ],
+  },
+];

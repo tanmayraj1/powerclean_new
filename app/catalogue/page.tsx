@@ -9,6 +9,7 @@ import { Backdrop } from "@/components/ui/Backdrop";
 import { CatalogueGrid } from "@/components/sections/catalogue/CatalogueGrid";
 import { RangeHierarchy } from "@/components/sections/catalogue/RangeHierarchy";
 import { RangeMap } from "@/components/sections/catalogue/RangeMap";
+import { SelectionMatrix } from "@/components/sections/catalogue/SelectionMatrix";
 import { products } from "@/lib/catalogue";
 import { propertyTags } from "@/lib/solutions";
 
@@ -63,6 +64,17 @@ export default function CataloguePage() {
         />
         <CatalogueGrid />
       </div>
+
+      {/* SELECTION MATRIX */}
+      <SectionPanel outerClassName="p-3">
+        <SectionHeading
+          eyebrow="SELECTION MATRIX"
+          title="Pick by the Parameters"
+          lede="Every product on one spec sheet — metal compatibility, process window, application methods and corrosion protection, side by side. Slide across on mobile."
+          className="mb-9 max-w-[680px]"
+        />
+        <SelectionMatrix />
+      </SectionPanel>
 
       <RippleDivider />
 
