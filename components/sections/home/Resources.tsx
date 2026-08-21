@@ -23,7 +23,11 @@ export function Resources() {
               className="group block rounded-card bg-[linear-gradient(170deg,#ffffff_0%,#fbfdfc_60%,#f4faf7_100%)] px-3 pb-5 pt-3 no-underline ring-1 ring-inset ring-line-2 transition-[transform,box-shadow,ring-color] duration-[350ms] hover:-translate-y-1.5 hover:shadow-card-lg hover:ring-green/25"
             >
               <div className="relative mb-4 h-[180px] overflow-hidden rounded-img">
-                <ImageSlot brief={r.image} className="absolute inset-0" />
+                <ImageSlot
+                  brief={r.image}
+                  src={r.photo}
+                  className="absolute inset-0"
+                />
               </div>
               <div className="px-2">
                 <h3 className="mb-2.5 text-base font-semibold leading-[1.4] text-navy">

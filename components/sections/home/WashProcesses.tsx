@@ -76,9 +76,9 @@ export function WashProcesses() {
             key={p.title}
             dir="up"
             delay={i * 90}
-            className="flex flex-col rounded-card-lg bg-white p-6"
+            className="flex flex-col rounded-card-lg bg-white p-6 transition-[transform,box-shadow] duration-[350ms] hover:-translate-y-1.5 hover:shadow-card-lg"
           >
-            <span className="mb-3.5 font-mono text-[12px] font-semibold text-green-deep">
+            <span className="mb-4 flex h-9 w-9 items-center justify-center rounded-full bg-green-tint font-mono text-[12px] font-bold text-green-deep">
               {String(i + 1).padStart(2, "0")}
             </span>
             <h3 className="mb-2 text-[15.5px] font-semibold leading-tight text-navy">
@@ -102,7 +102,10 @@ export function WashProcesses() {
         ))}
       </div>
 
-      <Reveal dir="up" className="mt-8 rounded-card-lg bg-white/70 p-6">
+      <Reveal
+        dir="up"
+        className="mt-8 rounded-card-lg bg-white p-6 ring-1 ring-inset ring-line-2"
+      >
         <ul className="grid list-none grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-x-8 gap-y-2.5 p-0">
           {VERSATILITY.map((v) => (
             <li key={v} className="flex items-start gap-2.5">

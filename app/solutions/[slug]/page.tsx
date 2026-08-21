@@ -21,6 +21,7 @@ import {
   detailTestimonial,
   getSolution,
   packagingRows,
+  sharedGalleryPhotos,
   solutions,
 } from "@/lib/solutions";
 
@@ -119,6 +120,8 @@ export default async function SolutionDetailPage(props: {
             <InspectImage className="relative mb-5 h-[150px] overflow-hidden rounded-img">
               <ImageSlot
                 brief="[PRODUCT PHOTO PLACEHOLDER — 35L pail / 200L barrel, to be replaced with real photography]"
+                src="/photos/packaging.webp"
+                alt="Blue supply drums staged beside the filling line"
                 className="absolute inset-0"
               />
             </InspectImage>
@@ -399,7 +402,11 @@ export default async function SolutionDetailPage(props: {
               delay={i * 100}
               className="relative h-[220px] w-[min(340px,78vw)] shrink-0 overflow-hidden rounded-img-lg"
             >
-              <ImageSlot brief={g} className="absolute inset-0" />
+              <ImageSlot
+                brief={g}
+                src={sharedGalleryPhotos[i]}
+                className="absolute inset-0"
+              />
             </Reveal>
           ))}
         </HScrollGallery>

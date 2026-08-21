@@ -189,12 +189,16 @@ export default function AboutPage() {
               <div className="relative h-[170px] overflow-hidden rounded-img-lg">
                 <ImageSlot
                   brief="Photo — early lab bench, formulation work"
+                  src="/photos/story-lab.webp"
+                  alt="Chemist working at a laboratory bench, black-and-white archival photograph"
                   className="absolute inset-0"
                 />
               </div>
               <div className="relative h-[170px] overflow-hidden rounded-img-lg">
                 <ImageSlot
                   brief="Photo — today's production facility"
+                  src="/photos/story-facility.webp"
+                  alt="Modern laboratory with gloved technician testing a formulation"
                   className="absolute inset-0"
                 />
               </div>
@@ -265,6 +269,8 @@ export default function AboutPage() {
           >
             <ImageSlot
               brief="Photo — production hall interior, blending vessels"
+              src="/photos/production-hall.webp"
+              alt="Production hall with stainless steel blending vessels and railed walkways"
               className="absolute inset-0"
             />
             <div className="pointer-events-none absolute bottom-3.5 left-3.5 rounded-full bg-white/85 px-4 py-2 text-xs font-semibold text-navy backdrop-blur-[8px]">
@@ -299,12 +305,16 @@ export default function AboutPage() {
             <div className="relative min-h-[160px] overflow-hidden rounded-img-lg">
               <ImageSlot
                 brief="Photo — QC laboratory"
+                src="/photos/qc-lab.webp"
+                alt="Quality-control analyst running a titration in the laboratory"
                 className="absolute inset-0"
               />
             </div>
             <div className="relative min-h-[160px] overflow-hidden rounded-img-lg">
               <ImageSlot
                 brief="Photo — drum filling & dispatch bay"
+                src="/photos/dispatch-bay.webp"
+                alt="Forklift moving palletised stock in the dispatch warehouse"
                 className="absolute inset-0"
               />
             </div>

@@ -223,7 +223,12 @@ export const industries: Industry[] = [
   },
 ];
 
-export type Resource = { title: string; byline: string; image: string };
+export type Resource = {
+  title: string;
+  byline: string;
+  image: string;
+  photo?: string;
+};
 
 // PLACEHOLDER articles
 export const resources: Resource[] = [
@@ -231,16 +236,19 @@ export const resources: Resource[] = [
     title: "Staying Ahead of Safety & Compliance in Industrial Cleaning",
     byline: "Technical Team · June 2026",
     image: "Photo — safety equipment and compliance signage",
+    photo: "/photos/res-safety.webp",
   },
   {
     title: "Switching From Solvent-Based to Water-Based Cleaning",
     byline: "Applications Lab · May 2026",
     image: "Photo — water-based solution replacing solvent drums",
+    photo: "/photos/res-switch.webp",
   },
   {
     title: "Reducing Downtime With Smarter Wash Processes",
     byline: "Process Engineering · April 2026",
     image: "Photo — washer machinery close-up, maintenance",
+    photo: "/photos/res-downtime.webp",
   },
 ];
 

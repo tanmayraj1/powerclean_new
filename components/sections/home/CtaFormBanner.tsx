@@ -10,6 +10,9 @@ export function CtaFormBanner() {
       <div className="animate-pc-drift relative mx-auto flex min-h-[620px] max-w-[1320px] items-center overflow-hidden rounded-section bg-[linear-gradient(120deg,#23273f,#292F6E_55%,#333b7e)] bg-[length:200%_200%]">
         <ImageSlot
           brief="Photo — fine mist of cleaning solution sprayed across a metal panel, backlit"
+          src="/photos/spray-mist.webp"
+          alt="Backlit spray of cleaning solution against a dark background"
+          sizes="100vw"
           className="absolute inset-0"
         />
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(100deg,rgba(29,31,35,.72)_0%,rgba(41,47,110,.45)_55%,rgba(29,31,35,.2)_100%)]" />

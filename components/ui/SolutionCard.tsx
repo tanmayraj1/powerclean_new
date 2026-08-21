@@ -62,7 +62,11 @@ export function SolutionCard({
           className="relative mb-4 overflow-hidden rounded-img"
           style={{ height: imageHeight }}
         >
-          <ImageSlot brief={solution.cardImage} className="absolute inset-0" />
+          <ImageSlot
+            brief={solution.cardImage}
+            src={solution.cardPhoto}
+            className="absolute inset-0"
+          />
         </div>
         <div className="px-2">
           <h3

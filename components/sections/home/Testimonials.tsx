@@ -31,12 +31,16 @@ export function Testimonials() {
           <div className="absolute left-0 top-0 h-[78%] w-[62%] overflow-hidden rounded-card shadow-[0_20px_50px_rgba(29,31,35,.15)]">
             <ImageSlot
               brief="Photo — plant operations manager on factory floor"
+              src="/photos/testimonial-1.webp"
+              alt="Machine operator working at a lathe on the plant floor"
               className="absolute inset-0"
             />
           </div>
           <div className="animate-pc-float absolute bottom-0 right-0 h-[62%] w-[48%] overflow-hidden rounded-card shadow-[0_20px_50px_rgba(29,31,35,.18)]">
             <ImageSlot
               brief="Photo — cleaning application in progress"
+              src="/photos/testimonial-2.webp"
+              alt="Rows of freshly machined metal flanges after cleaning"
               className="absolute inset-0"
             />
           </div>

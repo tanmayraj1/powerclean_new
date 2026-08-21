@@ -28,6 +28,8 @@ export type Solution = {
   cardBlurb: string;
   cardTags: [string, string];
   cardImage: string;
+  /** real photograph for the card; cardImage stays as the art-direction brief */
+  cardPhoto?: string;
   highlight?: boolean;
   about: [string, string];
   removes: string[];
@@ -52,6 +54,14 @@ const SHARED_GALLERY: [string, string, string, string] = [
   "Photo — titration check at the bath",
   "Photo — clean parts basket unloading",
   "Photo — dosing pump and metering setup",
+];
+
+/** real photographs matching SHARED_GALLERY by index */
+export const sharedGalleryPhotos: [string, string, string, string] = [
+  "/photos/gallery-1.webp",
+  "/photos/gallery-2.webp",
+  "/photos/gallery-3.webp",
+  "/photos/gallery-4.webp",
 ];
 
 export const deploySteps = [
@@ -140,6 +150,7 @@ export const solutions: Solution[] = [
       "Water-based, rust-inhibited alkaline concentrate that strips oils, coolants, and drawing compounds — dilutable up to 1:100.",
     cardTags: ["Oil & Grease Removal", "Water-Based"],
     cardImage: "Photo — spray degreasing of machined parts",
+    cardPhoto: "/photos/solution-xl.webp",
     about: [
       "POWER CLEAN XL is an all-round heavy-duty alkaline degreaser built on water-based active-colloid chemistry. It emulsifies cutting oils, coolants, and shop soils at low dilutions, then releases them in the separator so the bath keeps working longer.",
       "Rust-inhibited and effective in ultrasonic, spray, and soak systems alike, it replaces petroleum distillates and hazardous solvents in most machining and assembly operations — with no flash point and no solvent permits.",
@@ -198,6 +209,7 @@ export const solutions: Solution[] = [
       "Neutral-pH chemistry for soft metals: cleans aluminium, brass, and copper at 3:100, rinse-free, and prevents white rust.",
     cardTags: ["Aluminium · Brass · Copper", "Neutral pH"],
     cardImage: "Photo — parts-washing cabinet with components in solution",
+    cardPhoto: "/photos/solution-nf14.webp",
     highlight: true,
     about: [
       "POWER CLEAN NF-14 is a non-ferrous metal cleaner formulated at neutral pH for aluminium, brass, and copper. It lifts machining soils without etching, staining, or attacking soft substrates.",
@@ -257,6 +269,7 @@ export const solutions: Solution[] = [
       "Zero-foam formulation for high-pressure jet washers — dilutable 1:100 with a rust preventive built in.",
     cardTags: ["High-Jet Spray", "No Foam"],
     cardImage: "Photo — high-pressure spray washer in operation",
+    cardPhoto: "/photos/solution-lf.webp",
     about: [
       "POWER CLEAN LF is a no-foam cleaner-degreaser engineered for high-jet spray washers, where conventional chemistry foams out of control. It cuts oils and shop soils at pressure without cavitation or overflow.",
       "Dilutable up to 1:100 and carrying a built-in rust preventive, it cleans and protects in a single stage — keeping ferrous parts flash-rust free straight out of the washer.",
@@ -315,6 +328,7 @@ export const solutions: Solution[] = [
       "Cleans mild steel and cast iron at 3:100 — and leaves multi-day rust protection on the part.",
     cardTags: ["Mild Steel · Cast Iron", "Rust Protection"],
     cardImage: "Photo — steel components with protective coating, warehouse",
+    cardPhoto: "/photos/solution-sp.webp",
     about: [
       "POWER CLEAN SP is a ferrous metal cleaner formulated for mild steel and cast iron. It removes machining soils and coolant residues while laying down inter-operational rust protection in the same pass.",
       "At a 3:100 working dilution, cleaned parts stay flash-rust free for multiple days between processes and in storage — without a separate protection stage.",
@@ -373,6 +387,7 @@ export const solutions: Solution[] = [
       "A drop-in replacement for trichloroethylene: solvent-grade degreasing with a high flash point and boiling point.",
     cardTags: ["TCE Replacement", "High Flash Point"],
     cardImage: "Photo — solvent degreasing station, extraction hood",
+    cardPhoto: "/photos/solution-342.webp",
     about: [
       "PC-S 342 is a solvent degreaser engineered as a drop-in replacement for trichloroethylene (TCE), using n-propyl bromide chemistry with a high flash point and boiling point. It slots into existing vapor and immersion degreasing equipment.",
       "Roovel Solutions has been replacing TCE, perchloroethylene, and other hazardous solvents in Indian plants since 2000 — PC-S 342 is the direct path off TCE where a full aqueous conversion is not yet possible.",
@@ -430,6 +445,7 @@ export const solutions: Solution[] = [
       "Long-term oil-based rust preventive: 3–6 months of protection, touch-dry in 10–15 minutes.",
     cardTags: ["Long-Term Protection", "Quick Touch-Dry"],
     cardImage: "Photo — protected steel parts in storage racks",
+    cardPhoto: "/photos/solution-rp636.webp",
     about: [
       "PC RP-636 is an oil-based rust preventive for long-term protection of ferrous parts in storage and transit. It lays down a thin, consistent film that holds off corrosion for three to six months.",
       "Touch-dry in 10–15 minutes, parts can be handled, packed, and dispatched quickly — no tacky film, no drips, no re-work at the receiving end.",

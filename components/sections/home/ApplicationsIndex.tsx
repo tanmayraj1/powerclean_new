@@ -33,11 +33,11 @@ export function ApplicationsIndex() {
               {g.items.map((item) => (
                 <li
                   key={item}
-                  className="flex items-start gap-2.5 text-[13.5px] leading-[1.55] text-muted-3"
+                  className="group flex items-start gap-2.5 text-[13.5px] leading-[1.55] text-muted-3 transition-[color,transform] duration-300 hover:translate-x-1 hover:text-navy"
                 >
                   <span
                     aria-hidden="true"
-                    className="mt-[7px] h-[5px] w-[5px] shrink-0 rounded-full bg-green"
+                    className="mt-[7px] h-[5px] w-[5px] shrink-0 rounded-full bg-green transition-transform duration-300 group-hover:scale-150"
                   />
                   {item}
                 </li>

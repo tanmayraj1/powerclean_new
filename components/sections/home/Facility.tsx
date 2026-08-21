@@ -56,6 +56,8 @@ export function Facility() {
           <div className="relative h-[190px] overflow-hidden rounded-card">
             <ImageSlot
               brief="Photo — blending / filling line in production"
+              src="/photos/blending-line.webp"
+              alt="Stainless steel blending vessels and piping on the production line"
               className="absolute inset-0"
             />
           </div>

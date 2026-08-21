@@ -44,13 +44,13 @@ export function ReplaceSolvents() {
             {SOLVENTS.map((s) => (
               <span
                 key={s}
-                className="rounded-full border border-white/25 px-4 py-2 text-[13px] font-semibold text-white/90 line-through decoration-green decoration-2"
+                className="rounded-full border border-white/25 px-4 py-2 text-[13px] font-semibold text-white/90 line-through decoration-green decoration-2 transition-colors duration-300 hover:border-green/60 hover:bg-white/10"
               >
                 {s}
               </span>
             ))}
           </div>
-          <div className="rounded-card-lg bg-white/10 p-6 backdrop-blur-[2px]">
+          <div className="rounded-card-lg bg-white/10 p-6 ring-1 ring-inset ring-white/15 backdrop-blur-[2px]">
             <div className="mb-1 font-mono text-[26px] font-bold text-green">
               1 L → 1,000,000 L
             </div>
