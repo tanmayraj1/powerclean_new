@@ -70,6 +70,8 @@ export default function RangePage() {
         eyebrow="WELCOME — YOU FOUND US"
         blurb={`${products.length} industrial cleaning products across four families. Cleaner. Safer. Better. Tap any family to open every series and product inside it.`}
         minHeight="min(46vh, 420px)"
+        image="/photos/blending-line.webp"
+        imageAlt=""
       />
 
       {/* THE RANGE CHART */}

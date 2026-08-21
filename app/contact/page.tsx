@@ -40,6 +40,8 @@ export default function ContactPage() {
         eyebrow="GET IN TOUCH"
         blurb="Program inquiries, trial requests, and partnership opportunities — our technical team replies within one business day."
         minHeight="min(56vh, 480px)"
+        image="/photos/gallery-1.webp"
+        imageAlt=""
         titleClassName="text-[clamp(34px,4.8vw,70px)]"
       />
 

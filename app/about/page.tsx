@@ -59,6 +59,8 @@ export default function AboutPage() {
         eyebrow="ABOUT POWER CLEAN"
         blurb="Helping Indian manufacturers clean better, spend less, and meet every compliance bar — with chemistry built in-house."
         minHeight="min(66vh, 560px)"
+        image="/photos/production-hall.webp"
+        imageAlt=""
       />
 
       {/* VISION / MISSION */}

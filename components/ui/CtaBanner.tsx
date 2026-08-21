@@ -5,6 +5,7 @@ import { TransitionLink } from "@/components/layout/TransitionLink";
 import { HeroBackdrop } from "./HeroBackdrop";
 import { Eyebrow } from "./Eyebrow";
 import { Arrow } from "./Arrow";
+import { InlineContact } from "./InlineContact";
 
 type CtaBannerProps = {
   eyebrow?: string;
@@ -67,6 +68,7 @@ export function CtaBanner({
             </Magnetic>
             {extra}
           </div>
+          <InlineContact className="mt-4" />
         </Reveal>
       </div>
     </div>

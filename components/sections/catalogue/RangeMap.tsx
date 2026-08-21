@@ -162,6 +162,23 @@ export function RangeMap({ mode = "scroll" }: { mode?: "scroll" | "link" }) {
 
           return (
             <Reveal key={cat.key} dir="up" delay={i * 90}>
+              {/* mobile connector — the fan collapses into a vertical spine:
+                  a coloured drop line ties each stacked card back to the hub */}
+              <div
+                aria-hidden="true"
+                className="flex flex-col items-center xl:hidden"
+              >
+                <span
+                  className="block h-6 w-[2px] rounded-full"
+                  style={{
+                    background: `linear-gradient(#292F6E, ${cat.accent})`,
+                  }}
+                />
+                <span
+                  className="mb-1.5 block h-[7px] w-[7px] rounded-full"
+                  style={{ background: cat.accent }}
+                />
+              </div>
               {mode === "link" ? (
                 <TransitionLink
                   href={`/catalogue#range-${cat.key}`}

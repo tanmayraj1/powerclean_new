@@ -28,6 +28,8 @@ export default function CataloguePage() {
         eyebrow="PRODUCT CATALOGUE"
         blurb={`${products.length} products across aqueous cleaning, cooling-water treatment, solvent replacement and rust protection — every one supplied with dosing guidance and an SDS.`}
         minHeight="min(56vh, 480px)"
+        image="/photos/solution-xl.webp"
+        imageAlt=""
       />
 
       {/* CATEGORY MAP — the range as one chart */}

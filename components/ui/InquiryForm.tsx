@@ -5,6 +5,7 @@ import { submitInquiry, type InquiryState } from "@/app/actions";
 import { industryOptions } from "@/lib/site-config";
 import { Magnetic } from "@/components/motion/Magnetic";
 import { Arrow } from "./Arrow";
+import { InlineContact } from "./InlineContact";
 
 type FieldDef = {
   name: string;
@@ -164,6 +165,7 @@ export function InquiryForm({ variant }: InquiryFormProps) {
           </button>
         </Magnetic>
       </div>
+      <InlineContact className="mt-3.5 border-t border-line-2 pt-3.5" />
     </form>
   );
 }

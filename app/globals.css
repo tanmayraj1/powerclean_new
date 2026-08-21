@@ -48,8 +48,21 @@
   --animate-pc-pulse: pcPulse 2.2s ease-in-out infinite;
   --animate-pc-drift: pcDrift 12s ease-in-out infinite;
   --animate-pc-rip-drift: pcRipDrift 26s ease-in-out infinite alternate;
+  --animate-pc-halo: pcHalo 3.6s ease-out infinite;
 }
 
+/* quiet attention ring on the floating contact dock — expands, fades, rests */
+@keyframes pcHalo {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  55%,
+  100% {
+    transform: scale(1.75);
+    opacity: 0;
+  }
+}
 @keyframes pcFloat {
   0%,
   100% {

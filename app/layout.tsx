@@ -7,6 +7,7 @@ import { IntroCurtain } from "@/components/providers/IntroCurtain";
 import { CustomCursor } from "@/components/providers/CustomCursor";
 import { SiteNav } from "@/components/layout/SiteNav";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { QuickContact } from "@/components/layout/QuickContact";
 import { siteConfig } from "@/lib/site-config";
 import { JsonLd } from "@/components/seo/JsonLd";
 import {
@@ -110,6 +111,7 @@ export default function RootLayout({
             <main className="flex-1">{children}</main>
             <SiteFooter />
           </TransitionProvider>
+          <QuickContact />
           <IntroCurtain />
           <CustomCursor />
         </LenisProvider>

@@ -27,6 +27,8 @@ export default function SolutionsPage() {
         eyebrow="POWER CLEAN SOLUTIONS"
         blurb="Water-based chemistry, solvent replacements, and rust protection — matched to your metals, soils, equipment, and compliance requirements."
         minHeight="min(62vh, 540px)"
+        image="/photos/solution-lf.webp"
+        imageAlt=""
       />
 
       {/* ALL SOLUTIONS */}
