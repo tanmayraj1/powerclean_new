@@ -107,50 +107,23 @@ export function SiteFooter() {
           </div>
         </div>
 
-        {/* Giant wordmark. The brand logo uses a crossbar-less "A" (a
-            flat-topped Λ), so that glyph is drawn as a path while the rest
-            stays live text. Each run keeps its own textLength, so the mark
-            still stretches to exactly 988 units and can never clip.
-            Run widths come from the real Poppins-700 advances at this size,
-            scaled by 988/964.77. */}
+        {/* Giant company wordmark — Roovel Solutions logo (background
+            removed), stretched edge-to-edge like the old type lockup. */}
         <Reveal
           dir="up"
           delay={120}
           className="mt-[clamp(28px,5vw,56px)] overflow-hidden"
         >
-          <svg
-            viewBox="0 0 1000 150"
+          {/* unoptimized: sharp palettizes large flat-colour PNGs at q75,
+              which mottles the blue fills — the hand-tuned WebP stays clean */}
+          <Image
+            src="/roovel-wordmark.webp"
+            alt="Roovel Solutions Pvt. Ltd."
+            width={1890}
+            height={308}
+            unoptimized
             className="block h-auto w-full"
-            role="img"
-            aria-label="POWERCLEAN"
-          >
-            <g
-              fill="#00A651"
-              fontFamily="var(--font-poppins), sans-serif"
-              fontWeight="700"
-              fontSize="148"
-              letterSpacing="-6"
-            >
-              <text
-                x="6"
-                y="122"
-                textLength="774.6"
-                lengthAdjust="spacingAndGlyphs"
-              >
-                POWERCLE
-              </text>
-              {/* crossbar-less A, matching the logo lockup */}
-              <path d="M780.4 122 L817.5 18.4 L849.3 18.4 L886.4 122 L863.6 122 L833.4 37.7 L803.2 122 Z" />
-              <text
-                x="886.2"
-                y="122"
-                textLength="107.8"
-                lengthAdjust="spacingAndGlyphs"
-              >
-                N
-              </text>
-            </g>
-          </svg>
+          />
         </Reveal>
 
         <div className="mt-[26px] flex flex-wrap justify-between gap-x-8 gap-y-3.5 border-t border-line-2 pt-[22px]">

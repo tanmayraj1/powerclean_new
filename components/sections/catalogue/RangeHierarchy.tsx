@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { EASE } from "@/lib/motion";
 import { TransitionLink } from "@/components/layout/TransitionLink";
@@ -22,6 +22,47 @@ export function RangeHierarchy() {
   const reduced = usePrefersReducedMotion();
   const [openCat, setOpenCat] = useState<CategoryKey>("aqueous");
 
+  // The RangeMap chart above (same page) dispatches pc-open-category; QR
+  // landing links arrive cross-page as /catalogue#range-<key>. Both open
+  // the right family band and bring it into view.
+  useEffect(() => {
+    const isKey = (k: string): k is CategoryKey =>
+      categories.some((c) => c.key === k);
+    const bringIntoView = (key: string, delay: number) => {
+      setTimeout(() => {
+        const el = document.getElementById(`range-${key}`);
+        if (!el) return;
+        window.scrollTo({
+          top: el.getBoundingClientRect().top + window.scrollY - 96,
+          behavior: "smooth",
+        });
+      }, delay);
+    };
+    const fromHash = () => {
+      const key = window.location.hash.replace("#range-", "");
+      if (window.location.hash.startsWith("#range-") && isKey(key)) {
+        setOpenCat(key);
+        // wait out the page-transition reveal before scrolling
+        bringIntoView(key, 750);
+      }
+    };
+    const onOpen = (e: Event) => {
+      const key = (e as CustomEvent<string>).detail;
+      if (!isKey(key)) return;
+      setOpenCat(key);
+      // wait for the previously-open band to finish collapsing (0.45s), or
+      // the target's position is measured too early and we overshoot
+      bringIntoView(key, 520);
+    };
+    fromHash();
+    window.addEventListener("pc-open-category", onOpen);
+    window.addEventListener("hashchange", fromHash);
+    return () => {
+      window.removeEventListener("pc-open-category", onOpen);
+      window.removeEventListener("hashchange", fromHash);
+    };
+  }, []);
+
   return (
     <div className="flex flex-col gap-4">
       {categories.map((cat) => {
@@ -34,7 +75,8 @@ export function RangeHierarchy() {
         return (
           <div
             key={cat.key}
-            className="overflow-hidden rounded-card bg-white ring-1 ring-inset ring-line-2 transition-shadow duration-300"
+            id={`range-${cat.key}`}
+            className="scroll-mt-24 overflow-hidden rounded-card bg-white ring-1 ring-inset ring-line-2 transition-shadow duration-300"
             style={open ? { boxShadow: `0 18px 44px -28px ${cat.accent}66` } : undefined}
           >
             {/* Category band */}

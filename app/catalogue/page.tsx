@@ -8,7 +8,8 @@ import { Reveal } from "@/components/motion/Reveal";
 import { Backdrop } from "@/components/ui/Backdrop";
 import { CatalogueGrid } from "@/components/sections/catalogue/CatalogueGrid";
 import { RangeHierarchy } from "@/components/sections/catalogue/RangeHierarchy";
-import { categories, products } from "@/lib/catalogue";
+import { RangeMap } from "@/components/sections/catalogue/RangeMap";
+import { products } from "@/lib/catalogue";
 import { propertyTags } from "@/lib/solutions";
 
 export const metadata: Metadata = {
@@ -28,38 +29,15 @@ export default function CataloguePage() {
         minHeight="min(56vh, 480px)"
       />
 
-      {/* CATEGORY OVERVIEW */}
+      {/* CATEGORY MAP — the range as one chart */}
       <SectionPanel outerClassName="px-3 pb-3 pt-10">
         <SectionHeading
           eyebrow="BY CATEGORY"
           title="Four Families, One Standard"
-          lede="Every formulation is trialled on your parts before it is recommended."
+          lede="The whole range on one map — pick a family to open every series and product inside it."
           className="mb-10 max-w-[620px]"
         />
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-4">
-          {categories.map((c, i) => (
-            <Reveal
-              key={c.key}
-              dir="up"
-              delay={i * 80}
-              className="rounded-img-lg p-6 ring-1 ring-inset ring-line-2"
-              style={{ background: c.accentSoft }}
-            >
-              <div className="mb-2.5 flex items-baseline gap-2">
-                <span
-                  className="font-mono text-[22px] font-semibold"
-                  style={{ color: c.accentText }}
-                >
-                  {String(products.filter((p) => p.category === c.key).length).padStart(2, "0")}
-                </span>
-                <h3 className="text-[15px] font-semibold leading-tight text-navy">
-                  {c.label}
-                </h3>
-              </div>
-              <p className="text-[13px] leading-[1.6] text-muted-3">{c.blurb}</p>
-            </Reveal>
-          ))}
-        </div>
+        <RangeMap />
       </SectionPanel>
 
       {/* THE RANGE — full hierarchy on one page */}
