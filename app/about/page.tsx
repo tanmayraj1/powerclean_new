@@ -12,10 +12,11 @@ import { CountUp } from "@/components/motion/CountUp";
 import { DrawPath } from "@/components/motion/DrawPath";
 import { TransitionLink } from "@/components/layout/TransitionLink";
 import { Milestones } from "@/components/sections/about/Milestones";
-import { siteConfig, team } from "@/lib/site-config";
+import { Capabilities } from "@/components/sections/about/Capabilities";
+import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
-  title: "About",
+  title: "Industrial Cleaning Chemical Manufacturer in Bangalore",
   description:
     "Power Clean is a brand of Roovel Solutions Pvt. Ltd. — ISO 9001 certified, Bangalore-based, with 25+ years of precision cleaning solutions for Indian manufacturing.",
   alternates: { canonical: "/about" },
@@ -35,14 +36,14 @@ const STATS = [
     caption: "Years of precision cleaning", // REAL
   },
   {
-    count: siteConfig.stats.facilitiesServed,
-    suffix: "+",
-    caption: "Facilities served", // PLACEHOLDER
+    count: siteConfig.stats.productLines,
+    suffix: "",
+    caption: "Products in the range", // REAL
   },
   {
-    count: siteConfig.stats.productLines,
-    suffix: "+",
-    caption: "Product lines",
+    count: siteConfig.stats.seriesCount,
+    suffix: "",
+    caption: "Product series",
   },
   {
     count: siteConfig.stats.applicationsServed,
@@ -96,7 +97,7 @@ export default function AboutPage() {
             className="rounded-card-lg bg-card-tint p-7"
           >
             <div className="mb-5 text-sm font-semibold text-navy">
-              Formulation Performance Index
+              Process Economics
             </div>
             <svg
               viewBox="0 0 300 100"
@@ -114,15 +115,17 @@ export default function AboutPage() {
             <div className="flex gap-8">
               <div>
                 <div className="text-[30px] font-bold text-navy">
-                  <CountUp to={90} suffix="%" />
+                  <CountUp to={100} prefix="1:" />
                 </div>
-                <div className="text-xs text-muted">first-trial success rate</div>
+                <div className="text-xs text-muted">maximum dilution ratio</div>
               </div>
               <div>
                 <div className="text-[30px] font-bold text-navy">
-                  <CountUp to={96} suffix="%" />
+                  <CountUp to={65} suffix="°C" />
                 </div>
-                <div className="text-xs text-muted">customer retention</div>
+                <div className="text-xs text-muted">
+                  optimum wash temperature, vs 100 °C for TCE
+                </div>
               </div>
             </div>
           </Reveal>
@@ -192,7 +195,7 @@ export default function AboutPage() {
                 <ImageSlot
                   brief="Photo — early lab bench, formulation work"
                   src="/photos/story-lab.webp"
-                  alt="Chemist working at a laboratory bench, black-and-white archival photograph"
+                  alt="Archive photograph of early formulation work in the chemistry laboratory"
                   className="absolute inset-0"
                 />
               </div>
@@ -200,7 +203,7 @@ export default function AboutPage() {
                 <ImageSlot
                   brief="Photo — today's production facility"
                   src="/photos/story-facility.webp"
-                  alt="Modern laboratory with gloved technician testing a formulation"
+                  alt="Chemists developing industrial degreaser formulations in the Power Clean laboratory"
                   className="absolute inset-0"
                 />
               </div>
@@ -222,39 +225,14 @@ export default function AboutPage() {
             ✉ {siteConfig.contact.email}
           </span>
         }
+        image="/photos/story-facility.webp"
       />
 
       <RippleDivider />
 
-      {/* TEAM — PLACEHOLDER until real bios are provided */}
-      <div className="mx-auto max-w-[1320px] px-5 py-[clamp(40px,6vw,80px)]">
-        <SectionHeading
-          eyebrow="OUR TEAM"
-          title="Technical & Engineering Team"
-          lede="Chemists and applications engineers who spend as much time on plant floors as in the lab."
-          className="mb-10 max-w-[620px]"
-        />
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-[18px]">
-          {team.map((m, i) => (
-            <Reveal
-              key={m.name}
-              dir="up"
-              delay={i * 100}
-              className="relative h-[340px] overflow-hidden rounded-card transition-transform duration-300 hover:-translate-y-1.5"
-            >
-              <ImageSlot brief={m.image} className="absolute inset-0" />
-              <div className="pointer-events-none absolute bottom-3 left-3 right-3 rounded-img bg-white/85 px-4 py-3 backdrop-blur-[10px]">
-                <div className="text-[15px] font-semibold text-navy">
-                  {m.name}
-                </div>
-                <div className="text-xs text-muted">{m.role}</div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </div>
+      <Capabilities />
 
-      {/* MILESTONES — PLACEHOLDER timeline */}
+      {/* MILESTONES — real anchors from company records */}
       <Milestones />
 
       {/* FACILITIES + MAP */}
@@ -272,7 +250,7 @@ export default function AboutPage() {
             <ImageSlot
               brief="Photo — production hall interior, blending vessels"
               src="/photos/production-hall.webp"
-              alt="Production hall with stainless steel blending vessels and railed walkways"
+              alt="Production hall with stainless process vessels at the Bangalore manufacturing facility"
               className="absolute inset-0"
             />
             <div className="pointer-events-none absolute bottom-3.5 left-3.5 rounded-full bg-white/85 px-4 py-2 text-xs font-semibold text-navy backdrop-blur-[8px]">
@@ -308,7 +286,7 @@ export default function AboutPage() {
               <ImageSlot
                 brief="Photo — QC laboratory"
                 src="/photos/qc-lab.webp"
-                alt="Quality-control analyst running a titration in the laboratory"
+                alt="Quality control chemist testing a Power Clean cleaning chemical batch in the laboratory"
                 className="absolute inset-0"
               />
             </div>
@@ -316,7 +294,7 @@ export default function AboutPage() {
               <ImageSlot
                 brief="Photo — drum filling & dispatch bay"
                 src="/photos/dispatch-bay.webp"
-                alt="Forklift moving palletised stock in the dispatch warehouse"
+                alt="IBC totes and industrial containers staged for dispatch to customer plants"
                 className="absolute inset-0"
               />
             </div>

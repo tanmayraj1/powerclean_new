@@ -9,7 +9,7 @@ import { milestones } from "@/lib/site-config";
 
 /**
  * Year-selector milestones with ambient ripple field.
- * NOTE: milestone content is PLACEHOLDER — no real company timeline exists yet.
+ * Timeline anchors are REAL — see lib/site-config milestones.
  */
 export function Milestones() {
   const [year, setYear] = useState(milestones.length - 1);
@@ -30,7 +30,7 @@ export function Milestones() {
           <Reveal dir="left">
             <Eyebrow label="MILESTONES" className="mb-3.5" />
             <h2 className="mb-[22px] text-[clamp(28px,3.4vw,42px)] font-semibold leading-[1.12] tracking-[-0.02em] text-navy">
-              A Decade of Cleaner Plants
+              Since 2000, Cleaner Plants
             </h2>
             <div className="mb-6 flex flex-wrap gap-2">
               {milestones.map((m, i) => (
@@ -61,6 +61,8 @@ export function Milestones() {
           >
             <ImageSlot
               brief="Photo — milestone moment: facility, certification, or production line"
+              src="/photos/production-hall.webp"
+              alt="Production hall with stainless process vessels at the Bangalore manufacturing facility"
               className="absolute inset-0"
             />
           </Reveal>

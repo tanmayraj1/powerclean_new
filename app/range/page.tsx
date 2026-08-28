@@ -13,7 +13,7 @@ import { products } from "@/lib/catalogue";
 import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
-  title: "Explore the Full Range",
+  title: "The Complete Industrial Cleaning Product Range",
   description:
     "Scanned our card or brochure? This is the complete Power Clean range — aqueous cleaners, cooling-water treatment, solvent degreasers and rust protection — one tap from every product.",
   alternates: { canonical: "/range" },

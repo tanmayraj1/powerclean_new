@@ -51,15 +51,19 @@ export function CoreValues() {
           <div className="flex flex-wrap gap-7">
             <div>
               <div className="text-[26px] font-bold text-navy">
-                <CountUp to={40} suffix="%" />
+                <CountUp to={20} suffix="%" />
               </div>
-              <div className="text-xs text-muted">faster wash cycles</div>
+              <div className="text-xs text-muted">
+                faster cycle time on a spray tunnel line
+              </div>
             </div>
             <div>
               <div className="text-[26px] font-bold text-navy">
-                <CountUp to={98.6} dec={1} suffix="%" />
+                <CountUp to={0.4} dec={1} suffix="%" />
               </div>
-              <div className="text-xs text-muted">residue-free finish</div>
+              <div className="text-xs text-muted">
+                white-rust defects, down from 3.2%
+              </div>
             </div>
           </div>
         </Reveal>
@@ -106,7 +110,7 @@ export function CoreValues() {
                 <CountUp to={100} suffix="%" />
               </div>
               <div className="text-xs text-muted-3">
-                SDS &amp; PPE documentation coverage
+of shipments with SDS &amp; dosing guidance
               </div>
             </div>
           </div>
@@ -150,17 +154,17 @@ export function CoreValues() {
                 Precision Engineering
               </span>
               <span className="text-sm font-bold text-green-deep">
-                <CountUp to={5} prefix="< " suffix=" µm" />
+                Millipore
               </span>
             </div>
             <div className="h-1.5 overflow-hidden rounded-full bg-line">
               <GrowBar
                 axis="x"
-                className="h-full w-[94%] rounded-full bg-green"
+                className="h-full w-[73%] rounded-full bg-green"
               />
             </div>
             <div className="mt-1.5 text-[11px] text-muted">
-              residual film after final rinse
+              cleanliness levels achieved on customer components
             </div>
           </div>
         </Reveal>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Magnetic } from "@/components/motion/Magnetic";
@@ -12,7 +13,8 @@ const LINKS = [
   { key: "about", label: "About", href: "/about" },
   { key: "solutions", label: "Solutions", href: "/solutions" },
   { key: "catalogue", label: "Catalogue", href: "/catalogue" },
-  { key: "resources", label: "Resources", href: "/#resources" },
+  { key: "blog", label: "Blog", href: "/blog" },
+  { key: "resources", label: "Resources", href: "/resources" },
 ];
 
 function activeKey(pathname: string): string {
@@ -20,6 +22,8 @@ function activeKey(pathname: string): string {
   if (pathname === "/about") return "about";
   if (pathname.startsWith("/catalogue")) return "catalogue";
   if (pathname.startsWith("/solutions")) return "solutions";
+  if (pathname.startsWith("/blog")) return "blog";
+  if (pathname.startsWith("/resources")) return "resources";
   return "none";
 }
 
@@ -30,6 +34,8 @@ function activeKey(pathname: string): string {
  * full-screen menu; magnetic CTA.
  */
 export function SiteNav() {
+  const router = useRouter();
+  const [query, setQuery] = useState("");
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -105,7 +111,13 @@ export function SiteNav() {
 
           {/* desktop search + CTA */}
           <div className="hidden flex-1 items-center justify-end gap-2.5 nav:flex">
-            <div
+            <form
+              role="search"
+              onSubmit={(e) => {
+                e.preventDefault();
+                const q = query.trim();
+                router.push(q ? `/catalogue?q=${encodeURIComponent(q)}` : "/catalogue");
+              }}
               className={`flex items-center gap-2 rounded-full py-[7px] pl-[18px] pr-[7px] transition-[background,box-shadow] duration-300 ${
                 solid
                   ? "bg-azure"
@@ -113,16 +125,21 @@ export function SiteNav() {
               }`}
             >
               <input
-                placeholder="Search here"
-                aria-label="Search"
+                placeholder="Search products"
+                aria-label="Search products"
+                name="q"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
                 className={`w-[104px] border-none bg-transparent font-sans text-[13px] outline-none ${
                   solid
                     ? "text-navy placeholder:text-muted"
                     : "text-white placeholder:text-white/75"
                 }`}
               />
-              <span
-                className={`flex h-7 w-7 items-center justify-center rounded-full transition-colors ${
+              <button
+                type="submit"
+                aria-label="Search the catalogue"
+                className={`flex h-7 w-7 cursor-pointer items-center justify-center rounded-full border-none transition-colors ${
                   solid ? "bg-navy" : "bg-white"
                 }`}
               >
@@ -138,8 +155,8 @@ export function SiteNav() {
                   <circle cx="11" cy="11" r="7" />
                   <path d="M21 21l-4.3-4.3" />
                 </svg>
-              </span>
-            </div>
+              </button>
+            </form>
             <Magnetic>
               <TransitionLink
                 href="/contact"

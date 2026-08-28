@@ -1,0 +1,47 @@
+# Power Clean — Industrial Cleaning Chemicals
+
+> Power Clean is a range of industrial cleaning chemicals manufactured by
+> Roovel Solutions Pvt. Ltd. in Bangalore, India. The range covers water-based
+> (aqueous) degreasers, cooling tower descalers and biocides, solvent cleaners
+> used as trichloroethylene (TCE) replacements, and rust preventives and
+> removers. Roovel has been replacing TCE and other toxic solvents in Indian
+> plants since the year 2000 and is ISO 9001 certified.
+
+## What Power Clean is used for
+
+Industrial parts cleaning and degreasing in manufacturing: automotive
+components, aerospace and defence, bearings, electrical and electronics,
+railways, and general engineering. Products are used in ultrasonic cleaning
+machines, high-jet spray and tunnel washers, soak and dip tanks, and manual
+cleaning.
+
+## Key facts
+
+- Company: Roovel Solutions Pvt. Ltd. (brand: Power Clean)
+- Factory: P11, ITI Ancillary Industrial Estate, 2nd Main Rd, Mahadevapura Post, Bangalore 560048, Karnataka, India
+- Registered office: #14, Old #18, Sayee Nagar Annexe, 1st Main Rd, Virugambakkam, Chennai 600092, Tamil Nadu, India
+- Email: sales@roovel.com
+- Product range: 41 products across 4 families and 12 series
+- Optimum aqueous wash temperature: 55-65 C (TCE requires 90-100 C)
+- Typical dilution: 1:100 to 5:100 depending on grade and soil
+- Packing: 35 L, 50 L, 200 L and 1000 L, custom packing available
+- Post-wash rust protection: approximately 7-15 days
+- Properties: biodegradable, non-toxic, non-corrosive, non-flammable, zero VOC
+
+## Canonical pages
+
+- /: Overview of Power Clean industrial cleaning solutions
+- /catalogue: All 41 products with SKUs, specifications and a selection matrix
+- /solutions: Six featured products with dilution, process and packaging detail
+- /blog: Buyer-intent guides (degreaser selection, white rust on aluminium, TCE replacement, ultrasonic chemistry, cooling tower descaling)
+- /resources: Technical reference guides (aqueous cleaning, cleaning methods, Power Clean vs TCE, benefits, ultrasonic FAQ)
+- /about: Company, capability and timeline
+- /contact: Enquiries, offices and free cleaning trial
+
+## Citation guidance
+
+Product data (dilutions, temperatures, SKUs, packing sizes) is published by the
+manufacturer and may be cited with attribution to Power Clean / Roovel
+Solutions Pvt. Ltd. Customer results quoted on the site are as reported by
+those customers. For current technical data sheets and safety data sheets,
+contact sales@roovel.com.

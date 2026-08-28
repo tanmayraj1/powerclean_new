@@ -1,10 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
 import { EASE } from "@/lib/motion";
 import { TransitionLink } from "@/components/layout/TransitionLink";
 import { Arrow } from "@/components/ui/Arrow";
+import { ProductDrum } from "@/components/ui/ProductDrum";
 import { usePrefersReducedMotion } from "@/hooks/useMediaQuery";
 import {
   categories,
@@ -19,9 +21,19 @@ type Filter = "all" | CategoryKey;
 export function CatalogueGrid() {
   const [filter, setFilter] = useState<Filter>("all");
   const reduced = usePrefersReducedMotion();
+  const searchParams = useSearchParams();
+  // the nav search box submits to /catalogue?q=… — honour it here
+  const query = (searchParams.get("q") ?? "").trim().toLowerCase();
 
-  const shown =
+  const byCategory =
     filter === "all" ? products : products.filter((p) => p.category === filter);
+  const shown = query
+    ? byCategory.filter((p) =>
+        [p.name, p.tagline, p.sku ?? "", ...p.tags].some((v) =>
+          v.toLowerCase().includes(query)
+        )
+      )
+    : byCategory;
 
   const chips: { key: Filter; label: string; count: number }[] = [
     { key: "all", label: "All products", count: products.length },
@@ -61,6 +73,33 @@ export function CatalogueGrid() {
           );
         })}
       </div>
+
+      {query && (
+        <p className="mb-6 text-center text-[13px] text-muted-3">
+          Showing {shown.length} result{shown.length === 1 ? "" : "s"} for{" "}
+          <span className="font-semibold text-navy">&ldquo;{query}&rdquo;</span>{" "}
+          <a
+            href="/catalogue"
+            className="font-semibold text-green-deep underline-offset-4 hover:underline"
+          >
+            clear
+          </a>
+        </p>
+      )}
+      {shown.length === 0 && (
+        <p className="mb-8 text-center text-[14px] text-muted-3">
+          No products matched. Try a product code such as{" "}
+          <span className="font-mono text-navy">XL</span> or{" "}
+          <span className="font-mono text-navy">845</span>, or{" "}
+          <a
+            href="/contact"
+            className="font-semibold text-green-deep underline-offset-4 hover:underline"
+          >
+            tell us your soils and substrates
+          </a>{" "}
+          and we will match the grade for you.
+        </p>
+      )}
 
       <motion.div
         layout={!reduced}
@@ -105,6 +144,19 @@ function ProductCard({ product }: { product: CatalogueProduct }) {
         aria-hidden="true"
         className="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-green/[0.06] transition-transform duration-500 group-hover:scale-125"
       />
+      {/* pack shot — every product ships as a labelled Power Clean drum */}
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute right-3 top-7 w-[78px] opacity-[0.95] transition-transform duration-500 group-hover:-translate-y-1 group-hover:scale-[1.06]"
+      >
+        <ProductDrum
+          name={product.name}
+          sku={product.sku}
+          accent={cat.accent}
+          size="sm"
+          className="h-auto w-full drop-shadow-[0_8px_16px_rgba(29,31,35,.16)]"
+        />
+      </span>
       <div className="mb-3 flex items-center justify-between gap-2">
         <span className="flex items-center gap-2">
           <span className="h-[7px] w-[7px] shrink-0 rounded-full bg-green" />
@@ -112,16 +164,11 @@ function ProductCard({ product }: { product: CatalogueProduct }) {
             {cat.short}
           </span>
         </span>
-        {product.sku && (
-          <span className="rounded-md bg-navy/[0.06] px-2 py-0.5 font-mono text-[10px] font-semibold text-muted-3">
-            SKU {product.sku}
-          </span>
-        )}
       </div>
-      <h3 className="mb-2 text-[18px] font-semibold leading-[1.25] text-navy">
+      <h3 className="mb-2 max-w-[calc(100%-72px)] text-[18px] font-semibold leading-[1.25] text-navy">
         {product.name}
       </h3>
-      <p className="mb-4 flex-1 text-[13px] leading-[1.6] text-muted">
+      <p className="mb-4 max-w-[calc(100%-64px)] flex-1 text-[13px] leading-[1.6] text-muted">
         {product.tagline}
       </p>
       <div className="mb-4 flex flex-wrap gap-1.5">

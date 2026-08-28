@@ -57,7 +57,7 @@ export function Facility() {
             <ImageSlot
               brief="Photo — blending / filling line in production"
               src="/photos/blending-line.webp"
-              alt="Stainless steel blending vessels and piping on the production line"
+              alt="Stainless steel blending vessels where Power Clean industrial cleaning chemicals are manufactured"
               className="absolute inset-0"
             />
           </div>

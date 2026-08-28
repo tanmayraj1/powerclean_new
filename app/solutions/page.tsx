@@ -13,7 +13,7 @@ import { TactPrinciple } from "@/components/sections/solutions/TactPrinciple";
 import { TceComparison } from "@/components/sections/solutions/TceComparison";
 
 export const metadata: Metadata = {
-  title: "Solutions",
+  title: "Industrial Cleaning Solutions for Every Wash Process",
   description:
     "Water-based cleaners, degreasers, solvent replacements, and rust preventives from Power Clean — matched to your metals, soils, equipment, and compliance requirements.",
   alternates: { canonical: "/solutions" },
@@ -99,6 +99,7 @@ export default function SolutionsPage() {
         ctaHref="/contact"
         imageBrief="Photo — mist of solution across a metal panel, backlit"
         wedge
+        image="/photos/gallery-4.webp"
       />
     </>
   );

@@ -10,12 +10,15 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 import { QuickContact } from "@/components/layout/QuickContact";
 import { siteConfig } from "@/lib/site-config";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { Analytics } from "@/components/seo/Analytics";
 import {
   DEFAULT_DESCRIPTION,
   DEFAULT_TITLE,
   SITE_NAME,
   SITE_URL,
+  localBusinessJsonLd,
   organizationJsonLd,
+  serviceJsonLd,
   webSiteJsonLd,
 } from "@/lib/seo";
 
@@ -41,6 +44,14 @@ export const metadata: Metadata = {
     "aluminium cleaner ADC12",
     "degreasing chemicals India",
     "parts washing chemistry",
+    "industrial cleaning solutions",
+    "industrial cleaning chemicals manufacturer",
+    "degreaser manufacturer Bangalore",
+    "aluminium brightener ADC12",
+    "white rust removal aluminium",
+    "cooling tower biocide",
+    "solvent replacement India",
+    "millipore cleanliness",
     siteConfig.name,
     siteConfig.company,
   ],
@@ -78,7 +89,26 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  icons: { icon: "/logo.png" },
+  icons: {
+    icon: [{ url: "/logo.png", type: "image/png" }],
+    apple: [{ url: "/logo.png" }],
+    shortcut: ["/logo.png"],
+  },
+  manifest: "/manifest.webmanifest",
+  category: "Industrial cleaning chemicals",
+  // paste the codes into Vercel env vars — no code change needed
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+    other: process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION
+      ? { "msvalidate.01": process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION }
+      : {},
+  },
+  other: {
+    "geo.region": "IN-KA",
+    "geo.placename": "Bangalore",
+    "geo.position": "12.9899;77.6959",
+    ICBM: "12.9899, 77.6959",
+  },
 };
 
 /**
@@ -104,7 +134,14 @@ export default function RootLayout({
       className={`${poppins.variable} ${plexMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col overflow-x-clip">
-        <JsonLd data={[organizationJsonLd(), webSiteJsonLd()]} />
+        <JsonLd
+          data={[
+            organizationJsonLd(),
+            webSiteJsonLd(),
+            serviceJsonLd(),
+            ...localBusinessJsonLd(),
+          ]}
+        />
         <LenisProvider>
           <TransitionProvider>
             <SiteNav />
@@ -114,6 +151,7 @@ export default function RootLayout({
           <QuickContact />
           <IntroCurtain />
           <CustomCursor />
+          <Analytics />
         </LenisProvider>
       </body>
     </html>

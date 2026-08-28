@@ -3,12 +3,15 @@ import { Reveal } from "@/components/motion/Reveal";
 import { siteConfig } from "@/lib/site-config";
 import { Arrow } from "@/components/ui/Arrow";
 import { TransitionLink } from "./TransitionLink";
+import { NewsletterForm } from "./NewsletterForm";
 
 const QUICK_LINKS = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Solutions", href: "/solutions" },
   { label: "Catalogue", href: "/catalogue" },
+  { label: "Blog", href: "/blog" },
+  { label: "Resources", href: "/resources" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -41,23 +44,7 @@ export function SiteFooter() {
             <p className="mb-[22px] text-[13px] font-semibold uppercase tracking-[0.14em] text-green-deep">
               {siteConfig.motto}
             </p>
-            <form
-              className="flex max-w-[380px] gap-2 rounded-full bg-azure p-1.5 pl-5"
-              aria-label="Newsletter subscription"
-            >
-              <input
-                placeholder="Your email address"
-                type="email"
-                aria-label="Email address"
-                className="min-w-0 flex-1 border-none bg-transparent font-sans text-[13px] text-ink outline-none placeholder:text-muted-2"
-              />
-              <button
-                type="button"
-                className="cursor-pointer rounded-full border-none bg-green-cta px-5 py-2.5 font-sans text-[13px] font-semibold text-white transition-colors hover:bg-green-cta-dark"
-              >
-                Subscribe
-              </button>
-            </form>
+            <NewsletterForm />
             <p className="mt-3.5 max-w-[380px] text-xs text-muted-2">
               Subscribe for application notes, product announcements, and Power
               Clean updates.

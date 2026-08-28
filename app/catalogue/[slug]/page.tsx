@@ -7,6 +7,7 @@ import { RippleDivider } from "@/components/ui/RippleDivider";
 import { CtaBanner } from "@/components/ui/CtaBanner";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Arrow } from "@/components/ui/Arrow";
+import { ProductDrum } from "@/components/ui/ProductDrum";
 import { Reveal } from "@/components/motion/Reveal";
 import { Magnetic } from "@/components/motion/Magnetic";
 import { TransitionLink } from "@/components/layout/TransitionLink";
@@ -26,6 +27,14 @@ export function generateStaticParams() {
 }
 
 export const dynamicParams = false;
+
+/** hero photography per product family, so the 41 pages are not identical */
+const CATEGORY_HERO: Record<string, string> = {
+  aqueous: "/photos/solution-xl.webp",
+  cooling: "/photos/blending-line.webp",
+  solvent: "/photos/solution-342.webp",
+  rust: "/photos/solution-rp636.webp",
+};
 
 export async function generateMetadata(props: {
   params: Promise<{ slug: string }>;
@@ -88,6 +97,8 @@ export default async function ProductPage(props: {
         blurb={product.tagline}
         minHeight="min(54vh, 460px)"
         titleClassName="text-[clamp(32px,4.4vw,62px)]"
+        image={CATEGORY_HERO[product.category]}
+        imageAlt=""
       />
 
       {/* BREADCRUMB */}
@@ -146,6 +157,17 @@ export default async function ProductPage(props: {
             dir="right"
             className="sticky top-[90px] rounded-card-lg border border-line-2 bg-white p-7"
           >
+            <div
+              className="mb-5 flex items-end justify-center rounded-img-lg py-4"
+              style={{ background: category.accentSoft }}
+            >
+              <ProductDrum
+                name={product.name}
+                sku={product.sku}
+                accent={category.accent}
+                className="h-[200px] w-auto drop-shadow-[0_14px_26px_rgba(29,31,35,.20)]"
+              />
+            </div>
             <h3 className="mb-1.5 text-lg font-semibold text-navy">
               Key Specifications
             </h3>
@@ -256,12 +278,24 @@ export default async function ProductPage(props: {
               <Reveal key={r.slug} dir="up" delay={i * 120}>
                 <TransitionLink
                   href={`/catalogue/${r.slug}`}
-                  className="group flex h-full flex-col rounded-card border border-line-2 bg-white p-6 no-underline transition-[transform,box-shadow] duration-[350ms] hover:-translate-y-1.5 hover:shadow-card-lg"
+                  className="group relative flex h-full flex-col overflow-hidden rounded-card border border-line-2 bg-white p-6 no-underline transition-[transform,box-shadow] duration-[350ms] hover:-translate-y-1.5 hover:shadow-card-lg"
                 >
-                  <h3 className="mb-2 text-[17px] font-semibold text-navy">
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute -right-2 top-6 w-[76px] opacity-90 transition-transform duration-500 group-hover:-translate-y-1"
+                  >
+                    <ProductDrum
+                      name={r.name}
+                      sku={r.sku}
+                      accent={category.accent}
+                      size="sm"
+                      className="h-auto w-full"
+                    />
+                  </span>
+                  <h3 className="mb-2 max-w-[calc(100%-64px)] text-[17px] font-semibold text-navy">
                     {r.name}
                   </h3>
-                  <p className="mb-4 flex-1 text-[12.5px] leading-[1.6] text-muted">
+                  <p className="mb-4 max-w-[calc(100%-56px)] flex-1 text-[12.5px] leading-[1.6] text-muted">
                     {r.tagline}
                   </p>
                   <span className="flex items-center gap-2 text-[13px] font-semibold text-navy transition-colors group-hover:text-green">
@@ -281,6 +315,7 @@ export default async function ProductPage(props: {
         ctaHref="/contact"
         imageBrief="Photo — product containers on a plant floor beside a parts washer"
         minHeight={400}
+        image="/photos/packaging.webp"
       />
     </>
   );

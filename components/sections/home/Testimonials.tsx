@@ -32,7 +32,7 @@ export function Testimonials() {
             <ImageSlot
               brief="Photo — plant operations manager on factory floor"
               src="/photos/testimonial-1.webp"
-              alt="Machine operator working at a lathe on the plant floor"
+              alt="Machining operation producing the components Power Clean degreasers clean"
               className="absolute inset-0"
             />
           </div>
@@ -40,7 +40,7 @@ export function Testimonials() {
             <ImageSlot
               brief="Photo — cleaning application in progress"
               src="/photos/testimonial-2.webp"
-              alt="Rows of freshly machined metal flanges after cleaning"
+              alt="Bronze and brass bushings cleaned with a neutral-pH non-ferrous cleaner"
               className="absolute inset-0"
             />
           </div>
@@ -48,11 +48,15 @@ export function Testimonials() {
         <Reveal dir="right">
           <div className="mb-[18px] flex items-center gap-3.5">
             <span className="text-[46px] font-bold text-navy">
-              <CountUp to={siteConfig.stats.partnerRating} dec={1} />
+              <CountUp to={siteConfig.stats.yearsOfPrecisionCleaning} suffix="+" />
             </span>
             <div>
-              <div className="text-base tracking-[2px] text-green">★★★★★</div>
-              <div className="text-xs text-muted">average partner rating</div>
+              <div className="text-[13px] font-semibold text-green-deep">
+                years of precision cleaning
+              </div>
+              <div className="text-xs text-muted">
+                trusted by BOSCH, TVS, Bharat Forge and Murugappa
+              </div>
             </div>
           </div>
           <p className="mb-5 min-h-24 text-[clamp(17px,1.8vw,21px)] font-medium leading-[1.55] text-ink [text-wrap:pretty]">

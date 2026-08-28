@@ -2,7 +2,7 @@
  * Single source of truth for every solution card and detail page.
  * All six featured products are REAL items from the powerclean.in catalogue;
  * product facts (dilutions, bases, applications) come from the live site.
- * Photography briefs remain placeholders.
+ * Photography and pack artwork are wired; briefs are kept as art direction.
  */
 
 export type Spec = { label: string; value: string };
@@ -53,7 +53,6 @@ export type Solution = {
   gallery: [string, string, string, string];
   related: [string, string, string];
   cta: { heading: string; body: string };
-  heroBrief: string;
 };
 
 const SHARED_GALLERY: [string, string, string, string] = [
@@ -210,7 +209,6 @@ export const solutions: Solution[] = [
       heading: "Trial POWER CLEAN XL on Your Line",
       body: "Request a sample pail and a supervised trial — measured against your current process.",
     },
-    heroBrief: "Hero photo — spray parts washer mid-cycle, foam and mist",
   },
   {
     slug: "power-clean-nf-14",
@@ -276,7 +274,6 @@ export const solutions: Solution[] = [
       heading: "Trial POWER CLEAN NF-14 on Your Line",
       body: "Request a sample pail and a supervised trial on your non-ferrous parts.",
     },
-    heroBrief: "Hero photo — aluminium components in a parts-washing bath",
   },
   {
     slug: "power-clean-lf",
@@ -341,7 +338,6 @@ export const solutions: Solution[] = [
       heading: "Trial POWER CLEAN LF on Your Line",
       body: "Request a sample pail and a supervised trial in your spray washer.",
     },
-    heroBrief: "Hero photo — high-jet spray washer cabinet mid-cycle",
   },
   {
     slug: "power-clean-sp",
@@ -406,7 +402,6 @@ export const solutions: Solution[] = [
       heading: "Trial POWER CLEAN SP on Your Line",
       body: "Request a sample pail and a supervised trial on your ferrous parts.",
     },
-    heroBrief: "Hero photo — steel parts leaving a washer, dry and protected",
   },
   {
     slug: "pc-s-342",
@@ -470,7 +465,6 @@ export const solutions: Solution[] = [
       heading: "Replace TCE Without Replacing Your Equipment",
       body: "Request a sample and a supervised trial of PC-S 342 in your existing degreaser.",
     },
-    heroBrief: "Hero photo — enclosed solvent degreasing unit, parts basket",
   },
   {
     slug: "pc-rp-636",
@@ -534,7 +528,6 @@ export const solutions: Solution[] = [
       heading: "Protect Your Parts With PC RP-636",
       body: "Request a sample and a supervised protection trial on your stored parts.",
     },
-    heroBrief: "Hero photo — coated steel parts on racks, protective sheen",
   },
 ];
 

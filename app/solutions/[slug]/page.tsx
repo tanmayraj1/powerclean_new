@@ -7,6 +7,7 @@ import { RippleDivider } from "@/components/ui/RippleDivider";
 import { CtaBanner } from "@/components/ui/CtaBanner";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { ImageSlot } from "@/components/ui/ImageSlot";
+import { ProductDrum } from "@/components/ui/ProductDrum";
 import { Arrow } from "@/components/ui/Arrow";
 import { Reveal } from "@/components/motion/Reveal";
 import { CountUp } from "@/components/motion/CountUp";
@@ -65,6 +66,8 @@ export default async function SolutionDetailPage(props: {
         eyebrow="SOLUTION DETAILS"
         blurb={solution.tagline}
         minHeight="min(58vh, 500px)"
+        image={solution.cardPhoto}
+        imageAlt=""
         titleClassName="text-[clamp(34px,4.6vw,66px)]"
       />
 
@@ -118,12 +121,13 @@ export default async function SolutionDetailPage(props: {
               ))}
             </div>
             <InspectImage className="relative mb-5 h-[150px] overflow-hidden rounded-img">
-              <ImageSlot
-                brief="[PRODUCT PHOTO PLACEHOLDER — 35L pail / 200L barrel, to be replaced with real photography]"
-                src="/photos/packaging.webp"
-                alt="Blue supply drums staged beside the filling line"
-                className="absolute inset-0"
-              />
+              <div className="absolute inset-0 flex items-end justify-center bg-green-tint py-3">
+                <ProductDrum
+                  name={solution.name}
+                  accent="#00853f"
+                  className="h-full w-auto drop-shadow-[0_12px_22px_rgba(29,31,35,.18)]"
+                />
+              </div>
             </InspectImage>
             <Magnetic style={{ display: "block" }}>
               <TransitionLink
@@ -236,6 +240,8 @@ export default async function SolutionDetailPage(props: {
           >
             <ImageSlot
               brief="Photo — applications engineer beside a running parts washer"
+              src="/photos/gallery-1.webp"
+              alt="Applications engineer inspecting parts cleaning equipment on a production line"
               className="absolute inset-0"
             />
           </Reveal>
@@ -352,6 +358,7 @@ export default async function SolutionDetailPage(props: {
         ctaHref="/contact"
         imageBrief="Photo — clean parts leaving the washer on a conveyor"
         minHeight={400}
+        image="/photos/gallery-1.webp"
       />
 
       {/* RELATED */}
@@ -381,7 +388,11 @@ export default async function SolutionDetailPage(props: {
                 className="group block rounded-card border border-line-2 bg-white px-3 pb-5 pt-3 no-underline transition-[transform,box-shadow] duration-[350ms] hover:-translate-y-1.5 hover:shadow-card-lg"
               >
                 <div className="relative mb-4 h-[170px] overflow-hidden rounded-img">
-                  <ImageSlot brief={r.cardImage} className="absolute inset-0" />
+                  <ImageSlot
+                    brief={r.cardImage}
+                    src={r.cardPhoto}
+                    className="absolute inset-0"
+                  />
                 </div>
                 <div className="px-2">
                   <h3 className="mb-1.5 text-[17px] font-semibold text-navy">

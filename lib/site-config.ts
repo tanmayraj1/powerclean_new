@@ -1,7 +1,8 @@
 /**
  * Central content store. Real data pulled from the live powerclean.in site is
- * marked REAL; everything marked PLACEHOLDER awaits real material and must not
- * be presented as fact elsewhere.
+ * Every value here is REAL — sourced from powerclean.in, company registration
+ * data, or the client's own material. Nothing in this file may be invented:
+ * if a fact is unknown, omit the claim rather than estimating it.
  */
 
 export const siteConfig = {
@@ -67,15 +68,14 @@ export const siteConfig = {
   ],
 
   stats: {
-    yearsOfPrecisionCleaning: 25, // REAL — "25+ years", keep as final content
-    facilitiesServed: 120, // PLACEHOLDER
-    productLines: 20, // REAL-derived — 20+ products in the published catalogue
-    applicationsServed: 17, // REAL-derived — count of listed applications
-    challengesSolved: 500, // PLACEHOLDER
-    partnerRating: 4.9, // PLACEHOLDER
-  },
-
-  // Rotating word in the Home hero — REAL application areas
+    // ALL REAL / REAL-DERIVED — no invented scale or rating numbers.
+    yearsOfPrecisionCleaning: 25, // REAL — "25+ years" on powerclean.in
+    productLines: 41, // REAL — products in the published catalogue
+    seriesCount: 12, // REAL — series across the four families
+    applicationsServed: 33, // REAL — applications listed on powerclean.in
+    responseHours: 24, // REAL — "all enquiries answered within 24 hours"
+    replacingSolventsSince: 2000, // REAL — "replacing TCE since year 2000"
+  },  // Rotating word in the Home hero — REAL application areas
   heroRotatingWords: [
     "automotive",
     "aerospace",
@@ -87,52 +87,73 @@ export const siteConfig = {
 
 export type Testimonial = { quote: string; name: string; role: string };
 
-export const testimonials: Testimonial[] = [
+export const testimonials = [
+  // ALL REAL — quotes published on powerclean.in, attributions as printed there.
   {
-    // REAL — attributed testimonial from the live site, reworded to card length
     quote:
-      "Roovel doesn't just sell a product — they delivered the complete cleaning solution. They helped us source the right machine, provided free chemical samples, and trained our people on the full system.",
+      "Roovel doesn't just sell a product — they provide complete end-to-end cleaning solutions. They help you procure the cleaning machine, provide free samples of cleaning chemical, and then train our employees on how to use the complete solution effectively.",
     name: "Mani",
     role: "Vice President, TVS Group",
   },
   {
-    // PLACEHOLDER
     quote:
-      "The dilution guidance alone paid for the program. We were overdosing chemistry for years — their bath monitoring cut consumption by a third.",
-    name: "Priya Deshmukh",
-    role: "Procurement Lead, Precision Engineering",
+      "We had corrosion issues after cleaning our mild steel and carbon steel components in our water ultrasonic cleaner. POWER CLEAN SP resolved it — now we clean them with no rust for more than 12 hours before they go to plating.",
+    name: "Sub-vendor",
+    role: "TVS Group supply chain",
   },
   {
-    // PLACEHOLDER
     quote:
-      "Their applications engineer stood at our washer for a full week during the trial. That level of support is why we standardized across both plants.",
-    name: "Amit Kulkarni",
-    role: "Production Manager, Aerospace Supplier",
+      "We tried many aluminium cleaners, but found POWER CLEAN NF to be the best performing.",
+    name: "Quality team",
+    role: "BOSCH ancillary unit",
+  },
+  {
+    quote:
+      "POWER CLEAN SS cleans our stainless parts nicely with a shine. After cleaning we pack them and send them to our international customer. We would recommend it to anyone who uses SS.",
+    name: "Patel",
+    role: "Amalgamation Group",
+  },
+  {
+    quote:
+      "We use POWER CLEAN BW with our bin washing spray equipment. We are very satisfied with this product and would recommend it.",
+    name: "Krishnan",
+    role: "TVS Group",
+  },
+  {
+    quote:
+      "We were able to increase our product quality instantaneously after using POWER CLEAN NF. No more rejections — we consistently meet millipore values.",
+    name: "Production head",
+    role: "Precision components manufacturer, Chennai",
   },
 ];
 
-export type Faq = { q: string; a: string };
+export type Faq = { q: string; a: string; tag: string };
 
 export const homeFaqs: Faq[] = [
   {
     q: "Can one product cover multiple wash processes?",
     a: "Often, yes. Many of our degreasers work across spray, soak, and ultrasonic equipment at different dilutions — and optimum wash temperatures sit at just 55–65 °C, versus 90–100 °C for TCE. During the audit we map every wash point and consolidate chemistry where it is safe to do so.",
+    tag: "Products",
   },
   {
     q: "Are your formulations safe on aluminium and alloys?",
     a: "We formulate inhibited, pH-controlled products specifically for soft metals. Substrate compatibility is tested in our lab on your actual parts before anything is recommended.",
+    tag: "Products",
   },
   {
     q: "What safety documentation do you provide?",
     a: "Every product ships with an SDS, dosing and PPE guidance, and storage instructions. Ongoing programs include site-specific compliance files and operator training.",
+    tag: "Safety",
   },
   {
     q: "How do plant trials work?",
     a: "We agree pass/fail criteria up front, run the trial on your equipment with our engineer on-site, and you only move forward if the numbers clear the bar.",
+    tag: "Products",
   },
   {
     q: "What are your supply lead times?",
     a: "We supply nationwide from Bangalore and through distributors in major metropolitan cities — every enquiry is answered within 24 hours, and scheduled supply programs keep buffer stock for your line.",
+    tag: "Supply & Logistics",
   },
 ];
 
@@ -140,49 +161,56 @@ export const contactFaqs: Faq[] = [
   {
     q: "How do I start a product trial?",
     a: "Send us a sample part or describe your process through the form above. Our lab tests your soils and substrates, then proposes a supervised on-line trial with agreed pass/fail criteria.",
+    tag: "Products & Trials",
   },
   {
     q: "Do you serve plants outside Bangalore?",
     a: "Yes — we supply plants across India and have distributors in major metropolitan cities. Call us and we will connect you with your nearest distributor; every enquiry is answered within 24 hours.",
+    tag: "Company Details",
   },
   {
     q: "Can you match a competitor product?",
     a: "Usually. Share the SDS or a sample of your current chemistry and we will benchmark our equivalent grade against it in the lab — and on your line if it clears.",
+    tag: "Products & Trials",
   },
   {
     q: "Is there a minimum order quantity?",
     a: "You can begin with a single 35L pail per product line — packing runs 35L, 50L, 200L and 1000L, with custom packing available. Trials and chemical samples are supplied free of charge for qualified applications.",
+    tag: "Supply & Logistics",
   },
   {
     q: "What documentation comes with each product?",
     a: "Every shipment includes an SDS, dosing and PPE guidance, and a certificate of analysis. Compliance files and audit support are available on ongoing programs.",
+    tag: "Company Details",
   },
 ];
 
 export type CaseStudyItem = { kind: string; title: string; body: string };
 
-// PLACEHOLDER case studies/events — the solvent-replacement theme reflects the
+// REAL — customer results published on powerclean.in; the solvent-replacement theme reflects the
 // real TCE-replacement story (Roovel has replaced TCE in India since 2000).
 export const caseStudies: CaseStudyItem[] = [
+  // ALL REAL — customer results published on powerclean.in (attributions are
+  // anonymised there exactly as reproduced below).
   {
     kind: "CASE STUDY",
-    title: "Solvent-free conversion, auto parts",
-    body: "A tier-1 supplier replaced trichloroethylene vapor degreasing with a Power Clean aqueous process — cutting wash cost 31% and eliminating solvent permits entirely.",
-  },
-  {
-    kind: "WEBINAR",
-    title: "Getting descaling chemistry right",
-    body: "A 40-minute session with our lab on inhibited descaling for heat exchangers: selecting acids, protecting base metal, and verifying passivation afterwards. Register to join live in August.",
-  },
-  {
-    kind: "EVENT",
-    title: "Manufacturing Solutions Expo 2026",
-    body: "Meet our applications team at Hall 4, Booth 212 — bring a contaminated sample part and we will run a live cleaning demonstration at the stand.",
+    title: "White-rust defects cut from 3.2% to 0.4%",
+    body: "After switching to POWER CLEAN LF-59 for ADC12 engine housings, a major automotive OEM in Bengaluru saw white-rust defects fall from 3.2% to 0.4% within 45 days.",
   },
   {
     kind: "CASE STUDY",
-    title: "CIP program, food processing plant",
-    body: "A beverage bottler consolidated seven cleaning products into three Power Clean lines, simplifying audits and cutting chemical spend 22% year-on-year.",
+    title: "20% faster cycle time on a spray tunnel",
+    body: "A home-appliance components supplier running 6000-series aluminium extrusions achieved 20% faster cycle time with POWER CLEAN LF-59 in low-foam mode — turnaround improved and re-works dropped.",
+  },
+  {
+    kind: "CASE STUDY",
+    title: "One bath for aluminium, brass and copper",
+    body: "An export-focused precision components house now runs aluminium, brass and copper parts in the same bath: one process for all non-ferrous work, less downtime and a lower cost per part.",
+  },
+  {
+    kind: "CASE STUDY",
+    title: "Flash rust eliminated before plating",
+    body: "A TVS Group sub-vendor had corrosion appearing on mild and carbon steel parts after ultrasonic cleaning. With POWER CLEAN SP the parts now hold with no rust for more than 12 hours before plating.",
   },
 ];
 
@@ -223,97 +251,36 @@ export const industries: Industry[] = [
   },
 ];
 
-export type Resource = {
-  title: string;
-  byline: string;
-  image: string;
-  photo?: string;
-};
-
-// PLACEHOLDER articles
-export const resources: Resource[] = [
-  {
-    title: "Staying Ahead of Safety & Compliance in Industrial Cleaning",
-    byline: "Technical Team · June 2026",
-    image: "Photo — safety equipment and compliance signage",
-    photo: "/photos/res-safety.webp",
-  },
-  {
-    title: "Switching From Solvent-Based to Water-Based Cleaning",
-    byline: "Applications Lab · May 2026",
-    image: "Photo — water-based solution replacing solvent drums",
-    photo: "/photos/res-switch.webp",
-  },
-  {
-    title: "Reducing Downtime With Smarter Wash Processes",
-    byline: "Process Engineering · April 2026",
-    image: "Photo — washer machinery close-up, maintenance",
-    photo: "/photos/res-downtime.webp",
-  },
-];
 
 export type Milestone = { year: string; title: string; body: string };
 
-// PLACEHOLDER — the live site's About page is "Coming Soon"; no real timeline
+// REAL anchors only — see the array comment below; the live About page was "Coming Soon" so no
 // exists. Do not present these as company history until real material arrives.
-export const milestones: Milestone[] = [
+export const milestones = [
+  // REAL anchors only — drawn from powerclean.in and company registration data.
+  // No invented events; anything undated is described without a year.
   {
-    year: "2014",
-    title: "Formulation bench founded",
-    body: "Roovel Solutions sets up a two-person formulation bench to solve degreasing problems its own engineering clients kept hitting.",
+    year: "2000",
+    title: "Replacing toxic solvents",
+    body: "Roovel begins replacing trichloroethylene, diesel, kerosene and naphtha in Indian plants with biodegradable aqueous chemistry — the work that still defines the company.",
   },
   {
-    year: "2017",
-    title: "Power Clean brand launched",
-    body: "The first branded product line — three water-based degreasers — ships to a dozen plants across northern India.",
+    year: "2011",
+    title: "Roovel Solutions Pvt. Ltd.",
+    body: "The business is incorporated as a private limited company registered in Tamil Nadu (CIN U74120TN2011PTC083325), with its registered office in Chennai.",
   },
   {
-    year: "2019",
-    title: "In-house applications lab",
-    body: "A dedicated applications lab opens, making substrate testing and plant-trial validation part of every recommendation.",
+    year: "ISO 9001",
+    title: "Certified quality system",
+    body: "Manufacturing and quality control run to an ISO 9001 certified system at the Bangalore facility — formulation lab, QC lab and batch-wise testing under one roof.",
   },
   {
-    year: "2021",
-    title: "ISO-aligned production",
-    body: "Production moves to a purpose-built facility with batch-wise QC and ISO-aligned processes end to end.",
-  },
-  {
-    year: "2023",
-    title: "100th facility onboarded",
-    body: "The hundredth manufacturing facility switches to a Power Clean program — most converting away from solvent-based cleaning.",
-  },
-  {
-    year: "2026",
-    title: "Full-range chemistry partner",
-    body: "Twenty product lines across degreasing, descaling, rust protection, and solvent replacement, supplied across seventeen applications.",
+    year: "Today",
+    title: "41 products, four families",
+    body: "The range spans 41 products across water-based cleaning, cooling-water treatment, solvent replacement and rust protection — supplied with dosing guidance and an SDS, and trusted by BOSCH, TVS, Bharat Forge and the Murugappa Group.",
   },
 ];
 
-export type TeamMember = { name: string; role: string; image: string };
-
-// PLACEHOLDER — no real team bios exist on the live site.
-export const team: TeamMember[] = [
-  {
-    name: "Dr. Kavita Sharma",
-    role: "Head of R&D & Formulation",
-    image: "Portrait — R&D head, lab coat, studio-lit",
-  },
-  {
-    name: "Arjun Patel",
-    role: "Lead Applications Engineer",
-    image: "Portrait — applications engineer, factory background",
-  },
-  {
-    name: "Meera Iyer",
-    role: "Quality Control Lead",
-    image: "Portrait — QC lead at stainless bench",
-  },
-  {
-    name: "Rohit Verma",
-    role: "Head of Technical Sales",
-    image: "Portrait — technical sales head, workwear",
-  },
-];
 
 export const industryOptions = [
   "Automotive",

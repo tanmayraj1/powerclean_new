@@ -6,7 +6,7 @@ import { RippleField } from "@/components/ui/RippleField";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { ImageSlot } from "@/components/ui/ImageSlot";
 import { MapEmbed } from "@/components/ui/MapEmbed";
-import { FaqList } from "@/components/ui/FaqList";
+import { FaqFilter } from "@/components/ui/FaqFilter";
 import { InquiryForm } from "@/components/ui/InquiryForm";
 import { Arrow } from "@/components/ui/Arrow";
 import { Reveal } from "@/components/motion/Reveal";
@@ -17,7 +17,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { faqJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Contact",
+  title: "Contact — Industrial Cleaning Chemicals, Bangalore & Chennai",
   description:
     "Reach Power Clean (Roovel Solutions Pvt. Ltd., Bangalore) for program inquiries, free chemical samples, and supervised plant trials.",
   alternates: { canonical: "/contact" },
@@ -54,6 +54,8 @@ export default function ContactPage() {
           >
             <ImageSlot
               brief="Photo — engineer testing a formulation sample"
+              src="/photos/story-facility.webp"
+              alt="Chemists developing industrial degreaser formulations in the Power Clean laboratory"
               className="absolute inset-0"
             />
             <div className="pointer-events-none absolute left-3.5 top-3.5 rounded-full bg-white/85 px-[15px] py-[7px] text-xs font-semibold text-navy backdrop-blur-[8px]">
@@ -217,23 +219,10 @@ export default function ContactPage() {
         </Reveal>
         <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] items-start gap-7">
           <Reveal dir="left">
-            <FaqList faqs={contactFaqs} />
+            <FaqFilter faqs={contactFaqs} chips={FAQ_CHIPS} />
           </Reveal>
           <Reveal dir="right" className="flex flex-col gap-4">
-            <div className="flex flex-wrap gap-2">
-              {FAQ_CHIPS.map((c, i) => (
-                <span
-                  key={c}
-                  className={`cursor-pointer rounded-full px-4 py-2 text-[12.5px] transition-transform duration-[250ms] hover:scale-105 ${
-                    i === 0
-                      ? "bg-green-tint font-semibold text-navy"
-                      : "bg-white font-medium text-muted-3"
-                  }`}
-                >
-                  {c}
-                </span>
-              ))}
-            </div>
+
             <div className="relative overflow-hidden rounded-card bg-navy p-7">
               <div className="animate-pc-float absolute -bottom-[30px] -right-[30px] h-[150px] w-[150px] rounded-full bg-green/28" />
               <div className="relative">

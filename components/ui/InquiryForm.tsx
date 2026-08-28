@@ -6,6 +6,7 @@ import { industryOptions } from "@/lib/site-config";
 import { Magnetic } from "@/components/motion/Magnetic";
 import { Arrow } from "./Arrow";
 import { InlineContact } from "./InlineContact";
+import { siteConfig } from "@/lib/site-config";
 
 type FieldDef = {
   name: string;
@@ -142,13 +143,42 @@ export function InquiryForm({ variant }: InquiryFormProps) {
               {message}
             </p>
           )}
+          {state?.ok && state.summary && (
+            <div className="mt-3 rounded-[10px] border border-line-2 bg-white p-3.5">
+              <pre className="mb-3 max-h-[132px] overflow-auto whitespace-pre-wrap font-mono text-[11.5px] leading-[1.6] text-muted-3">
+                {state.summary}
+              </pre>
+              <div className="flex flex-wrap gap-2">
+                <a
+                  href={state.mailto}
+                  className="rounded-full bg-green-cta px-4 py-2 text-[12px] font-semibold text-white no-underline shadow-cta"
+                >
+                  Send by email
+                </a>
+                <a
+                  href={siteConfig.contact.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-full bg-[#25D366] px-4 py-2 text-[12px] font-semibold text-white no-underline"
+                >
+                  Send on WhatsApp
+                </a>
+                <a
+                  href={`tel:${siteConfig.contact.phones[0].replace(/[^+\d]/g, "")}`}
+                  className="rounded-full bg-green-tint px-4 py-2 text-[12px] font-semibold text-navy no-underline"
+                >
+                  Call {siteConfig.contact.phones[0]}
+                </a>
+              </div>
+            </div>
+          )}
         </div>
       </div>
       <div className="mt-[18px] flex flex-wrap items-center justify-between gap-3.5">
         <span className="max-w-[300px] text-xs text-muted">
           {variant === "home"
-            ? "Our technical team responds within one business day."
-            : "Our team will review your submission and contact you with next steps."}
+            ? "Sends through your email app — our team replies within one business day."
+            : "Sends through your email app, or reach us instantly on WhatsApp below."}
         </span>
         <Magnetic>
           <button

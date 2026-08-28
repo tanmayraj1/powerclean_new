@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { PageHero } from "@/components/ui/PageHero";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { SectionPanel } from "@/components/ui/SectionPanel";
@@ -11,10 +12,12 @@ import { RangeHierarchy } from "@/components/sections/catalogue/RangeHierarchy";
 import { RangeMap } from "@/components/sections/catalogue/RangeMap";
 import { SelectionMatrix } from "@/components/sections/catalogue/SelectionMatrix";
 import { products } from "@/lib/catalogue";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { SITE_URL, breadcrumbJsonLd, itemListJsonLd } from "@/lib/seo";
 import { propertyTags } from "@/lib/solutions";
 
 export const metadata: Metadata = {
-  title: "Catalogue",
+  title: "Industrial Cleaning Chemicals Catalogue — 41 Products",
   description:
     "The full Power Clean product catalogue — aqueous cleaners and degreasers, cooling tower descalers and biocides, solvent degreasers including a TCE replacement, and rust protection.",
   alternates: { canonical: "/catalogue" },
@@ -23,6 +26,21 @@ export const metadata: Metadata = {
 export default function CataloguePage() {
   return (
     <>
+      <JsonLd
+        data={[
+          breadcrumbJsonLd([{ name: "Catalogue", url: `${SITE_URL}/catalogue` }]),
+          itemListJsonLd({
+            name: "Power Clean product catalogue",
+            description:
+              "All 41 Power Clean industrial cleaning products across aqueous cleaning, cooling-water treatment, solvent replacement and rust protection.",
+            url: `${SITE_URL}/catalogue`,
+            items: products.map((p) => ({
+              name: p.name,
+              url: `${SITE_URL}/catalogue/${p.slug}`,
+            })),
+          }),
+        ]}
+      />
       <PageHero
         title="The Power Clean Catalogue"
         eyebrow="PRODUCT CATALOGUE"
@@ -64,7 +82,9 @@ export default function CataloguePage() {
           lede="Filter by family, or tell us your soils and substrates and we will match the grade for you."
           className="mb-9"
         />
-        <CatalogueGrid />
+        <Suspense fallback={<div className="min-h-[420px]" />}>
+          <CatalogueGrid />
+        </Suspense>
       </div>
 
       {/* SELECTION MATRIX */}
@@ -113,6 +133,7 @@ export default function CataloguePage() {
         ctaHref="/contact"
         imageBrief="Photo — lab bench with sample parts and product containers"
         wedge
+        image="/photos/qc-lab.webp"
       />
     </>
   );

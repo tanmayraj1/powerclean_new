@@ -11,7 +11,7 @@ export function CtaFormBanner() {
         <ImageSlot
           brief="Photo — fine mist of cleaning solution sprayed across a metal panel, backlit"
           src="/photos/spray-mist.webp"
-          alt="Backlit spray of cleaning solution against a dark background"
+          alt="Cleaning solution spray mist against a dark industrial background"
           sizes="100vw"
           className="absolute inset-0"
         />

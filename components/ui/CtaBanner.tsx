@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Image from "next/image";
 import { Reveal } from "@/components/motion/Reveal";
 import { Magnetic } from "@/components/motion/Magnetic";
 import { TransitionLink } from "@/components/layout/TransitionLink";
@@ -13,8 +14,10 @@ type CtaBannerProps = {
   body: string;
   ctaLabel: string;
   ctaHref: string;
-  /** shot brief, retained on call sites for when real photography lands */
+  /** shot brief for the photo layer */
   imageBrief?: string;
+  /** photographic layer behind the navy panel */
+  image?: string;
   /** green clip-path wedge on the right (Solutions variant) */
   wedge?: boolean;
   minHeight?: number;
@@ -34,6 +37,7 @@ export function CtaBanner({
   wedge,
   minHeight = 420,
   extra,
+  image = "/photos/spray-mist.webp",
 }: CtaBannerProps) {
   return (
     <div className="px-3 pb-3">
@@ -41,9 +45,19 @@ export function CtaBanner({
         className="relative mx-auto flex max-w-[1320px] items-center justify-center overflow-hidden rounded-section bg-[linear-gradient(120deg,#23273f,#292F6E_60%,#333b7e)]"
         style={{ minHeight }}
       >
-        {/* No photography yet: the branded ripple backdrop reads as a designed
-            panel rather than an empty photo slot. `imageBrief` is kept as the
-            shot brief for when real photography lands. */}
+        {/* photo layer under the navy scrim, then the branded ripple backdrop */}
+        {image && (
+          <>
+            <Image
+              src={image}
+              alt=""
+              fill
+              sizes="100vw"
+              className="object-cover opacity-[0.30]"
+            />
+            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(120deg,rgba(35,39,63,.86),rgba(41,47,110,.70)_60%,rgba(51,59,126,.55))]" />
+          </>
+        )}
         <HeroBackdrop />
         {wedge && (
           <div className="pointer-events-none absolute -right-[8%] inset-y-0 w-[30%] bg-[linear-gradient(rgba(0,166,81,.3),rgba(0,166,81,.12))] [clip-path:polygon(38%_0,100%_0,100%_100%,0_100%)]" />
