@@ -105,7 +105,7 @@ export function QuickContact() {
       aria-hidden={!open}
     >
       <Link
-        href="/get-consultation"
+        href="/get-consultation#request"
         aria-label="Request a free sample or consultation"
         tabIndex={open ? 0 : -1}
         className={`${shell} bg-green-cta`}

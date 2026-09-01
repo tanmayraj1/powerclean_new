@@ -188,9 +188,14 @@ export default function GetConsultationPage() {
             </Reveal>
           </div>
 
+          {/* Someone who tapped "Request a free sample" wants the form, not a
+              pitch. On a phone the grid is one column, so the form is pulled
+              above the explanatory cards; from md up it sits in its own
+              column anyway and normal order applies. */}
           <Reveal
             dir="right"
-            className="rounded-card-lg bg-white p-[clamp(24px,3vw,36px)] shadow-card-lg ring-1 ring-inset ring-line-2 lg:sticky lg:top-28"
+            id="request"
+            className="order-first scroll-mt-24 rounded-card-lg bg-white p-[clamp(24px,3vw,36px)] shadow-card-lg ring-1 ring-inset ring-line-2 md:order-none lg:sticky lg:top-28"
           >
             <h2 className="mb-2 text-[clamp(20px,2.2vw,26px)] font-semibold leading-[1.2] text-navy">
               Request your consultation
