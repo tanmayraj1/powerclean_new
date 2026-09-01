@@ -64,6 +64,7 @@ export function SolutionCard({
         >
           <ImageSlot
             brief={solution.cardImage}
+            alt={solution.cardImage}
             src={solution.cardPhoto}
             className="absolute inset-0"
           />

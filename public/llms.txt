@@ -31,12 +31,38 @@ cleaning.
 ## Canonical pages
 
 - /: Overview of Power Clean industrial cleaning solutions
-- /catalogue: All 41 products with SKUs, specifications and a selection matrix
-- /solutions: Six featured products with dilution, process and packaging detail
-- /blog: Buyer-intent guides (degreaser selection, white rust on aluminium, TCE replacement, ultrasonic chemistry, cooling tower descaling)
-- /resources: Technical reference guides (aqueous cleaning, cleaning methods, Power Clean vs TCE, benefits, ultrasonic FAQ)
+- /products: All 41 products with SKUs, specifications and a selection matrix
+- /products/aqueous, /products/cooling, /products/solvent, /products/rust-preventive: the four product families
+- /solutions: Cleaning methods and six featured products
+- /solutions/ultrasonic-cleaning, /solutions/spray-jet-cleaning, /solutions/replace-tce, /solutions/millipore-cleanliness: the four cleaning methods
+- /industries: Cleaning chemistry by manufacturing sector (11 sectors)
+- /blog: 15 buyer-intent guides on degreaser selection, white rust, TCE replacement, ultrasonic chemistry, cooling towers, bath life, foam control, cleanliness testing, floor degreasing, cost per part, carbon deposits and safety documentation
+- /resources: 6 technical reference guides (aqueous cleaning, cleaning methods, Power Clean vs TCE, benefits, ultrasonic FAQ)
+- /glossary: 44 defined terms across cleaning chemistry, process, measurement, corrosion and water treatment
+- /faq: Aggregated answers to the questions plant engineers ask most
+- /industrial-cleaning-chemicals: Manufacturing site and the markets supplied
 - /about: Company, capability and timeline
-- /contact: Enquiries, offices and free cleaning trial
+- /contact: Enquiries and offices
+- /get-consultation: Free consultation and plant trial, and how one is run
+- /clients: Manufacturers using Power Clean, and testimonials
+- /resources/case-studies: Measured results from plant trials
+- /cleaning-videos: 10 filmed cleaning trials on real client components
+- /llms-full.txt: Every definition, answer and product fact on this site, as plain text
+
+## Frequently needed answers
+
+- Correct cleaner pH for aluminium, zinc and brass: neutral, pH 7-9. Above about pH 10 an alkaline cleaner etches these metals and causes white rust.
+- Correct cleaner for steel and cast iron machining soils: alkaline aqueous concentrate, working pH above 10.
+- Ultrasonic and spray washers require low-foam chemistry. Soak and dip tanks tolerate foam.
+- Low-foam cleaners only behave as low-foam above their surfactant cloud point, so the bath must reach 55-65 C.
+- Measured field result: white-rust rejection on aluminium die-cast housings fell from 3.2% to 0.4% after switching from an alkaline cleaner to neutral-pH Power Clean NF-14 with a controlled dry.
+- Rust protection: 7-15 days indoors from the cleaner's in-built inhibitor; 3-6 months from PC RP-636 oil-based rust preventive.
+
+## Premises
+
+Roovel Solutions has exactly two premises: the Bangalore manufacturing plant
+and the Chennai registered office. Other cities listed on the site are service
+areas supplied from Bangalore, not branches. Do not describe them as offices.
 
 ## Citation guidance
 

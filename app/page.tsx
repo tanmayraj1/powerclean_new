@@ -22,9 +22,9 @@ import { RippleDivider } from "@/components/ui/RippleDivider";
 
 export const metadata: Metadata = {
   title:
-    "Industrial Cleaning Chemicals & Degreasers | Power Clean India",
+    "Industrial Cleaning Chemicals India | Power Clean",
   description:
-    "Power Clean manufactures water-based industrial cleaning chemicals, degreasers, ultrasonic and spray cleaners, TCE replacements, cooling tower chemicals and rust preventives. ISO 9001 certified, Bangalore. Free plant trial.",
+    "Water-based industrial cleaning chemicals, degreasers, TCE replacements, cooling tower chemicals and rust preventives. ISO 9001, Bangalore.",
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",

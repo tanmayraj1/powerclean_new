@@ -1066,3 +1066,54 @@ export function categoryOf(key: CategoryKey) {
 export function seriesOf(key: string) {
   return series.find((s) => s.key === key)!;
 }
+
+/* ── URL helpers ────────────────────────────────────────────────────────
+ * Single source of truth for product and category URLs. The hub moved from
+ * /catalogue to /products to match the client's architecture diagram, and 58
+ * hard-coded strings across 20 files had to move with it — routing through
+ * these two functions means the next change is one edit, not another sweep.
+ * next.config.ts 308-redirects every old /catalogue URL here.
+ * ───────────────────────────────────────────────────────────────────────── */
+
+/**
+ * Category URL slugs follow the client's diagram, which names the rust family
+ * "rust-preventive" while our data key is "rust".
+ */
+export const CATEGORY_SLUG: Record<CategoryKey, string> = {
+  aqueous: "aqueous",
+  cooling: "cooling",
+  solvent: "solvent",
+  rust: "rust-preventive",
+};
+
+const SLUG_TO_CATEGORY = Object.fromEntries(
+  Object.entries(CATEGORY_SLUG).map(([k, v]) => [v, k as CategoryKey])
+) as Record<string, CategoryKey>;
+
+export const PRODUCTS_ROOT = "/products";
+
+export const categoryHref = (key: CategoryKey) =>
+  `${PRODUCTS_ROOT}/${CATEGORY_SLUG[key]}`;
+
+export const productHref = (slugOrProduct: string | CatalogueProduct) =>
+  `${PRODUCTS_ROOT}/${
+    typeof slugOrProduct === "string" ? slugOrProduct : slugOrProduct.slug
+  }`;
+
+/** Resolve a /products/[slug] segment to a category, if it is one. */
+export function categoryBySlug(slug: string): CategoryKey | undefined {
+  return SLUG_TO_CATEGORY[slug];
+}
+
+/**
+ * Category hubs and product pages share the /products/[slug] segment, so a
+ * collision would silently shadow one with the other. Fail the build instead.
+ */
+const collisions = products
+  .map((p) => p.slug)
+  .filter((s) => s in SLUG_TO_CATEGORY);
+if (collisions.length) {
+  throw new Error(
+    `Product slug collides with a category slug under /products: ${collisions.join(", ")}`
+  );
+}

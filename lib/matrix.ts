@@ -1,4 +1,4 @@
-import type { CategoryKey } from "./catalogue";
+import type { CategoryKey } from "./products";
 
 /**
  * Technical selection matrix — one row per product, Zerust-ICT-style.

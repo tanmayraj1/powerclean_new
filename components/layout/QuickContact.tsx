@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { siteConfig } from "@/lib/site-config";
+import Link from "next/link";
 
 /**
  * Floating call / WhatsApp dock — the instant-contact affordance that rides
@@ -37,6 +38,25 @@ function PhoneIcon() {
   );
 }
 
+function SampleIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-[21px] w-[21px]"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.9"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M9 3h6v5.5l3.6 8.1A2.5 2.5 0 0 1 16.3 20H7.7a2.5 2.5 0 0 1-2.3-3.4L9 8.5V3Z" />
+      <path d="M8 3h8" />
+      <path d="M7.2 14.5h9.6" />
+    </svg>
+  );
+}
+
 export function QuickContact() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
@@ -61,7 +81,12 @@ export function QuickContact() {
     return () => io.disconnect();
   }, [pathname]);
 
-  if (pathname === "/contact" || pathname === "/range") return null;
+  if (
+    pathname === "/contact" ||
+    pathname === "/range" ||
+    pathname === "/get-consultation"
+  )
+    return null;
 
   const open = scrolled && !atFooter;
 
@@ -79,6 +104,18 @@ export function QuickContact() {
       }`}
       aria-hidden={!open}
     >
+      <Link
+        href="/get-consultation"
+        aria-label="Request a free sample or consultation"
+        tabIndex={open ? 0 : -1}
+        className={`${shell} bg-green-cta`}
+      >
+        <span className={disc}>
+          <SampleIcon />
+        </span>
+        <span className={label}>Request a free sample</span>
+      </Link>
+
       <a
         href={WA_HREF}
         target="_blank"

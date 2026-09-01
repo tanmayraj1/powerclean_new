@@ -41,8 +41,10 @@
   --font-sans: var(--font-poppins), sans-serif;
   --font-mono: var(--font-plex-mono), monospace;
 
-  /* nav breakpoint: mobile menu below 940px (do not use lg) */
-  --breakpoint-nav: 940px;
+  /* nav breakpoint: mobile menu below 1024px (do not use lg).
+     Raised from 940px when Industries became the 7th nav link — seven links
+     plus the logo and CTA overflow the bar below 1024. */
+  --breakpoint-nav: 1024px;
 
   --animate-pc-float: pcFloat 7s ease-in-out infinite;
   --animate-pc-pulse: pcPulse 2.2s ease-in-out infinite;

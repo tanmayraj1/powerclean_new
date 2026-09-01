@@ -34,9 +34,9 @@ export const articles: Article[] = [
     kicker: "FUNDAMENTALS",
     summary:
       "Water, chemistry, heat and agitation — how water-based precision cleaning works, and why plants are moving to it from solvents.",
-    metaTitle: "What Is Aqueous Cleaning? Water-Based Metal Cleaning Explained",
+    metaTitle: "What Is Aqueous Cleaning?",
     metaDescription:
-      "Aqueous cleaning explained: the four elements (cleaning agent, water, heat, agitation), immersion vs spray vs ultrasonic, the TACT and WATCH frameworks, and bath maintenance.",
+      "Aqueous cleaning explained — the four elements, immersion vs spray vs ultrasonic, the TACT and WATCH frameworks, and bath maintenance.",
     readMinutes: 6,
     photo: "/photos/gallery-2.webp",
     photoAlt: "Industrial wash tanks and piping in a plant",
@@ -107,9 +107,9 @@ export const articles: Article[] = [
     kicker: "PROCESS GUIDE",
     summary:
       "Spray washers, ultrasonic systems, heated dip tanks and agitated immersion — with the concentrations, temperatures and bath-life practices for each.",
-    metaTitle: "Aqueous Cleaning Methods — Spray, Ultrasonic, Dip & Immersion",
+    metaTitle: "Aqueous Cleaning Methods Compared",
     metaDescription:
-      "Concentrations and temperatures for parts spray washers, ultrasonic systems, heated dip tanks and agitated immersion, plus recycling, disposal and cleaning bath life.",
+      "Concentrations and temperatures for spray washers, ultrasonic systems and heated dip tanks, plus recycling, disposal and bath life.",
     readMinutes: 8,
     photo: "/photos/gallery-4.webp",
     photoAlt: "Conveyor line carrying metal parts through a plant",
@@ -194,9 +194,9 @@ export const articles: Article[] = [
     kicker: "SOLVENT REPLACEMENT",
     summary:
       "A head-to-head comparison with trichloroethylene, and the proven process for switching a line over safely and legally.",
-    metaTitle: "TCE Replacement — Power Clean vs Trichloroethylene Compared",
+    metaTitle: "Power Clean vs TCE Compared",
     metaDescription:
-      "Replacing trichloroethylene (TCE): a point-by-point comparison with Power Clean aqueous cleaning, the benefits of switching, and how the changeover process works.",
+      "Replacing trichloroethylene — a point-by-point comparison with aqueous cleaning, the benefits of switching, and how changeover works.",
     readMinutes: 5,
     photo: "/photos/res-switch.webp",
     photoAlt: "Worker moving chemical drums in a plant",
@@ -268,9 +268,9 @@ export const articles: Article[] = [
     kicker: "PRODUCT BENEFITS",
     summary:
       "Safety, features and cost — what changes on the plant floor when hazardous chemistry is replaced with a biodegradable aqueous concentrate.",
-    metaTitle: "Benefits of Power Clean Aqueous Degreasers & Cleaners",
+    metaTitle: "Benefits of Aqueous Degreasers",
     metaDescription:
-      "Safety, performance and cost benefits of Power Clean aqueous cleaners and degreasers — biodegradable, non-toxic, non-flammable, rust inhibited, and used diluted.",
+      "Safety, performance and cost benefits of aqueous cleaners — biodegradable, non-toxic, non-flammable, rust inhibited and used diluted.",
     readMinutes: 3,
     photo: "/photos/res-safety.webp",
     photoAlt: "Engineers reviewing process documentation on a plant floor",
@@ -333,9 +333,9 @@ export const articles: Article[] = [
     kicker: "WHY IT MATTERS",
     summary:
       "Your choice of cleaning chemical decides your cleaning results, your operating cost and how long your washer lasts.",
-    metaTitle: "Five Reasons to Use Power Clean Aqueous Degreasers",
+    metaTitle: "Five Reasons to Switch to Aqueous",
     metaDescription:
-      "Why the cleaning chemical matters: cleaning results at temperature and pressure, parts washer operating cost, washer life, environmental safety and technical support.",
+      "Why the cleaning chemical matters — results at temperature and pressure, washer operating cost and life, safety and technical support.",
     readMinutes: 4,
     photo: "/photos/res-downtime.webp",
     photoAlt: "Maintenance team working on industrial equipment",
@@ -377,9 +377,9 @@ export const articles: Article[] = [
     kicker: "FAQ",
     summary:
       "How cavitation works, which solutions to use, which ones to never use, and the temperature and cycle times that get results.",
-    metaTitle: "Ultrasonic Cleaning FAQ — Cavitation, Solutions & Temperature",
+    metaTitle: "Ultrasonic Cleaning FAQ",
     metaDescription:
-      "Answers on ultrasonic cleaning: how ultrasonic cleaners work, what cavitation is, choosing a cleaning solution, what never to put in the tank, cycle time and optimum temperature.",
+      "How ultrasonic cleaners work, what cavitation is, choosing a solution, what never to put in the tank, cycle time and optimum temperature.",
     readMinutes: 5,
     photo: "/photos/gallery-3.webp",
     photoAlt: "Precision metal components after ultrasonic cleaning",

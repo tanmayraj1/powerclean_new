@@ -91,7 +91,7 @@ export function WashProcesses() {
               {p.grades.map((g) => (
                 <TransitionLink
                   key={g.slug}
-                  href={`/catalogue/${g.slug}`}
+                  href={`/products/${g.slug}`}
                   className="rounded-full bg-green-tint px-3 py-1 font-mono text-[11px] font-semibold text-navy no-underline transition-colors hover:bg-navy hover:text-white"
                 >
                   {g.label}

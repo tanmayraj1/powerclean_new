@@ -7,11 +7,12 @@ import { TransitionLink } from "@/components/layout/TransitionLink";
 import { Arrow } from "@/components/ui/Arrow";
 import {
   categories,
+  categoryHref,
   products,
   productsBySeries,
   seriesByCategory,
   type CategoryKey,
-} from "@/lib/catalogue";
+} from "@/lib/products";
 
 /**
  * The whole range as one chart: a hub node fanning out to the four product
@@ -19,7 +20,9 @@ import {
  * the fan is drawn with animated connectors; on mobile the cards stack and
  * the hub sits on top. Two navigation modes:
  *  - "scroll" (catalogue page): opens that family in RangeHierarchy below
- *  - "link" (QR landing): navigates to /catalogue#range-<key>
+ *  - "link" (QR landing and the products index): navigates to the family
+ *    hub page at /products/<category>, which is a real indexable page rather
+ *    than an anchor — the client's architecture calls for one per family
  */
 export function RangeMap({ mode = "scroll" }: { mode?: "scroll" | "link" }) {
   // widest series across the whole range sets the bar scale, so bar lengths
@@ -181,7 +184,7 @@ export function RangeMap({ mode = "scroll" }: { mode?: "scroll" | "link" }) {
               </div>
               {mode === "link" ? (
                 <TransitionLink
-                  href={`/catalogue#range-${cat.key}`}
+                  href={categoryHref(cat.key)}
                   className={cardClass}
                   aria-label={`${cat.label} — ${count} products`}
                 >

@@ -3,23 +3,28 @@
 Everything below is either a launch step or an open item that needs a decision
 from Roovel Solutions. The site itself is complete and deployable as it stands.
 
-## 1. Before pointing a real domain at it
+## 1. The domain
 
-**Set the site URL.** `lib/seo.ts` falls back to
-`https://powerclean-new.vercel.app`. Until `NEXT_PUBLIC_SITE_URL` is set, every
-canonical tag, Open Graph URL and sitemap entry points at the preview domain.
+The site is built for **`https://powerclean.in`**, set as the default in
+`lib/seo.ts`. Every canonical tag, Open Graph URL, sitemap entry, RSS link,
+`llms.txt` reference and schema `@id` derives from that one constant, so
+nothing needs changing when DNS is pointed at the deployment.
 
-In Vercel → Project → Settings → Environment Variables:
+**Pick one host and redirect the other.** The site canonicalises to the apex
+(`powerclean.in`). Configure `www.powerclean.in` to 301 to it — if both resolve
+without a redirect, every page competes against a duplicate of itself and the
+ranking signal is split. If you would rather run www as the primary, change the
+string in `lib/seo.ts` and redirect the apex instead; the important thing is
+that exactly one of them answers.
 
-```
-NEXT_PUBLIC_SITE_URL=https://www.powerclean.in
-```
+`NEXT_PUBLIC_SITE_URL` overrides it, and should only be set on preview
+deployments so previews do not emit canonicals pointing at production.
 
-Redeploy after setting it, then resubmit `sitemap.xml` in Google Search Console.
-
-**Regenerate the QR codes.** The printed QR files in `qr-assets/` encode
-`.../range` on the preview domain. Once the real domain is live, ask for new
-ones before anything goes to a printer.
+**QR codes are already correct.** The files in `qr-assets/` encode
+`https://powerclean.in/range` at error-correction level H (30% redundancy, so
+they still scan if a printer clips an edge or a logo sits over the centre).
+Both PNGs have been decode-tested. They are print-ready as they are — no
+regeneration needed unless the domain changes.
 
 ## 2. How enquiries currently reach you
 
@@ -68,7 +73,6 @@ The site ships with a complete technical SEO layer. Four env vars switch on the
 parts that need your accounts:
 
 ```
-NEXT_PUBLIC_SITE_URL=https://www.powerclean.in
 NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=<from Search Console>
 NEXT_PUBLIC_BING_SITE_VERIFICATION=<from Bing Webmaster Tools>
 NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
@@ -94,28 +98,117 @@ Then, in order:
 
 ### What is already in place
 
-- **Structured data**: Organization, WebSite, Service, LocalBusiness ×2,
-  BreadcrumbList, Product (41 pages), CollectionPage/ItemList, FAQPage, HowTo,
-  TechArticle and BlogPosting with author, dates and word count.
+**157 indexable pages**, all internally linked (no orphans), all with a unique
+title and description inside Google's display budget.
+
+- **Structured data** (0 validation errors sitewide): Organization, WebSite with
+  SearchAction, Service, LocalBusiness ×2, BreadcrumbList on every page, Product
+  (41 catalogue + 6 solution pages, with spec rows as `additionalProperty`),
+  CollectionPage/ItemList, FAQPage, QAPage, DefinedTermSet + DefinedTerm ×44,
+  HowTo ×7, TechArticle, BlogPosting with author/dates/wordCount, WebPage with
+  Speakable.
 - **AEO** (being quoted by ChatGPT, Perplexity and Google AI Overviews): every
-  blog article opens with a short extractable answer, carries a key-facts table
-  of hard numbers, and closes with an FAQ block emitting FAQ schema.
-  `public/llms.txt` tells AI crawlers what the company is and which pages are
-  canonical sources.
-- **Geographic**: LocalBusiness for both offices with coordinates, opening
-  hours and service areas across six states, plus `geo.*` meta tags.
-- **Crawl**: sitemap with real article dates, robots.txt, RSS at
-  `/blog/rss.xml`, web manifest, canonical URL on every page.
-- **Sharing**: sitewide OG image plus a generated per-article card for every
-  blog post.
-- **Content**: 5 buyer-intent blog articles and 6 technical guides, internally
-  cross-linked with the catalogue and solution pages.
+  article, industry page, location page and glossary entry opens with a short
+  extractable answer in a marked block, carries a key-facts table of hard
+  numbers, and closes with an FAQ. `public/llms.txt` is the index for AI
+  crawlers; `/llms-full.txt` is the whole corpus — every definition, product
+  fact and Q&A as plain text, generated from the same data the pages render so
+  it cannot drift.
+- **AI crawlers are named and allowed explicitly** in `robots.txt` — GPTBot,
+  OAI-SearchBot, ClaudeBot, PerplexityBot, Google-Extended, Applebot-Extended,
+  CCBot and others. See the comment in `app/robots.ts` for how to opt out of
+  training while staying visible in AI search, if that is ever wanted.
+- **Geographic**: LocalBusiness for both real premises with coordinates, hours
+  and six-state service areas, plus 10 city pages under
+  `/industrial-cleaning-chemicals/`, `geo.*` meta tags and per-city
+  Service schema with `areaServed`.
+- **Crawl**: sitemap with real article dates and image entries, robots.txt with
+  host, RSS at `/blog/rss.xml`, web manifest, canonical on every page.
+- **Content**: 15 buyer-intent blog articles (~15,400 words), 11 industry pages,
+  10 city pages, 44 glossary definitions, 6 technical guides and an aggregated
+  FAQ hub — all cross-linked with the catalogue and solution pages.
 
-### Publishing more articles
+### Site architecture
 
-Add an entry to `lib/blog.ts` — the route, sitemap, RSS feed, OG image and
-schema all pick it up automatically. One article a month beats five in a burst;
-consistency is what compounds.
+The site follows the architecture diagram supplied by Roovel. Two URL changes
+were made to match it, both with permanent redirects in `next.config.ts`:
+
+| Was | Now |
+|---|---|
+| `/catalogue` | `/products` |
+| `/catalogue/:slug` | `/products/:slug` |
+| `/cleaning-videos.aspx` | `/cleaning-videos` |
+
+Added to complete the diagram: four **product family pages**
+(`/products/aqueous`, `/cooling`, `/solvent`, `/rust-preventive`), four
+**cleaning-method pages** (`/solutions/ultrasonic-cleaning`,
+`/spray-jet-cleaning`, `/replace-tce`, `/millipore-cleanliness`), three new
+industry sectors (appliance, tools, earthmoving), plus `/clients`,
+`/resources/case-studies`, `/get-consultation` and `/cleaning-videos`.
+
+The diagram's own URLs that differ from ours also 301 rather than 404:
+`/resources/faq` → `/faq`, `/resources/blog` → `/blog`, `/resources/guides` →
+`/resources`, `/industries/facility` → `/industries/plant-facility`.
+
+**Lead-generation touchpoints**, as the diagram requires on every page: an
+inline micro-form (name, phone, application) on product, family, method,
+industry, city and video pages; a "Request a free sample" pill added to the
+existing floating dock rather than a second competing sticky bar; and a TDS/SDS
+request block on all 41 product pages.
+
+### Two things still waiting on Roovel
+
+1. **TDS and brochure PDFs.** The diagram asks for gated downloads. No PDF
+   files exist, so the block on each product page requests the sheet by email
+   with the product name prefilled. Send the TDS set and it becomes a real
+   download with no rework.
+2. **Video publication dates.** `/cleaning-videos` emits `VideoObject` schema
+   for all ten clips, but `uploadDate` is deliberately omitted because we do
+   not have the real dates — and it is a required property for Google's video
+   rich result. Send the dates and the videos become eligible.
+
+### Why the city pages say "service area" and not "branch"
+
+Roovel has exactly two premises: the Bangalore plant and the Chennai registered
+office. Only those two carry `LocalBusiness` schema. The other eight cities are
+service areas supplied from Bangalore, and the copy says so plainly on each
+page. Do not reword these into branch pages — inventing locations is a doorway-
+page spam signal that can get the whole domain demoted, and it would be untrue.
+The same warning is in the header comment of `lib/locations.ts`.
+
+### Publishing more content
+
+Everything is data-driven — routes, sitemap, RSS, OG images, schema and
+`/llms-full.txt` all pick up new entries automatically:
+
+| To add | Edit |
+|---|---|
+| A blog article | `lib/blog.ts` |
+| A glossary definition | `lib/glossary.ts` |
+| An industry page | `lib/industries.ts` |
+| A city page | `lib/locations.ts` |
+| A technical guide | `lib/articles.ts` |
+
+Keep `metaTitle` at 46 characters or fewer (the ` · Power Clean` suffix takes
+14 of the 60 Google shows) and `metaDescription` at 158 or fewer. `metaDesc()`
+and `brandedTitle()` in `lib/seo.ts` clamp generated metadata to the same
+budget. One article a month beats five in a burst; consistency compounds.
+
+### What only you can do
+
+These are the remaining levers, and none of them are code:
+
+1. **Google Business Profile** for both premises, then **ask customers for
+   reviews**. The site claims no rating because none exists — reviews are the
+   single highest-value action left.
+2. **A named technical author.** Articles are attributed to the "Power Clean
+   Applications Team" because inventing a person would be dishonest. A real
+   engineer's name, role and credentials on the byline is a genuine E-E-A-T
+   gain — send one and it is a small change.
+3. **Backlinks**: IndiaMART, TradeIndia, Justdial, industry associations, and
+   any customer or trade-body page that will link to you — with identical name,
+   address and phone everywhere.
+4. **Real photography** of the plant, products and wash trials (see §4).
 
 ## 6. Running it
 

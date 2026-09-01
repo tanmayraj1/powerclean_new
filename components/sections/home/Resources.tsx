@@ -26,6 +26,7 @@ export function Resources() {
               <div className="relative mb-4 h-[180px] overflow-hidden rounded-img">
                 <ImageSlot
                   brief={r.photoAlt}
+                  alt={r.photoAlt}
                   src={r.photo}
                   className="absolute inset-0"
                 />

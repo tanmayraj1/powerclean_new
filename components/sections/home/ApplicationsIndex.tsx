@@ -48,13 +48,13 @@ export function ApplicationsIndex() {
       </div>
       <Reveal dir="up" className="mt-10 flex flex-wrap gap-3">
         <TransitionLink
-          href="/catalogue"
+          href="/products"
           className="group rounded-full bg-green-cta px-6 py-3 text-[13.5px] font-semibold text-white no-underline shadow-cta transition-colors hover:bg-green-cta-dark"
         >
           Browse all 41 products <Arrow />
         </TransitionLink>
         <TransitionLink
-          href="/catalogue#range"
+          href="/products#range"
           className="group rounded-full border-[1.5px] border-navy px-6 py-3 text-[13.5px] font-semibold text-navy no-underline transition-colors hover:bg-navy hover:text-white"
         >
           Explore by family <Arrow />

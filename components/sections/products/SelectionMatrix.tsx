@@ -1,6 +1,6 @@
 import { Reveal } from "@/components/motion/Reveal";
 import { TransitionLink } from "@/components/layout/TransitionLink";
-import { categories, getProduct } from "@/lib/catalogue";
+import { categories, getProduct } from "@/lib/products";
 import { dutySpectrum, matrixBySlug, matrixRows } from "@/lib/matrix";
 
 /**
@@ -53,7 +53,13 @@ export function SelectionMatrix() {
   return (
     <div>
       <Reveal dir="up">
-        <div className="overflow-x-auto rounded-card ring-1 ring-inset ring-line-2 [scrollbar-width:thin]">
+        <div
+          // 41 rows ran to roughly 2,700px on a phone — a reference table
+          // nobody scrolls past, they scroll *through*. Capping the height on
+          // small screens turns it into a pane you pan around instead of a
+          // third of the page. Every row stays in the DOM.
+          className="max-h-[68vh] overflow-auto rounded-card ring-1 ring-inset ring-line-2 [scrollbar-width:thin] sm:max-h-none"
+        >
           <table className="w-full min-w-[1080px] border-collapse bg-white text-left">
             <thead>
               {/* group bands */}
@@ -155,7 +161,7 @@ export function SelectionMatrix() {
                           }`}
                         >
                           <TransitionLink
-                            href={`/catalogue/${r.slug}`}
+                            href={`/products/${r.slug}`}
                             className="text-[12px] font-semibold text-navy no-underline hover:text-green-deep"
                           >
                             {p.name.replace("POWER CLEAN ", "")}

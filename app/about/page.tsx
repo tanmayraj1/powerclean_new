@@ -14,11 +14,13 @@ import { TransitionLink } from "@/components/layout/TransitionLink";
 import { Milestones } from "@/components/sections/about/Milestones";
 import { Capabilities } from "@/components/sections/about/Capabilities";
 import { siteConfig } from "@/lib/site-config";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { SITE_URL, breadcrumbJsonLd, webPageJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Industrial Cleaning Chemical Manufacturer in Bangalore",
+  title: "Cleaning Chemical Manufacturer, Bangalore",
   description:
-    "Power Clean is a brand of Roovel Solutions Pvt. Ltd. — ISO 9001 certified, Bangalore-based, with 25+ years of precision cleaning solutions for Indian manufacturing.",
+    "Power Clean is a brand of Roovel Solutions Pvt. Ltd. — ISO 9001 certified and Bangalore-based, serving Indian manufacturing since 2000.",
   alternates: { canonical: "/about" },
 };
 
@@ -55,13 +57,25 @@ const STATS = [
 export default function AboutPage() {
   return (
     <>
+      <JsonLd
+        data={[
+          breadcrumbJsonLd([{ name: "About", url: `${SITE_URL}/about` }]),
+          webPageJsonLd({
+            name: "About Power Clean and Roovel Solutions",
+            description:
+              "Roovel Solutions Pvt. Ltd. manufactures Power Clean industrial cleaning chemicals at its ISO 9001 certified Bangalore plant.",
+            path: "/about",
+            about: ["Roovel Solutions Pvt. Ltd.", "Power Clean"],
+          }),
+        ]}
+      />
       <PageHero
         title="Engineering Cleaner Manufacturing"
         eyebrow="ABOUT POWER CLEAN"
         blurb="Helping Indian manufacturers clean better, spend less, and meet every compliance bar — with chemistry built in-house."
         minHeight="min(66vh, 560px)"
         image="/photos/production-hall.webp"
-        imageAlt=""
+        imageAlt="Production hall with stainless process vessels at the Bangalore facility"
       />
 
       {/* VISION / MISSION */}

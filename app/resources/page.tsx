@@ -12,11 +12,19 @@ import { SITE_URL, breadcrumbJsonLd, itemListJsonLd } from "@/lib/seo";
 import { articles } from "@/lib/articles";
 
 export const metadata: Metadata = {
-  title: "Technical Guides on Industrial Cleaning & Degreasing",
+  title: "Technical Guides on Industrial Cleaning",
   description:
     "Technical guides from the Power Clean applications team — aqueous cleaning explained, cleaning methods, replacing TCE, and ultrasonic cleaning answered.",
   alternates: { canonical: "/resources" },
 };
+
+const HUB_LINKS = [
+  { label: "Cleaning videos", href: "/cleaning-videos" },
+  { label: "Blog articles", href: "/blog" },
+  { label: "Case studies", href: "/resources/case-studies" },
+  { label: "Glossary", href: "/glossary" },
+  { label: "FAQ", href: "/faq" },
+];
 
 export default function ResourcesPage() {
   return (
@@ -44,7 +52,7 @@ export default function ResourcesPage() {
         blurb="Application notes and technical guides from our lab and applications engineers — the same guidance we give customers before a trial."
         minHeight="min(52vh, 460px)"
         image="/photos/qc-lab.webp"
-        imageAlt=""
+        imageAlt="Quality control chemist testing a Power Clean cleaning chemical batch"
       />
 
       <SectionPanel outerClassName="px-3 pb-3 pt-10">
@@ -91,6 +99,32 @@ export default function ResourcesPage() {
             </Reveal>
           ))}
         </div>
+
+        {/* the rest of the knowledge hub — the client's architecture groups
+            FAQ, blog, guides, case studies and videos under Resources */}
+        <Reveal
+          dir="up"
+          delay={160}
+          className="mt-10 rounded-card-lg bg-white p-7 ring-1 ring-inset ring-line-2"
+        >
+          <h2 className="mb-4 border-b border-line-2 pb-2.5 font-mono text-[10.5px] uppercase tracking-[0.12em] text-green-deep">
+            Also in the knowledge hub
+          </h2>
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-3.5">
+            {HUB_LINKS.map((l) => (
+              <TransitionLink
+                key={l.href}
+                href={l.href}
+                className="group flex items-center justify-between gap-3 rounded-card bg-card-tint px-5 py-4 text-[13.5px] font-semibold text-navy no-underline transition-colors duration-300 hover:bg-green-tint"
+              >
+                {l.label}
+                <span className="text-green">
+                  <Arrow />
+                </span>
+              </TransitionLink>
+            ))}
+          </div>
+        </Reveal>
       </SectionPanel>
 
       <CtaBanner

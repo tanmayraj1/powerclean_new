@@ -2,7 +2,7 @@ type ProductDrumProps = {
   /** full product name, e.g. "POWER CLEAN XL-45" */
   name: string;
   sku?: string;
-  /** category accent, from lib/catalogue categories[].accent */
+  /** category accent, from lib/products categories[].accent */
   accent: string;
   size?: "sm" | "lg";
   className?: string;

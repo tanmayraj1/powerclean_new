@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Reveal } from "@/components/motion/Reveal";
 import { Magnetic } from "@/components/motion/Magnetic";
 import { TransitionLink } from "@/components/layout/TransitionLink";
+import { photoAlt } from "@/lib/photo-alt";
 import { HeroBackdrop } from "./HeroBackdrop";
 import { Eyebrow } from "./Eyebrow";
 import { Arrow } from "./Arrow";
@@ -18,6 +19,8 @@ type CtaBannerProps = {
   imageBrief?: string;
   /** photographic layer behind the navy panel */
   image?: string;
+  /** overrides the shared description in lib/photo-alt.ts */
+  imageAlt?: string;
   /** green clip-path wedge on the right (Solutions variant) */
   wedge?: boolean;
   minHeight?: number;
@@ -37,6 +40,8 @@ export function CtaBanner({
   wedge,
   minHeight = 420,
   extra,
+  imageAlt,
+  imageBrief,
   image = "/photos/spray-mist.webp",
 }: CtaBannerProps) {
   return (
@@ -50,7 +55,9 @@ export function CtaBanner({
           <>
             <Image
               src={image}
-              alt=""
+              // the banner photo is real subject matter, not wallpaper — it is
+              // indexed by image search and read by assistants
+              alt={imageAlt ?? photoAlt(image, imageBrief ?? "")}
               fill
               sizes="100vw"
               className="object-cover opacity-[0.30]"

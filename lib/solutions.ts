@@ -56,10 +56,10 @@ export type Solution = {
 };
 
 const SHARED_GALLERY: [string, string, string, string] = [
-  "Photo — washer interior mid-cycle",
-  "Photo — titration check at the bath",
-  "Photo — clean parts basket unloading",
-  "Photo — dosing pump and metering setup",
+  "Technician loading components onto a parts washer fixture plate",
+  "Stainless process vessels and pipework in a chemical blending plant",
+  "Rows of machined steel bearing races after degreasing",
+  "Machined metal blocks with press-fit inserts, cleaned and inspected",
 ];
 
 /** real photographs matching SHARED_GALLERY by index */
@@ -155,7 +155,7 @@ export const solutions: Solution[] = [
     cardBlurb:
       "Water-based, rust-inhibited alkaline concentrate that strips oils, coolants, and drawing compounds — dilutable up to 1:100.",
     cardTags: ["Oil & Grease Removal", "Water-Based"],
-    cardImage: "Photo — spray degreasing of machined parts",
+    cardImage: "Oily machined gears and bearing races awaiting heavy-duty degreasing",
     cardPhoto: "/photos/solution-xl.webp",
     about: [
       "POWER CLEAN XL is an all-round heavy-duty alkaline degreaser built on water-based active-colloid chemistry. It emulsifies cutting oils, coolants, and shop soils at low dilutions, then releases them in the separator so the bath keeps working longer.",
@@ -219,7 +219,7 @@ export const solutions: Solution[] = [
     cardBlurb:
       "Neutral-pH chemistry for soft metals: cleans aluminium, brass, and copper at 3:100, rinse-free, and prevents white rust.",
     cardTags: ["Aluminium · Brass · Copper", "Neutral pH"],
-    cardImage: "Photo — parts-washing cabinet with components in solution",
+    cardImage: "Aluminium die-cast housings and brackets cleaned with neutral-pH chemistry",
     cardPhoto: "/photos/solution-nf14.webp",
     highlight: true,
     about: [
@@ -284,7 +284,7 @@ export const solutions: Solution[] = [
     cardBlurb:
       "Zero-foam formulation for high-pressure jet washers — dilutable 1:100 with a rust preventive built in.",
     cardTags: ["High-Jet Spray", "No Foam"],
-    cardImage: "Photo — high-pressure spray washer in operation",
+    cardImage: "CNC machining centre flooding a steel part with coolant during cutting",
     cardPhoto: "/photos/solution-lf.webp",
     about: [
       "POWER CLEAN LF is a no-foam cleaner-degreaser engineered for high-jet spray washers, where conventional chemistry foams out of control. It cuts oils and shop soils at pressure without cavitation or overflow.",
@@ -348,7 +348,7 @@ export const solutions: Solution[] = [
     cardBlurb:
       "Cleans mild steel and cast iron at 3:100 — and leaves multi-day rust protection on the part.",
     cardTags: ["Mild Steel · Cast Iron", "Rust Protection"],
-    cardImage: "Photo — steel components with protective coating, warehouse",
+    cardImage: "Rows of machined steel components with a protective rust-preventive finish",
     cardPhoto: "/photos/solution-sp.webp",
     about: [
       "POWER CLEAN SP is a ferrous metal cleaner formulated for mild steel and cast iron. It removes machining soils and coolant residues while laying down inter-operational rust protection in the same pass.",
@@ -412,7 +412,7 @@ export const solutions: Solution[] = [
     cardBlurb:
       "A drop-in replacement for trichloroethylene: solvent-grade degreasing with a high flash point and boiling point.",
     cardTags: ["TCE Replacement", "High Flash Point"],
-    cardImage: "Photo — solvent degreasing station, extraction hood",
+    cardImage: "Engine cylinder head being cleaned by hand with a solvent degreaser",
     cardPhoto: "/photos/solution-342.webp",
     about: [
       "PC-S 342 is a solvent degreaser engineered as a drop-in replacement for trichloroethylene (TCE), using n-propyl bromide chemistry with a high flash point and boiling point. It slots into existing vapor and immersion degreasing equipment.",
@@ -475,7 +475,7 @@ export const solutions: Solution[] = [
     cardBlurb:
       "Long-term oil-based rust preventive: 3–6 months of protection, touch-dry in 10–15 minutes.",
     cardTags: ["Long-Term Protection", "Quick Touch-Dry"],
-    cardImage: "Photo — protected steel parts in storage racks",
+    cardImage: "Golden rust-preventive oil droplet splashing, showing the protective film",
     cardPhoto: "/photos/solution-rp636.webp",
     about: [
       "PC RP-636 is an oil-based rust preventive for long-term protection of ferrous parts in storage and transit. It lays down a thin, consistent film that holds off corrosion for three to six months.",

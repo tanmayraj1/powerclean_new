@@ -15,7 +15,7 @@ import { articles } from "@/lib/articles";
 export const metadata: Metadata = {
   title: "Blog — Industrial Cleaning Insights",
   description:
-    "Practical guides on industrial cleaning chemicals: choosing a degreaser, removing white rust from aluminium, replacing TCE, ultrasonic cleaning chemistry and cooling tower descaling.",
+    "Guides on industrial cleaning chemicals — degreaser selection, white rust on aluminium, TCE replacement, ultrasonic chemistry and bath life.",
   alternates: { canonical: "/blog", types: { "application/rss+xml": "/blog/rss.xml" } },
   openGraph: {
     type: "website",

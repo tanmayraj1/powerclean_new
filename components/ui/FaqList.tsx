@@ -1,10 +1,14 @@
 "use client";
 
-import type { Faq } from "@/lib/site-config";
 import { AccordionBody, useAccordion } from "./Accordion";
 
-/** Numbered FAQ accordion with rotating chevron (Home + Contact). */
-export function FaqList({ faqs }: { faqs: Faq[] }) {
+/**
+ * Numbered FAQ accordion with rotating chevron (Home, Contact, Catalogue).
+ * Takes the bare question/answer shape rather than the tagged `Faq` type —
+ * only FaqFilter needs the category tag, and requiring it here forced callers
+ * to invent tags they never render.
+ */
+export function FaqList({ faqs }: { faqs: { q: string; a: string }[] }) {
   const { open, toggle } = useAccordion(0);
   return (
     <div className="flex flex-col gap-2.5">

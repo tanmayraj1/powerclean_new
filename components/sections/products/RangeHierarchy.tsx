@@ -11,7 +11,7 @@ import {
   productsBySeries,
   seriesByCategory,
   type CategoryKey,
-} from "@/lib/catalogue";
+} from "@/lib/products";
 
 /**
  * The Range at a Glance — the whole catalogue as one navigable hierarchy:
@@ -20,10 +20,23 @@ import {
  */
 export function RangeHierarchy() {
   const reduced = usePrefersReducedMotion();
-  const [openCat, setOpenCat] = useState<CategoryKey>("aqueous");
+  // Aqueous holds 30 of the 41 products, so leaving a band open by default
+  // pushed roughly 1,600px of desktop height (and three phone screens) onto
+  // the page before the reader had chosen anything — on a page that already
+  // shows the same 41 products in the chart above, the card grid below and
+  // the selection matrix after it. Every band now starts closed: four
+  // labelled bars read as an index and invite a tap. Nothing is removed;
+  // each family is one tap away, and the card grid below keeps all 41 links
+  // in the DOM for crawlers regardless of what is open here.
+  const [openCat, setOpenCat] = useState<CategoryKey | null>(null);
+  // set once the reader (or a deep link) chooses a band, after which their
+  // choice wins over the default
+  const [chosen, setChosen] = useState(false);
+
+  const effectiveOpen: CategoryKey | null = chosen ? openCat : null;
 
   // The RangeMap chart above (same page) dispatches pc-open-category; QR
-  // landing links arrive cross-page as /catalogue#range-<key>. Both open
+  // landing links arrive cross-page as /products#range-<key>. Both open
   // the right family band and bring it into view.
   useEffect(() => {
     const isKey = (k: string): k is CategoryKey =>
@@ -41,6 +54,7 @@ export function RangeHierarchy() {
     const fromHash = () => {
       const key = window.location.hash.replace("#range-", "");
       if (window.location.hash.startsWith("#range-") && isKey(key)) {
+        setChosen(true);
         setOpenCat(key);
         // wait out the page-transition reveal before scrolling
         bringIntoView(key, 750);
@@ -49,6 +63,7 @@ export function RangeHierarchy() {
     const onOpen = (e: Event) => {
       const key = (e as CustomEvent<string>).detail;
       if (!isKey(key)) return;
+      setChosen(true);
       setOpenCat(key);
       // wait for the previously-open band to finish collapsing (0.45s), or
       // the target's position is measured too early and we overshoot
@@ -71,7 +86,7 @@ export function RangeHierarchy() {
           (n, s) => n + productsBySeries(s.key).length,
           0
         );
-        const open = openCat === cat.key;
+        const open = effectiveOpen === cat.key;
         return (
           <div
             key={cat.key}
@@ -81,7 +96,10 @@ export function RangeHierarchy() {
           >
             {/* Category band */}
             <button
-              onClick={() => setOpenCat(cat.key)}
+              onClick={() => {
+                setChosen(true);
+                setOpenCat(open ? null : cat.key);
+              }}
               aria-expanded={open}
               className="flex w-full cursor-pointer items-center gap-4 border-none bg-transparent px-5 py-[18px] text-left font-sans sm:px-6"
             >
@@ -152,7 +170,7 @@ export function RangeHierarchy() {
                               {prods.map((p) => (
                                 <TransitionLink
                                   key={p.slug}
-                                  href={`/catalogue/${p.slug}`}
+                                  href={`/products/${p.slug}`}
                                   className="group inline-flex items-center gap-2 rounded-full bg-white py-[7px] pl-3.5 pr-2.5 text-[12.5px] font-semibold text-navy no-underline ring-1 ring-inset ring-line-2 transition-[transform,box-shadow,color] duration-300 hover:-translate-y-0.5 hover:text-green-deep hover:shadow-[0_8px_18px_-8px_rgba(29,31,35,.35)]"
                                 >
                                   {p.name.replace("POWER CLEAN ", "")}

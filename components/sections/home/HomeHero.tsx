@@ -26,8 +26,9 @@ export function HomeHero() {
         {/* Hero photograph — LCP image, so it loads eagerly at high priority. */}
         <Image
           src="/hero-bg.png"
-          alt=""
-          aria-hidden="true"
+          // the site's LCP image and its most valuable image-search surface —
+          // it carries the brand lockup, so it is content, not wallpaper
+          alt="Steel gear splashing through water, branded Power Clean industrial degreaser"
           fill
           sizes="100vw"
           quality={90}

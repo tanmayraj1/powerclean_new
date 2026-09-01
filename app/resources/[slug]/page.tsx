@@ -76,7 +76,7 @@ export default async function ArticlePage(props: {
         minHeight="min(50vh, 440px)"
         titleClassName="text-[clamp(30px,4.2vw,58px)]"
         image={article.photo}
-        imageAlt=""
+        imageAlt={article.photoAlt}
       />
 
       <nav

@@ -1,4 +1,11 @@
 import type { Metadata } from "next";
+import { JsonLd } from "@/components/seo/JsonLd";
+import {
+  SITE_URL,
+  breadcrumbJsonLd,
+  itemListJsonLd,
+  webPageJsonLd,
+} from "@/lib/seo";
 import { PageHero } from "@/components/ui/PageHero";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { SectionPanel } from "@/components/ui/SectionPanel";
@@ -8,34 +15,97 @@ import { CtaBanner } from "@/components/ui/CtaBanner";
 import { Reveal } from "@/components/motion/Reveal";
 import { industries } from "@/lib/site-config";
 import { solutions } from "@/lib/solutions";
+import { methods } from "@/lib/methods";
+import { Arrow } from "@/components/ui/Arrow";
+import { TransitionLink } from "@/components/layout/TransitionLink";
 import { IndustryIcon } from "@/components/sections/solutions/IndustryIcon";
 import { TactPrinciple } from "@/components/sections/solutions/TactPrinciple";
 import { TceComparison } from "@/components/sections/solutions/TceComparison";
 
 export const metadata: Metadata = {
-  title: "Industrial Cleaning Solutions for Every Wash Process",
+  title: "Industrial Cleaning Solutions by Process",
   description:
-    "Water-based cleaners, degreasers, solvent replacements, and rust preventives from Power Clean — matched to your metals, soils, equipment, and compliance requirements.",
+    "Water-based cleaners, degreasers, solvent replacements and rust preventives — matched to your metals, soils, wash equipment and compliance.",
   alternates: { canonical: "/solutions" },
 };
 
 export default function SolutionsPage() {
   return (
     <>
+      <JsonLd
+        data={[
+          breadcrumbJsonLd([{ name: "Solutions", url: `${SITE_URL}/solutions` }]),
+          itemListJsonLd({
+            name: "Power Clean cleaning solutions",
+            description:
+              "Four cleaning methods and six flagship products, with dilution, process and packaging detail.",
+            url: `${SITE_URL}/solutions`,
+            items: [
+              ...methods.map((m) => ({
+                name: m.name,
+                url: `${SITE_URL}/solutions/${m.slug}`,
+              })),
+              ...solutions.map((s) => ({
+                name: s.name,
+                url: `${SITE_URL}/solutions/${s.slug}`,
+              })),
+            ],
+          }),
+          webPageJsonLd({
+            name: "Industrial Cleaning Solutions",
+            description:
+              "Six flagship Power Clean products, each with the substrate, soil, wash process and dilution it is built for.",
+            path: "/solutions",
+            about: ["Industrial cleaning chemicals", "Degreasers"],
+          }),
+        ]}
+      />
       <PageHero
         title="Solutions Built Around Your Line"
         eyebrow="POWER CLEAN SOLUTIONS"
         blurb="Water-based chemistry, solvent replacements, and rust protection — matched to your metals, soils, equipment, and compliance requirements."
         minHeight="min(62vh, 540px)"
         image="/photos/solution-lf.webp"
-        imageAlt=""
+        imageAlt="CNC machining centre flooding a steel component with cutting coolant"
       />
 
-      {/* ALL SOLUTIONS */}
+      {/* BY METHOD — the client's architecture organises Solutions by cleaning
+          method; these four sit above the product deep-dives because most
+          people arrive knowing their process, not our product codes. */}
       <div className="mx-auto max-w-[1320px] px-5 pb-5 pt-[clamp(40px,6vw,72px)]">
         <SectionHeading
-          eyebrow="ALL SOLUTIONS"
-          title="Chemistry for Every Process"
+          eyebrow="BY METHOD"
+          title="Start With Your Process"
+          lede="Ultrasonic, spray, solvent replacement or a cleanliness specification — each page covers how the method works, what goes wrong, and the grades that suit it."
+          className="mb-10 max-w-[680px]"
+        />
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-5">
+          {methods.map((m, i) => (
+            <Reveal key={m.slug} dir="up" delay={Math.min(i, 4) * 70}>
+              <TransitionLink
+                href={`/solutions/${m.slug}`}
+                className="group flex h-full flex-col rounded-card bg-white p-6 no-underline ring-1 ring-inset ring-line-2 transition-[transform,box-shadow,ring-color] duration-[350ms] hover:-translate-y-1.5 hover:shadow-card-lg hover:ring-green/25"
+              >
+                <h3 className="mb-2.5 text-[17px] font-semibold leading-[1.3] text-navy">
+                  {m.name}
+                </h3>
+                <p className="mb-5 flex-1 text-[13px] leading-[1.62] text-muted-3">
+                  {m.answer.split(". ")[0]}.
+                </p>
+                <span className="flex items-center gap-1.5 text-[12.5px] font-semibold text-navy transition-colors group-hover:text-green">
+                  Open the method <Arrow />
+                </span>
+              </TransitionLink>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+
+      {/* ALL SOLUTIONS */}
+      <div className="mx-auto max-w-[1320px] px-5 pb-5 pt-[clamp(24px,3vw,40px)]">
+        <SectionHeading
+          eyebrow="FEATURED PRODUCTS"
+          title="Six Grades in Depth"
           lede="Each product is available in multiple grades and dilutions — and every recommendation starts with your sample parts in our lab."
           className="mb-11"
         />

@@ -22,7 +22,9 @@ export function ClientLogo({ name, file }: { name: string; file: string }) {
         // eslint-disable-next-line @next/next/no-img-element
         <img
           src={`/logos/${file}`}
-          alt={name}
+          // "BOSCH" alone is a weak accessible name in a row of eight marks —
+          // the alt says what the logo is doing on this page
+          alt={`${name} — Power Clean customer`}
           // eager: the marquee moves marks by transform, so lazy-loaded logos
           // that start off-screen never trigger a load
           loading="eager"

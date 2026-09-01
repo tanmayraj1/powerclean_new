@@ -108,7 +108,7 @@ export function IntroCurtain() {
           </div>
           <Image
             src="/logo.png"
-            alt="Power Clean"
+            alt="Power Clean — industrial cleaning chemicals by Roovel Solutions"
             width={253}
             height={76}
             className="h-[76px] w-auto brightness-0 invert"

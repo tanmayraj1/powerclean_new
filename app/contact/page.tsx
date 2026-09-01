@@ -14,10 +14,15 @@ import { Magnetic } from "@/components/motion/Magnetic";
 import { TransitionLink } from "@/components/layout/TransitionLink";
 import { contactFaqs, siteConfig } from "@/lib/site-config";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { faqJsonLd } from "@/lib/seo";
+import {
+  SITE_URL,
+  breadcrumbJsonLd,
+  faqJsonLd,
+  webPageJsonLd,
+} from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Contact — Industrial Cleaning Chemicals, Bangalore & Chennai",
+  title: "Contact Power Clean — Bangalore & Chennai",
   description:
     "Reach Power Clean (Roovel Solutions Pvt. Ltd., Bangalore) for program inquiries, free chemical samples, and supervised plant trials.",
   alternates: { canonical: "/contact" },
@@ -34,14 +39,26 @@ const FAQ_CHIPS = ["Products & Trials", "Company Details", "Supply & Logistics"]
 export default function ContactPage() {
   return (
     <>
-      <JsonLd data={faqJsonLd([...contactFaqs])} />
+      <JsonLd
+        data={[
+          faqJsonLd([...contactFaqs]),
+          breadcrumbJsonLd([{ name: "Contact", url: `${SITE_URL}/contact` }]),
+          webPageJsonLd({
+            name: "Contact Power Clean",
+            description:
+              "Enquiries, offices and free cleaning trials for Power Clean industrial cleaning chemicals.",
+            path: "/contact",
+            about: ["Industrial cleaning chemicals", "Bangalore", "Chennai"],
+          }),
+        ]}
+      />
       <PageHero
         title="Let's Solve Your Cleaning Challenge"
         eyebrow="GET IN TOUCH"
         blurb="Program inquiries, trial requests, and partnership opportunities — our technical team replies within one business day."
         minHeight="min(56vh, 480px)"
         image="/photos/gallery-1.webp"
-        imageAlt=""
+        imageAlt="Technician setting up components on a parts washer at a customer plant"
         titleClassName="text-[clamp(34px,4.8vw,70px)]"
       />
 

@@ -12,7 +12,8 @@ const LINKS = [
   { key: "home", label: "Home", href: "/" },
   { key: "about", label: "About", href: "/about" },
   { key: "solutions", label: "Solutions", href: "/solutions" },
-  { key: "catalogue", label: "Catalogue", href: "/catalogue" },
+  { key: "products", label: "Products", href: "/products" },
+  { key: "industries", label: "Industries", href: "/industries" },
   { key: "blog", label: "Blog", href: "/blog" },
   { key: "resources", label: "Resources", href: "/resources" },
 ];
@@ -20,7 +21,7 @@ const LINKS = [
 function activeKey(pathname: string): string {
   if (pathname === "/") return "home";
   if (pathname === "/about") return "about";
-  if (pathname.startsWith("/catalogue")) return "catalogue";
+  if (pathname.startsWith("/products")) return "products";
   if (pathname.startsWith("/solutions")) return "solutions";
   if (pathname.startsWith("/blog")) return "blog";
   if (pathname.startsWith("/resources")) return "resources";
@@ -96,7 +97,7 @@ export function SiteNav() {
           <TransitionLink href="/" className="flex shrink-0 items-center">
             <Image
               src="/logo.png"
-              alt="Power Clean"
+              alt="Power Clean — industrial cleaning chemicals by Roovel Solutions"
               width={153}
               height={46}
               className={`block w-auto transition-[filter,height] duration-[350ms] ${
@@ -116,9 +117,13 @@ export function SiteNav() {
               onSubmit={(e) => {
                 e.preventDefault();
                 const q = query.trim();
-                router.push(q ? `/catalogue?q=${encodeURIComponent(q)}` : "/catalogue");
+                router.push(q ? `/products?q=${encodeURIComponent(q)}` : "/products");
               }}
-              className={`flex items-center gap-2 rounded-full py-[7px] pl-[18px] pr-[7px] transition-[background,box-shadow] duration-300 ${
+              // 7 nav links + logo + search + CTA no longer fit between the
+              // 940px nav breakpoint and ~1180px. Search is the least critical
+              // of the three (the products index has its own filter and search), so
+              // it drops out first rather than the CTA being clipped.
+              className={`hidden items-center gap-2 rounded-full py-[7px] pl-[18px] pr-[7px] transition-[background,box-shadow] duration-300 min-[1180px]:flex ${
                 solid
                   ? "bg-azure"
                   : "bg-white/12 ring-1 ring-inset ring-white/25"
@@ -138,7 +143,7 @@ export function SiteNav() {
               />
               <button
                 type="submit"
-                aria-label="Search the catalogue"
+                aria-label="Search the product range"
                 className={`flex h-7 w-7 cursor-pointer items-center justify-center rounded-full border-none transition-colors ${
                   solid ? "bg-navy" : "bg-white"
                 }`}

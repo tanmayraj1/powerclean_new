@@ -17,6 +17,19 @@ import { InspectImage } from "@/components/motion/InspectImage";
 import { HScrollGallery } from "@/components/motion/HScrollGallery";
 import { TransitionLink } from "@/components/layout/TransitionLink";
 import { BeforeAfterSlider } from "@/components/sections/solution-detail/BeforeAfterSlider";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { MethodPage } from "@/components/sections/solutions/MethodPage";
+import { getMethod, methods } from "@/lib/methods";
+import {
+  SITE_URL,
+  brandedTitle,
+  breadcrumbJsonLd,
+  faqJsonLd,
+  howToJsonLd,
+  metaDesc,
+  productJsonLd,
+  webPageJsonLd,
+} from "@/lib/seo";
 import {
   deploySteps,
   detailTestimonial,
@@ -26,8 +39,17 @@ import {
   solutions,
 } from "@/lib/solutions";
 
+/**
+ * Two page types share /solutions/[slug]: the four cleaning-method pages the
+ * client's architecture calls for (/solutions/ultrasonic-cleaning) and the six
+ * product deep-dives (/solutions/power-clean-xl). lib/methods.ts asserts the
+ * slug sets are disjoint at module load.
+ */
 export function generateStaticParams() {
-  return solutions.map((s) => ({ slug: s.slug }));
+  return [
+    ...methods.map((m) => ({ slug: m.slug })),
+    ...solutions.map((s) => ({ slug: s.slug })),
+  ];
 }
 
 export const dynamicParams = false;
@@ -36,11 +58,29 @@ export async function generateMetadata(props: {
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await props.params;
+
+  const method = getMethod(slug);
+  if (method) {
+    return {
+      title: method.metaTitle,
+      description: method.metaDescription,
+      keywords: method.keywords,
+      alternates: { canonical: `/solutions/${slug}` },
+      openGraph: {
+        type: "article",
+        title: `${method.metaTitle} · Power Clean`,
+        description: method.metaDescription,
+        url: `${SITE_URL}/solutions/${slug}`,
+        images: [{ url: method.photo, alt: method.photoAlt }],
+      },
+    };
+  }
+
   const solution = getSolution(slug);
   if (!solution) return {};
   return {
-    title: `${solution.name} — Industrial Cleaning Solution`,
-    description: solution.tagline,
+    title: brandedTitle(`${solution.name} — Industrial Cleaning Solution`),
+    description: metaDesc(solution.tagline),
     alternates: { canonical: `/solutions/${slug}` },
     openGraph: {
       title: `${solution.name} · Power Clean`,
@@ -53,6 +93,37 @@ export default async function SolutionDetailPage(props: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await props.params;
+
+  // A cleaning-method page rather than a product deep-dive.
+  const method = getMethod(slug);
+  if (method) {
+    return (
+      <>
+        <JsonLd
+          data={[
+            breadcrumbJsonLd([
+              { name: "Solutions", url: `${SITE_URL}/solutions` },
+              { name: method.name, url: `${SITE_URL}/solutions/${slug}` },
+            ]),
+            faqJsonLd(method.faqs),
+            howToJsonLd({
+              name: `How to run ${method.name.toLowerCase()}`,
+              description: method.answer,
+              steps: method.steps,
+            }),
+            webPageJsonLd({
+              name: method.title,
+              description: method.metaDescription,
+              path: `/solutions/${slug}`,
+              about: [method.name, "Industrial cleaning chemicals"],
+            }),
+          ]}
+        />
+        <MethodPage method={method} />
+      </>
+    );
+  }
+
   const solution = getSolution(slug);
   if (!solution) notFound();
   const related = solution.related
@@ -61,13 +132,39 @@ export default async function SolutionDetailPage(props: {
 
   return (
     <>
+      <JsonLd
+        data={[
+          productJsonLd({
+            name: solution.name,
+            slug: solution.slug,
+            path: `/solutions/${solution.slug}`,
+            description: solution.tagline,
+            category: "Industrial cleaning chemical",
+            image: solution.cardPhoto,
+            properties: solution.specs,
+          }),
+          breadcrumbJsonLd([
+            { name: "Solutions", url: `${SITE_URL}/solutions` },
+            {
+              name: solution.name,
+              url: `${SITE_URL}/solutions/${solution.slug}`,
+            },
+          ]),
+          webPageJsonLd({
+            name: solution.name,
+            description: solution.tagline,
+            path: `/solutions/${solution.slug}`,
+            about: [solution.name, "Industrial cleaning chemicals"],
+          }),
+        ]}
+      />
       <PageHero
         title={solution.name}
         eyebrow="SOLUTION DETAILS"
         blurb={solution.tagline}
         minHeight="min(58vh, 500px)"
         image={solution.cardPhoto}
-        imageAlt=""
+        imageAlt={solution.cardImage}
         titleClassName="text-[clamp(34px,4.6vw,66px)]"
       />
 
@@ -390,6 +487,7 @@ export default async function SolutionDetailPage(props: {
                 <div className="relative mb-4 h-[170px] overflow-hidden rounded-img">
                   <ImageSlot
                     brief={r.cardImage}
+                    alt={r.cardImage}
                     src={r.cardPhoto}
                     className="absolute inset-0"
                   />
@@ -420,6 +518,7 @@ export default async function SolutionDetailPage(props: {
             >
               <ImageSlot
                 brief={g}
+                alt={g}
                 src={sharedGalleryPhotos[i]}
                 className="absolute inset-0"
               />

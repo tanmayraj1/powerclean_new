@@ -9,10 +9,23 @@ const QUICK_LINKS = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Solutions", href: "/solutions" },
-  { label: "Catalogue", href: "/catalogue" },
+  { label: "Products", href: "/products" },
+  { label: "Industries", href: "/industries" },
+  { label: "Clients", href: "/clients" },
+  { label: "Contact", href: "/contact" },
+];
+
+/** Knowledge hubs — the answer surfaces, kept out of the top nav to keep it short. */
+const LEARN_LINKS = [
   { label: "Blog", href: "/blog" },
   { label: "Resources", href: "/resources" },
-  { label: "Contact", href: "/contact" },
+  { label: "Glossary", href: "/glossary" },
+  { label: "FAQ", href: "/faq" },
+  { label: "Cleaning videos", href: "/cleaning-videos" },
+  { label: "Case studies", href: "/resources/case-studies" },
+  { label: "Free consultation", href: "/get-consultation" },
+  { label: "Where we supply", href: "/industrial-cleaning-chemicals" },
+  { label: "QR range map", href: "/range" },
 ];
 
 const SOCIAL_LINKS = [
@@ -33,7 +46,7 @@ export function SiteFooter() {
           <div>
             <Image
               src="/logo.png"
-              alt="Power Clean"
+              alt="Power Clean — industrial cleaning chemicals by Roovel Solutions"
               width={173}
               height={52}
               className="mb-5 block h-[52px] w-auto"
@@ -50,13 +63,29 @@ export function SiteFooter() {
               Clean updates.
             </p>
           </div>
-          <div className="grid grid-cols-2 gap-7">
+          <div className="grid grid-cols-2 gap-7 sm:grid-cols-3">
             <div>
               <h3 className="mb-3.5 text-[15px] font-semibold text-navy">
                 Quick Links
               </h3>
               <div className="flex flex-col gap-2.5">
                 {QUICK_LINKS.map((l) => (
+                  <TransitionLink
+                    key={l.label}
+                    href={l.href}
+                    className="group text-sm text-muted-3 no-underline transition-colors hover:text-green"
+                  >
+                    {l.label} <Arrow />
+                  </TransitionLink>
+                ))}
+              </div>
+            </div>
+            <div>
+              <h3 className="mb-3.5 text-[15px] font-semibold text-navy">
+                Learn
+              </h3>
+              <div className="flex flex-col gap-2.5">
+                {LEARN_LINKS.map((l) => (
                   <TransitionLink
                     key={l.label}
                     href={l.href}

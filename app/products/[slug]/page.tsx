@@ -12,18 +12,45 @@ import { Reveal } from "@/components/motion/Reveal";
 import { Magnetic } from "@/components/motion/Magnetic";
 import { TransitionLink } from "@/components/layout/TransitionLink";
 import {
+  CATEGORY_SLUG,
+  categoryBySlug,
   categoryOf,
   getProduct,
+  productHref,
   products,
   productsByCategory,
   seriesOf,
-} from "@/lib/catalogue";
+} from "@/lib/products";
+import { categoryContent } from "@/lib/category-content";
+import { CategoryHub } from "@/components/sections/products/CategoryHub";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { SITE_URL, breadcrumbJsonLd, productJsonLd } from "@/lib/seo";
+import {
+  SITE_URL,
+  brandedTitle,
+  metaDesc,
+  breadcrumbJsonLd,
+  faqJsonLd,
+  itemListJsonLd,
+  productJsonLd,
+  webPageJsonLd,
+} from "@/lib/seo";
+import { FaqList } from "@/components/ui/FaqList";
+import { MicroForm } from "@/components/ui/MicroForm";
+import { productFaqs } from "@/lib/product-faq";
 import { getSolution, packagingRows } from "@/lib/solutions";
+import { siteConfig } from "@/lib/site-config";
 
+/**
+ * Two page types share /products/[slug]: the four family hubs
+ * (/products/aqueous) and the 41 product pages (/products/power-clean-xl).
+ * The slug sets are asserted disjoint at module load in lib/products.ts, so a
+ * category can never silently shadow a product.
+ */
 export function generateStaticParams() {
-  return products.map((p) => ({ slug: p.slug }));
+  return [
+    ...Object.values(CATEGORY_SLUG).map((slug) => ({ slug })),
+    ...products.map((p) => ({ slug: p.slug })),
+  ];
 }
 
 export const dynamicParams = false;
@@ -40,17 +67,45 @@ export async function generateMetadata(props: {
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await props.params;
+
+  // family hub
+  const catKey = categoryBySlug(slug);
+  if (catKey) {
+    const c = categoryContent[catKey];
+    return {
+      title: c.metaTitle,
+      description: c.metaDescription,
+      keywords: c.keywords,
+      alternates: { canonical: `/products/${slug}` },
+      openGraph: {
+        type: "website",
+        title: `${c.metaTitle} · Power Clean`,
+        description: c.metaDescription,
+        url: `${SITE_URL}/products/${slug}`,
+        images: [{ url: c.photo, alt: c.photoAlt }],
+      },
+    };
+  }
+
   const product = getProduct(slug);
   if (!product) return {};
   const category = categoryOf(product.category);
   return {
-    title: `${product.name}${product.sku ? ` (SKU ${product.sku})` : ""} — ${category.short} Cleaning Chemical`,
-    description: `${product.tagline} ${product.description.slice(0, 110)}…`,
-    alternates: { canonical: `/catalogue/${slug}` },
+    // the product name already says "Power Clean" — an absolute title avoids
+    // repeating the brand in the template suffix and burning 14 SERP characters
+    title: brandedTitle(`${product.name} — ${category.short} Cleaning Chemical`),
+    description: metaDesc(`${product.tagline} ${product.description}`),
+    keywords: [
+      product.name,
+      ...(product.sku ? [`Power Clean ${product.sku}`] : []),
+      `${category.short} cleaning chemical`,
+      ...product.tags,
+    ],
+    alternates: { canonical: `/products/${slug}` },
     openGraph: {
       title: `${product.name} · Power Clean`,
       description: product.tagline,
-      url: `${SITE_URL}/catalogue/${slug}`,
+      url: `${SITE_URL}/products/${slug}`,
     },
   };
 }
@@ -59,6 +114,46 @@ export default async function ProductPage(props: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await props.params;
+
+  // A family hub rather than a product — /products/aqueous and friends.
+  const catKey = categoryBySlug(slug);
+  if (catKey) {
+    const c = categoryContent[catKey];
+    const items = productsByCategory(catKey);
+    return (
+      <>
+        <JsonLd
+          data={[
+            itemListJsonLd({
+              name: categoryOf(catKey).label,
+              description: c.metaDescription,
+              url: `${SITE_URL}/products/${slug}`,
+              items: items.map((p) => ({
+                name: p.name,
+                url: `${SITE_URL}${productHref(p)}`,
+              })),
+            }),
+            faqJsonLd(c.faqs),
+            breadcrumbJsonLd([
+              { name: "Products", url: `${SITE_URL}/products` },
+              {
+                name: categoryOf(catKey).short,
+                url: `${SITE_URL}/products/${slug}`,
+              },
+            ]),
+            webPageJsonLd({
+              name: categoryOf(catKey).label,
+              description: c.metaDescription,
+              path: `/products/${slug}`,
+              about: [categoryOf(catKey).label, "Industrial cleaning chemicals"],
+            }),
+          ]}
+        />
+        <CategoryHub categoryKey={catKey} />
+      </>
+    );
+  }
+
   const product = getProduct(slug);
   if (!product) notFound();
 
@@ -69,6 +164,7 @@ export default async function ProductPage(props: {
   const related = productsByCategory(product.category)
     .filter((p) => p.slug !== product.slug)
     .slice(0, 3);
+  const faqs = productFaqs(product);
 
   return (
     <>
@@ -80,13 +176,16 @@ export default async function ProductPage(props: {
             description: product.description,
             sku: product.sku,
             category: category.label,
+            image: CATEGORY_HERO[product.category],
+            properties: product.specs,
           }),
+          faqJsonLd(faqs),
           breadcrumbJsonLd([
-            { name: "Catalogue", url: `${SITE_URL}/catalogue` },
-            { name: category.short, url: `${SITE_URL}/catalogue#range` },
+            { name: "Products", url: `${SITE_URL}/products` },
+            { name: category.short, url: `${SITE_URL}/products#range` },
             {
               name: product.name,
-              url: `${SITE_URL}/catalogue/${product.slug}`,
+              url: `${SITE_URL}/products/${product.slug}`,
             },
           ]),
         ]}
@@ -98,7 +197,7 @@ export default async function ProductPage(props: {
         minHeight="min(54vh, 460px)"
         titleClassName="text-[clamp(32px,4.4vw,62px)]"
         image={CATEGORY_HERO[product.category]}
-        imageAlt=""
+        imageAlt={`${product.name} — ${category.label.toLowerCase()} from Power Clean`}
       />
 
       {/* BREADCRUMB */}
@@ -106,7 +205,7 @@ export default async function ProductPage(props: {
         aria-label="Breadcrumb"
         className="mx-auto max-w-[1320px] px-5 pt-6 text-[12.5px] text-muted"
       >
-        <TransitionLink href="/catalogue" className="hover:text-green">
+        <TransitionLink href="/products" className="hover:text-green">
           Catalogue
         </TransitionLink>
         <span className="mx-2 text-line-3">/</span>
@@ -254,6 +353,56 @@ export default async function ProductPage(props: {
       <RippleDivider />
 
       {/* RELATED */}
+      {/* PRODUCT FAQ — derived from this product's own specification, so the
+          answers differ per grade rather than repeating one template */}
+      <SectionPanel tone="tint" outerClassName="p-3">
+        <SectionHeading
+          eyebrow="PRODUCT FAQ"
+          title={`${product.name} — Common Questions`}
+          className="mb-9 max-w-[680px]"
+        />
+        <div className="mx-auto max-w-[880px]">
+          <FaqList faqs={faqs} />
+        </div>
+
+        {/* TDS / brochure request. There is no PDF library yet, so this asks
+            for the sheet by email with the product prefilled rather than
+            linking a file that does not exist. Swap in a real download once
+            Roovel supplies the TDS set. */}
+        <Reveal dir="up" className="mx-auto mt-10 max-w-[880px]">
+          <div className="flex flex-wrap items-center justify-between gap-5 rounded-card-lg bg-white p-7 ring-1 ring-inset ring-line-2">
+            <div className="max-w-[520px]">
+              <h3 className="mb-1.5 text-[16px] font-semibold text-navy">
+                Technical data sheet &amp; SDS
+              </h3>
+              <p className="text-[13.5px] leading-[1.65] text-muted-3">
+                Every product ships with a safety data sheet and dosing
+                guidance. Ask for the {product.name} documents and we will send
+                them across.
+              </p>
+            </div>
+            <a
+              href={`mailto:${siteConfig.contact.email}?subject=${encodeURIComponent(
+                `TDS & SDS request — ${product.name}${product.sku ? ` (SKU ${product.sku})` : ""}`
+              )}&body=${encodeURIComponent(
+                `Please send the technical data sheet and safety data sheet for ${product.name}.\n\nCompany:\nApplication:\nPhone:\n`
+              )}`}
+              className="rounded-full bg-green-cta px-6 py-3 text-[13.5px] font-semibold text-white no-underline transition-colors hover:bg-green-cta-dark"
+            >
+              Request the TDS
+            </a>
+          </div>
+        </Reveal>
+
+        <div className="mx-auto mt-6 max-w-[880px]">
+          <MicroForm
+            context={`Product: ${product.name}`}
+            heading={`Is ${product.name} right for your parts?`}
+            blurb="Tell us the metal, the soil and the wash equipment — we will confirm the grade and the dilution, or point you at a better fit."
+          />
+        </div>
+      </SectionPanel>
+
       {related.length > 0 && (
         <div className="mx-auto max-w-[1320px] px-5 pb-5 pt-[clamp(30px,5vw,56px)]">
           <Reveal
@@ -267,17 +416,17 @@ export default async function ProductPage(props: {
               </h2>
             </div>
             <TransitionLink
-              href="/catalogue"
+              href="/products"
               className="group rounded-full bg-green-tint px-[22px] py-[11px] text-[13.5px] font-semibold text-navy no-underline transition-colors hover:text-green"
             >
-              View Full Catalogue <Arrow />
+              View All Products <Arrow />
             </TransitionLink>
           </Reveal>
           <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-5">
             {related.map((r, i) => (
               <Reveal key={r.slug} dir="up" delay={i * 120}>
                 <TransitionLink
-                  href={`/catalogue/${r.slug}`}
+                  href={`/products/${r.slug}`}
                   className="group relative flex h-full flex-col overflow-hidden rounded-card border border-line-2 bg-white p-6 no-underline transition-[transform,box-shadow] duration-[350ms] hover:-translate-y-1.5 hover:shadow-card-lg"
                 >
                   <span
