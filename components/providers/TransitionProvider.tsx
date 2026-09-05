@@ -62,14 +62,34 @@ export function TransitionProvider({ children }: { children: ReactNode }) {
       lenis?.current?.scrollTo(0, { immediate: true });
       window.scrollTo(0, 0);
       setPhase("revealing");
-      ScrollTrigger.refresh();
+      // Refresh after the new page has painted. Measuring synchronously here
+      // reads the outgoing DOM, which left every scroll-driven effect on the
+      // incoming page working from stale bounds.
+      requestAnimationFrame(() => requestAnimationFrame(() => ScrollTrigger.refresh()));
     }
   }, [pathname, phase, lenis]);
 
-  // Safety: never leave the screen covered if navigation stalls.
+  // Safety net for BOTH non-idle phases.
+  //
+  // `navigateTo` refuses to start while `phase !== "idle"`, and each phase
+  // leaves it only from an `onAnimationComplete`. A backgrounded tab throttles
+  // rAF, so that callback can simply never arrive — which stranded the overlay
+  // on screen and killed every link on the page. Each phase now has a deadline
+  // comfortably past its own animation (0.5s cover, 0.8s reveal).
+  //
+  // The covering deadline also catches a push that resolves to the pathname we
+  // started from (an internal link that hits a redirect), where the reveal
+  // above can never fire.
   useEffect(() => {
-    if (phase !== "covering") return;
-    const t = setTimeout(() => setPhase("idle"), 4000);
+    if (phase === "idle") return;
+    const t = setTimeout(
+      () => {
+        setPhase("idle");
+        targetRef.current = null;
+        coveredPathRef.current = null;
+      },
+      phase === "covering" ? 4000 : 2000
+    );
     return () => clearTimeout(t);
   }, [phase]);
 

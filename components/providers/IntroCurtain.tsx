@@ -5,7 +5,7 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react";
 import { EASE } from "@/lib/motion";
 import { usePrefersReducedMotion } from "@/hooks/useMediaQuery";
-import { useLenis } from "./LenisProvider";
+import { useScrollLock } from "./LenisProvider";
 
 type Stage = "counting" | "rings" | "exit" | "done";
 
@@ -17,7 +17,6 @@ type Stage = "counting" | "rings" | "exit" | "done";
  */
 export function IntroCurtain() {
   const reduced = usePrefersReducedMotion();
-  const lenis = useLenis();
   const [stage, setStage] = useState<Stage | null>(null);
   const [count, setCount] = useState(0);
   const started = useRef(false);
@@ -39,16 +38,10 @@ export function IntroCurtain() {
     setStage("counting");
   }, []);
 
-  // lock scroll while the curtain is up
-  useEffect(() => {
-    if (stage === null || stage === "done") return;
-    lenis?.current?.stop();
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = "";
-      lenis?.current?.start();
-    };
-  }, [stage === null || stage === "done", lenis]); // eslint-disable-line react-hooks/exhaustive-deps
+  const running = stage !== null && stage !== "done" && !reduced;
+
+  // lock the page while the curtain is up (shared, ref-counted)
+  useScrollLock(running);
 
   // 000 → 100 counter (1050ms, ease-out cubic)
   useEffect(() => {
@@ -72,6 +65,19 @@ export function IntroCurtain() {
     const t = setTimeout(() => setStage("exit"), 620);
     return () => clearTimeout(t);
   }, [stage]);
+
+  // Hard deadline on the whole sequence.
+  //
+  // The counter and the wipe are both rAF-driven, and rAF stops in a
+  // backgrounded tab. Anyone who opened the site and glanced at another tab
+  // during the ~2.4s intro could come back to a curtain that never finished —
+  // holding the scroll lock, with no way out but a reload. setTimeout keeps
+  // running when rAF does not, so this always fires.
+  useEffect(() => {
+    if (!running) return;
+    const t = setTimeout(() => setStage("done"), 4000);
+    return () => clearTimeout(t);
+  }, [running]);
 
   if (stage === null || stage === "done" || reduced) return null;
 

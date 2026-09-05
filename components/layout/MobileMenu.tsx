@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { EASE } from "@/lib/motion";
 import { usePrefersReducedMotion } from "@/hooks/useMediaQuery";
-import { useLenis } from "@/components/providers/LenisProvider";
+import { useScrollLock } from "@/components/providers/LenisProvider";
 import { siteConfig } from "@/lib/site-config";
 import { Arrow } from "@/components/ui/Arrow";
 import { TransitionLink } from "./TransitionLink";
@@ -43,7 +43,6 @@ const CONTACT_LINKS = [
 
 export function MobileMenu({ open, onClose, links, active }: MobileMenuProps) {
   const reduced = usePrefersReducedMotion();
-  const lenis = useLenis();
 
   // Esc closes the menu
   useEffect(() => {
@@ -55,17 +54,8 @@ export function MobileMenu({ open, onClose, links, active }: MobileMenuProps) {
     return () => removeEventListener("keydown", onKey);
   }, [open, onClose]);
 
-  // lock scroll behind the panel
-  useEffect(() => {
-    if (!open) return;
-    lenis?.current?.stop();
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = prev;
-      lenis?.current?.start();
-    };
-  }, [open, lenis]);
+  // lock the page behind the panel (shared, ref-counted)
+  useScrollLock(open);
 
   const panel = reduced
     ? { initial: { opacity: 0 }, animate: { opacity: 1 }, exit: { opacity: 0 } }
@@ -94,7 +84,12 @@ export function MobileMenu({ open, onClose, links, active }: MobileMenuProps) {
         <motion.div
           key="mobile-menu"
           id="mobile-menu"
-          className="fixed inset-0 z-[995] flex flex-col overflow-y-auto bg-[linear-gradient(160deg,#23273f,#292F6E_60%,#1d1f23)] px-7 pb-10 pt-28 nav:hidden"
+          /* Lenis preventDefault()s every wheel/touchmove while stopped, which
+             froze this panel too — it is taller than the viewport and has to
+             scroll. `data-lenis-prevent` makes Lenis skip gestures that start
+             inside it; `overscroll-contain` stops the page chaining behind. */
+          data-lenis-prevent
+          className="fixed inset-0 z-[995] flex flex-col overflow-y-auto overscroll-contain bg-[linear-gradient(160deg,#23273f,#292F6E_60%,#1d1f23)] px-7 pb-10 pt-28 nav:hidden"
           {...panel}
           transition={{ duration: 0.55, ease: EASE }}
         >
