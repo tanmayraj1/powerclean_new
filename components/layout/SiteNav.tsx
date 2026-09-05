@@ -33,7 +33,21 @@ const LINKS: NavLink[] = [
       { label: "Solvent cleaners", href: "/products/solvent", hint: "TCE replacements" },
     ],
   },
-  { key: "industries", label: "Industries", href: "/industries" },
+  {
+    key: "industries",
+    label: "Industries",
+    href: "/industries",
+    menu: [
+      { label: "All industries", href: "/industries", hint: "11 manufacturing sectors" },
+      { label: "Case studies", href: "/resources/case-studies", hint: "Measured results from plant trials" },
+      { label: "Automotive", href: "/industries/automotive", hint: "Engine, brake, piston and axle cleaning" },
+      { label: "Bearing manufacturing", href: "/industries/bearing-manufacturing", hint: "Millipore-level precision cleaning" },
+      { label: "Foundry & die casting", href: "/industries/foundry-die-casting", hint: "ADC10 / ADC12 and white rust" },
+      { label: "Aerospace & defence", href: "/industries/aerospace-defence", hint: "Residue-critical component cleaning" },
+      { label: "Electrical & electronics", href: "/industries/electrical-electronics", hint: "Copper, brass and defluxing" },
+      { label: "Plant & facility care", href: "/industries/plant-facility", hint: "Floors, coils and cooling towers" },
+    ],
+  },
   { key: "blog", label: "Blog", href: "/blog" },
   { key: "resources", label: "Resources", href: "/resources" },
 ];
