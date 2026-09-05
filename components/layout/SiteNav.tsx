@@ -130,7 +130,7 @@ export function SiteNav() {
           <nav className="hidden flex-1 items-center gap-0.5 nav:flex">
             {LINKS.map((l) => {
               const isActive = active === l.key;
-              const cls = `relative rounded-full px-4 py-[9px] text-sm no-underline transition-[background,color] duration-[250ms] ${
+              const cls = `relative rounded-full px-3 py-2 text-[13.5px] no-underline transition-[background,color] duration-[250ms] ${
                 solid
                   ? isActive
                     ? "bg-green-tint font-semibold text-navy"
@@ -295,7 +295,7 @@ function NavMenu({
         aria-current={isActive ? "page" : undefined}
         aria-expanded={open}
         aria-controls={menuId}
-        className={`${triggerClass} inline-flex items-center gap-1.5`}
+        className={`${triggerClass} inline-flex items-center gap-1`}
       >
         {label}
         <svg
