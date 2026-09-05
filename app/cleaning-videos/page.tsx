@@ -163,7 +163,7 @@ export default function CleaningVideosPage() {
       <CtaBanner
         eyebrow="SEE IT ON YOUR OWN PARTS"
         heading="Send Us a Sample Component"
-        body="Our lab tests it against your soils and substrates, then runs a supervised trial on your line — from a single 35 L pail."
+        body="Our lab tests it against your soils and substrates, then runs a supervised trial on your line — from a single 20 L pail."
         ctaLabel="Request a Free Consultation"
         ctaHref="/get-consultation"
         image="/photos/qc-lab.webp"

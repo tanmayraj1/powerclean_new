@@ -32,10 +32,10 @@ const CAPABILITIES = [
   },
   {
     title: "Supply & Support",
-    body: "Nationwide supply from Bangalore with distributors in major metros, packing from 35 L to 1000 L, and every enquiry answered within 24 hours.",
+    body: "Nationwide supply from Bangalore with distributors in major metros, packing from 20 L to 1000 L, and every enquiry answered within 24 hours.",
     photo: "/photos/dispatch-bay.webp",
     alt: "Palletised stock in the dispatch warehouse",
-    points: ["35 L – 1000 L packing", "Distributors in metros", "24-hour response"],
+    points: ["20 L – 1000 L packing", "Distributors in metros", "24-hour response"],
   },
 ];
 

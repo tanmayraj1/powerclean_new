@@ -1,6 +1,7 @@
 "use server";
 
 import { siteConfig } from "@/lib/site-config";
+import { questionnaireFields } from "@/lib/questionnaire";
 
 export type InquiryState = {
   ok: boolean;
@@ -23,6 +24,21 @@ const LABELS: Record<string, string> = {
 };
 
 /**
+ * The questionnaire posts 25 fields the short forms never send. Rather than
+ * maintain a second label map, take the questions themselves as the labels so
+ * the email reads as a filled-in questionnaire.
+ */
+const QUESTION_LABELS: Record<string, string> = Object.fromEntries(
+  questionnaireFields.map((f) => [f.name, f.label])
+);
+
+/** field order in the email: questionnaire order first, then the short-form keys */
+const FIELD_ORDER = [
+  ...Object.keys(LABELS),
+  ...questionnaireFields.map((f) => f.name),
+];
+
+/**
  * The site has no CRM or transactional-email service behind it, so rather
  * than silently dropping enquiries this composes the submission into a real
  * message addressed to sales@roovel.com and hands the visitor three live
@@ -36,6 +52,12 @@ export async function submitInquiry(
   // Either route back is enough. The full forms ask for an email; the inline
   // micro-form asks for a phone, which is often what an Indian plant buyer
   // would rather give — requiring both would lose leads for no reason.
+  // Honeypot. A hidden field only a bot would complete — answer as if the
+  // submission succeeded rather than telling the bot it was caught.
+  if (String(formData.get("website") ?? "").trim()) {
+    return { ok: true, message: "Thanks — your enquiry has been noted." };
+  }
+
   const email = String(formData.get("email") ?? "").trim();
   const phone = String(formData.get("phone") ?? "").trim();
 
@@ -50,9 +72,14 @@ export async function submitInquiry(
   }
 
   const lines: string[] = [];
-  for (const [key, label] of Object.entries(LABELS)) {
+  const seen = new Set<string>();
+  for (const key of FIELD_ORDER) {
+    if (seen.has(key)) continue;
+    seen.add(key);
     const value = String(formData.get(key) ?? "").trim();
-    if (value) lines.push(`${label}: ${value}`);
+    if (!value) continue;
+    const label = LABELS[key] ?? QUESTION_LABELS[key] ?? key;
+    lines.push(`${label}: ${value}`);
   }
   const summary = lines.join("\n");
   const context = String(formData.get("context") ?? "").trim();

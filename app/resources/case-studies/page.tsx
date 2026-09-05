@@ -190,6 +190,6 @@ const TRIAL_STEPS = [
   },
   {
     name: "Run it on your own line",
-    text: "Supervised, from a 35 L pail, on your equipment. You move forward only if the numbers clear the bar.",
+    text: "Supervised, from a 20 L pail, on your equipment. You move forward only if the numbers clear the bar.",
   },
 ];

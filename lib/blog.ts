@@ -75,7 +75,7 @@ export const blogPosts: BlogPost[] = [
       { label: "Optimum wash temperature", value: "55–65 °C" },
       { label: "TCE comparison", value: "90–100 °C required" },
       { label: "Rust protection after wash", value: "7–15 days" },
-      { label: "Trial packing", value: "35 L pail" },
+      { label: "Trial packing", value: "20 L pail" },
     ],
     blocks: [
       {
@@ -174,7 +174,7 @@ export const blogPosts: BlogPost[] = [
       { kind: "h2", text: "The economics buyers miss" },
       {
         kind: "p",
-        text: "Concentrates are bought by the litre and consumed by the dilution. One 35-litre pail of POWER CLEAN XL at 1:100 makes up to 3,500 litres of working bath. Judge a quotation on cost per litre of made-up bath, then on how long that bath survives before it is dumped.",
+        text: "Concentrates are bought by the litre and consumed by the dilution. One 20-litre pail of POWER CLEAN XL at 1:100 makes up to 3,500 litres of working bath. Judge a quotation on cost per litre of made-up bath, then on how long that bath survives before it is dumped.",
       },
       {
         kind: "list",
@@ -1870,7 +1870,7 @@ export const blogPosts: BlogPost[] = [
       { label: "Working strength", value: "1–5% (1:100 to 5:100)" },
       { label: "Wash temperature", value: "55–65 °C (TCE needs 90–100 °C)" },
       { label: "Biggest hidden cost", value: "Drag-out and bath changes" },
-      { label: "Trial packing", value: "35 L pail" },
+      { label: "Trial packing", value: "20 L pail" },
     ],
     blocks: [
       {
@@ -1943,7 +1943,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         kind: "p",
-        text: "That is why the process here starts with a sample part and a description of your line, and ends with a supervised trial from a 35 litre pail. You get a dilution that has been proved on your own components, and a consumption figure you can actually budget against.",
+        text: "That is why the process here starts with a sample part and a description of your line, and ends with a supervised trial from a 20 litre pail. You get a dilution that has been proved on your own components, and a consumption figure you can actually budget against.",
       },
       {
         kind: "cta",

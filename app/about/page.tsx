@@ -176,9 +176,10 @@ export default function AboutPage() {
           <Reveal dir="left">
             <Eyebrow label="OUR STORY" className="mb-3.5" />
             <p className="mb-[22px] text-[clamp(19px,2vw,25px)] font-medium leading-[1.5] text-ink [text-wrap:pretty]">
-              For over 25 years, Power Clean has helped Indian plants achieve
-              precision cleaning — with technical know-how originally sourced
-              from the USA and chemistry engineered in-house.
+              Designed in USA, developed in India. For over 25 years Power
+              Clean has helped Indian plants achieve precision cleaning — on
+              technical know-how originally sourced from the USA, with the
+              chemistry engineered in-house here.
             </p>
             <p className="mb-7 text-[14.5px] leading-[1.7] text-muted-3">
               We don&apos;t just sell a chemical. Roovel Solutions engineers the

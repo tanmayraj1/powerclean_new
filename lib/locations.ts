@@ -70,7 +70,7 @@ export const locationPages: LocationPage[] = [
       { name: "Electrical & Electronics", href: "/industries/electrical-electronics" },
     ],
     supply:
-      "Supplied directly from the Mahadevapura plant, in packs from 35 L pails to 1000 L containers.",
+      "Supplied directly from the Mahadevapura plant, in packs from 20 L pails to 1000 L containers.",
     faqs: [
       {
         q: "Where are Power Clean cleaning chemicals manufactured in Bangalore?",
@@ -82,7 +82,7 @@ export const locationPages: LocationPage[] = [
       },
       {
         q: "What is the minimum order quantity?",
-        a: "Trials normally start with a single 35 L pail. Bulk supply goes up to 1000 L containers once the process is proven.",
+        a: "Trials normally start with a single 20 L pail. Bulk supply goes up to 1000 L containers once the process is proven.",
       },
     ],
     keywords: [
@@ -124,11 +124,11 @@ export const locationPages: LocationPage[] = [
       { name: "Railways & Fleet", href: "/industries/railways-fleet" },
     ],
     supply:
-      "Roovel Solutions is registered in Chennai; product is manufactured at the Bangalore plant and shipped to Tamil Nadu, in packs from 35 L to 1000 L.",
+      "Roovel Solutions is registered in Chennai; product is manufactured at the Bangalore plant and shipped to Tamil Nadu, in packs from 20 L to 1000 L.",
     faqs: [
       {
         q: "Does Power Clean supply industrial cleaning chemicals in Chennai?",
-        a: "Yes. Roovel Solutions Pvt. Ltd. is registered in Chennai and supplies the Ambattur, Sriperumbudur, Oragadam and Irungattukottai belts. Manufacturing is at the Bangalore plant and product ships to Tamil Nadu in packs from 35 L to 1000 L.",
+        a: "Yes. Roovel Solutions Pvt. Ltd. is registered in Chennai and supplies the Ambattur, Sriperumbudur, Oragadam and Irungattukottai belts. Manufacturing is at the Bangalore plant and product ships to Tamil Nadu in packs from 20 L to 1000 L.",
       },
       {
         q: "What replaces TCE on a Chennai precision cleaning line?",
@@ -173,11 +173,11 @@ export const locationPages: LocationPage[] = [
       { name: "General Engineering", href: "/industries/general-engineering" },
     ],
     supply:
-      "Supplied from the Bangalore plant, approximately 40 km away — short lead times on 35 L to 1000 L packs.",
+      "Supplied from the Bangalore plant, approximately 40 km away — short lead times on 20 L to 1000 L packs.",
     faqs: [
       {
         q: "Do you supply cleaning chemicals to Hosur SIPCOT?",
-        a: "Yes. Hosur is about 40 km from the Bangalore manufacturing plant, so SIPCOT Phase I and II and the Bagalur Road belt are supplied directly with short lead times, in packs from 35 L pails to 1000 L containers.",
+        a: "Yes. Hosur is about 40 km from the Bangalore manufacturing plant, so SIPCOT Phase I and II and the Bagalur Road belt are supplied directly with short lead times, in packs from 20 L pails to 1000 L containers.",
       },
       {
         q: "Which cleaner suits two-wheeler component manufacturing?",
@@ -219,7 +219,7 @@ export const locationPages: LocationPage[] = [
       { name: "Electrical & Electronics", href: "/industries/electrical-electronics" },
     ],
     supply:
-      "Supplied from the Bangalore plant to Coimbatore and the surrounding foundry belt, in packs from 35 L to 1000 L.",
+      "Supplied from the Bangalore plant to Coimbatore and the surrounding foundry belt, in packs from 20 L to 1000 L.",
     faqs: [
       {
         q: "What cleaner is used for cast iron pump components?",
@@ -266,15 +266,15 @@ export const locationPages: LocationPage[] = [
       { name: "General Engineering", href: "/industries/general-engineering" },
     ],
     supply:
-      "Supplied from the Bangalore plant to Maharashtra, in packs from 35 L pails to 1000 L containers.",
+      "Supplied from the Bangalore plant to Maharashtra, in packs from 20 L pails to 1000 L containers.",
     faqs: [
       {
         q: "Do you supply industrial cleaning chemicals in Pune?",
-        a: "Yes. Power Clean supplies the Chakan, Ranjangaon, Pimpri-Chinchwad and Talegaon MIDC belts from its Bangalore manufacturing plant, in packs from 35 L to 1000 L. Maharashtra is one of the states covered in the standard service area.",
+        a: "Yes. Power Clean supplies the Chakan, Ranjangaon, Pimpri-Chinchwad and Talegaon MIDC belts from its Bangalore manufacturing plant, in packs from 20 L to 1000 L. Maharashtra is one of the states covered in the standard service area.",
       },
       {
         q: "How does a trial work if we are not near the plant?",
-        a: "Send a sample part with the soil description and wash equipment details. The Bangalore lab matches a formulation and returns a dosing and trial plan, then a 35 L pail is shipped for an on-line trial before any bulk commitment.",
+        a: "Send a sample part with the soil description and wash equipment details. The Bangalore lab matches a formulation and returns a dosing and trial plan, then a 20 L pail is shipped for an on-line trial before any bulk commitment.",
       },
     ],
     keywords: [
@@ -313,7 +313,7 @@ export const locationPages: LocationPage[] = [
       { name: "Plant & Facility Care", href: "/industries/plant-facility" },
     ],
     supply:
-      "Supplied from the Bangalore plant to Telangana, in packs from 35 L to 1000 L.",
+      "Supplied from the Bangalore plant to Telangana, in packs from 20 L to 1000 L.",
     faqs: [
       {
         q: "What cleaning chemical suits aerospace components?",
@@ -357,11 +357,11 @@ export const locationPages: LocationPage[] = [
       { name: "Electrical & Electronics", href: "/industries/electrical-electronics" },
     ],
     supply:
-      "Supplied from the Bangalore plant, roughly 145 km away, in packs from 35 L to 1000 L.",
+      "Supplied from the Bangalore plant, roughly 145 km away, in packs from 20 L to 1000 L.",
     faqs: [
       {
         q: "Do you deliver cleaning chemicals to Mysuru?",
-        a: "Yes. Mysuru is about 145 km from the Bangalore manufacturing plant and the Hebbal, Belagola, Hootagalli and Nanjangud industrial areas are supplied directly, in packs from 35 L pails to 1000 L containers.",
+        a: "Yes. Mysuru is about 145 km from the Bangalore manufacturing plant and the Hebbal, Belagola, Hootagalli and Nanjangud industrial areas are supplied directly, in packs from 20 L pails to 1000 L containers.",
       },
       {
         q: "How long are parts protected from rust after washing?",
@@ -401,7 +401,7 @@ export const locationPages: LocationPage[] = [
       { name: "Plant & Facility Care", href: "/industries/plant-facility" },
     ],
     supply:
-      "Supplied from the Bangalore plant to north Karnataka, in packs from 35 L to 1000 L.",
+      "Supplied from the Bangalore plant to north Karnataka, in packs from 20 L to 1000 L.",
     faqs: [
       {
         q: "What removes moulding sand and casting soil?",
@@ -447,11 +447,11 @@ export const locationPages: LocationPage[] = [
       { name: "Railways & Fleet", href: "/industries/railways-fleet" },
     ],
     supply:
-      "Supplied from the Bangalore plant to Gujarat, in packs from 35 L to 1000 L.",
+      "Supplied from the Bangalore plant to Gujarat, in packs from 20 L to 1000 L.",
     faqs: [
       {
         q: "Do you supply industrial cleaning chemicals in Gujarat?",
-        a: "Yes. Gujarat is within the standard service area. Product is manufactured at the Bangalore plant and shipped to the Vatva, Naroda, Odhav, Changodar and Sanand belts in packs from 35 L pails to 1000 L containers.",
+        a: "Yes. Gujarat is within the standard service area. Product is manufactured at the Bangalore plant and shipped to the Vatva, Naroda, Odhav, Changodar and Sanand belts in packs from 20 L pails to 1000 L containers.",
       },
       {
         q: "What is used for cooling tower scale in a process plant?",
@@ -492,7 +492,7 @@ export const locationPages: LocationPage[] = [
       { name: "Automotive", href: "/industries/automotive" },
     ],
     supply:
-      "Supplied from the Bangalore plant to Saurashtra, in packs from 35 L to 1000 L.",
+      "Supplied from the Bangalore plant to Saurashtra, in packs from 20 L to 1000 L.",
     faqs: [
       {
         q: "Which cleaner works on cast iron engine components?",

@@ -13,7 +13,7 @@ import { TransitionLink } from "@/components/layout/TransitionLink";
 
 const PROOF_CHIPS = [
   "ISO 9001 Certified",
-  "Know-how from the USA",
+  "Designed in USA · Developed in India",
   "Replacing TCE since 2000",
   "25+ years of precision cleaning",
 ];
@@ -54,9 +54,9 @@ export function WhyPowerClean() {
             POWER CLEAN aqueous cleaners use a unique active-colloid chemistry
             that replaces dangerous petroleum distillates, hazardous chemicals
             and solvents. Every formulation is biodegradable, safe for people
-            and the environment, and manufactured in India by Roovel Solutions
-            Pvt. Ltd. — an ISO 9001 certified company — with technical
-            know-how from the USA.
+            and the environment. Designed in USA, developed in India —
+            manufactured by Roovel Solutions Pvt. Ltd., an ISO 9001 certified
+            company, on technical know-how originally sourced from the USA.
           </p>
           <p className="text-[14.5px] leading-[1.75] text-muted-3">
             Unlike mineral spirits, high-alkaline powders and other hazardous

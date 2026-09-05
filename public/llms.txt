@@ -24,14 +24,16 @@ cleaning.
 - Product range: 41 products across 4 families and 12 series
 - Optimum aqueous wash temperature: 55-65 C (TCE requires 90-100 C)
 - Typical dilution: 1:100 to 5:100 depending on grade and soil
-- Packing: 35 L, 50 L, 200 L and 1000 L, custom packing available
+- Packing: 20 L, 50 L, 200 L and 1000 L, custom packing available
 - Post-wash rust protection: approximately 7-15 days
 - Properties: biodegradable, non-toxic, non-corrosive, non-flammable, zero VOC
 
 ## Canonical pages
 
 - /: Overview of Power Clean industrial cleaning solutions
-- /products: All 41 products with SKUs, specifications and a selection matrix
+- /products: All 41 products with SKUs and specifications
+- /products/quick-view: Every product name, SKU code and description on one page
+- /products/selection-matrix: All products compared by metal, process window, application and rust protection
 - /products/aqueous, /products/cooling, /products/solvent, /products/rust-preventive: the four product families
 - /solutions: Cleaning methods and six featured products
 - /solutions/ultrasonic-cleaning, /solutions/spray-jet-cleaning, /solutions/replace-tce, /solutions/millipore-cleanliness: the four cleaning methods
@@ -44,6 +46,8 @@ cleaning.
 - /about: Company, capability and timeline
 - /contact: Enquiries and offices
 - /get-consultation: Free consultation and plant trial, and how one is run
+- /request-cleanup: Send components to the Bangalore lab for a free wash trial
+- /questionnaire: Structured questionnaire covering parts, soils, equipment and wash parameters
 - /clients: Manufacturers using Power Clean, and testimonials
 - /resources/case-studies: Measured results from plant trials
 - /cleaning-videos: 10 filmed cleaning trials on real client components

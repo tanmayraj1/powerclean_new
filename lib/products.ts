@@ -1109,11 +1109,14 @@ export function categoryBySlug(slug: string): CategoryKey | undefined {
  * Category hubs and product pages share the /products/[slug] segment, so a
  * collision would silently shadow one with the other. Fail the build instead.
  */
+/** static pages that live under /products and must never be shadowed */
+export const RESERVED_PRODUCT_SEGMENTS = ["quick-view", "selection-matrix"];
+
 const collisions = products
   .map((p) => p.slug)
-  .filter((s) => s in SLUG_TO_CATEGORY);
+  .filter((s) => s in SLUG_TO_CATEGORY || RESERVED_PRODUCT_SEGMENTS.includes(s));
 if (collisions.length) {
   throw new Error(
-    `Product slug collides with a category slug under /products: ${collisions.join(", ")}`
+    `Product slug collides with a category or reserved segment under /products: ${collisions.join(", ")}`
   );
 }

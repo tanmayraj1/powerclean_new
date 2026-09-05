@@ -9,7 +9,13 @@ import { siteConfig } from "@/lib/site-config";
 import { Arrow } from "@/components/ui/Arrow";
 import { TransitionLink } from "./TransitionLink";
 
-export type NavLink = { key: string; label: string; href: string };
+export type NavLink = {
+  key: string;
+  label: string;
+  href: string;
+  /** desktop shows these in a dropdown; on mobile they nest under the link */
+  menu?: { label: string; href: string; hint: string }[];
+};
 
 type MobileMenuProps = {
   open: boolean;
@@ -29,6 +35,12 @@ type MobileMenuProps = {
  * Motion: the panel wipes down via clip-path, links stagger in behind it, and
  * everything degrades to a plain fade under prefers-reduced-motion.
  */
+const CONTACT_LINKS = [
+  { label: "Questionnaire", href: "/questionnaire" },
+  { label: "Free consultation", href: "/get-consultation" },
+  { label: "Contact us", href: "/contact" },
+];
+
 export function MobileMenu({ open, onClose, links, active }: MobileMenuProps) {
   const reduced = usePrefersReducedMotion();
   const lenis = useLenis();
@@ -130,17 +142,43 @@ export function MobileMenu({ open, onClose, links, active }: MobileMenuProps) {
                     <Arrow />
                   </span>
                 </TransitionLink>
+                {l.menu && (
+                  <div className="flex flex-col border-b border-white/12">
+                    {l.menu.slice(1).map((m) => (
+                      <TransitionLink
+                        key={m.href}
+                        href={m.href}
+                        onClick={onClose}
+                        className="py-2.5 pl-4 text-[15px] font-medium text-white/70 no-underline transition-colors hover:text-white"
+                      >
+                        {m.label}
+                      </TransitionLink>
+                    ))}
+                  </div>
+                )}
               </motion.div>
             ))}
 
-            <motion.div variants={item} className="mt-8">
+            <motion.div variants={item} className="mt-8 flex flex-col gap-2.5">
               <TransitionLink
-                href="/contact"
+                href="/request-cleanup"
                 onClick={onClose}
                 className="block rounded-full bg-green-cta px-7 py-[15px] text-center text-[17px] font-semibold text-white no-underline shadow-cta"
               >
-                Get in Touch
+                Request a Cleanup
               </TransitionLink>
+              <div className="flex flex-wrap justify-center gap-x-5 gap-y-1.5 pt-1">
+                {CONTACT_LINKS.map((c) => (
+                  <TransitionLink
+                    key={c.href}
+                    href={c.href}
+                    onClick={onClose}
+                    className="text-[14px] font-medium text-white/70 no-underline transition-colors hover:text-white"
+                  >
+                    {c.label}
+                  </TransitionLink>
+                ))}
+              </div>
             </motion.div>
 
             <motion.div

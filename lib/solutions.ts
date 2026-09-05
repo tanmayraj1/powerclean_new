@@ -106,9 +106,9 @@ export const deploySteps = [
 ] as const;
 
 export const packagingRows = [
-  // REAL packing sizes: 35L, 50L, 200L, 1000L — custom packing available
+  // REAL packing sizes: 20L, 50L, 200L, 1000L — custom packing available
   {
-    size: "35 L",
+    size: "20 L",
     title: "Pail — trials & low-volume lines",
     body: "Ideal for first supervised trials and pilot programs",
     tag: "Best for trials",
@@ -172,15 +172,15 @@ export const solutions: Solution[] = [
       { label: "Base", value: "Water-based alkaline" },
       { label: "Dilution", value: "Up to 1:100" },
       { label: "Rust inhibited", value: "Yes" },
-      { label: "Packaging", value: "35L · 50L · 200L · 1000L" },
+      { label: "Packaging", value: "20L · 50L · 200L · 1000L" },
       { label: "Properties", value: "Biodegradable, Zero VOC" },
     ],
     dilution: {
       heading: "A Little Concentrate Goes a Long Way",
-      body: "Dilutable up to 1:100, one 35-litre pail of POWER CLEAN XL makes up to 3,500 litres of ready-to-use cleaning bath. Dosing pumps hold the ratio steady, so cost-per-part stays predictable.",
+      body: "Dilutable up to 1:100, one 20-litre pail of POWER CLEAN XL makes up to 3,500 litres of ready-to-use cleaning bath. Dosing pumps hold the ratio steady, so cost-per-part stays predictable.",
       stats: [
         { count: 100, prefix: "1:", caption: "maximum dilution ratio" },
-        { count: 3500, suffix: "L", caption: "bath from one 35L pail" },
+        { count: 3500, suffix: "L", caption: "bath from one 20L pail" },
         { count: 100, suffix: "%", caption: "water-based chemistry" },
       ],
       barsTitle: "Working bath composition",
@@ -237,15 +237,15 @@ export const solutions: Solution[] = [
       { label: "Metals", value: "Aluminium · Brass · Copper" },
       { label: "Dilution", value: "3:100" },
       { label: "pH", value: "Neutral" },
-      { label: "Packaging", value: "35L · 50L · 200L · 1000L" },
+      { label: "Packaging", value: "20L · 50L · 200L · 1000L" },
       { label: "Properties", value: "Rinse-free, prevents white rust" },
     ],
     dilution: {
       heading: "Gentle on Metal, Strong on Soils",
-      body: "At its 3:100 working dilution, one 35-litre pail of NF-14 makes over 1,150 litres of ready-to-use bath — rinse-free in most applications, so cycle time stays short.",
+      body: "At its 3:100 working dilution, one 20-litre pail of NF-14 makes over 1,150 litres of ready-to-use bath — rinse-free in most applications, so cycle time stays short.",
       stats: [
         { count: 3, suffix: ":100", caption: "working dilution" },
-        { count: 1150, suffix: "L", caption: "bath from one 35L pail" },
+        { count: 1150, suffix: "L", caption: "bath from one 20L pail" },
         { count: 7, caption: "neutral pH — safe on soft metals" },
       ],
       barsTitle: "Working bath composition",
@@ -301,15 +301,15 @@ export const solutions: Solution[] = [
       { label: "Base", value: "Water-based, no-foam" },
       { label: "Dilution", value: "Up to 1:100" },
       { label: "Rust preventive", value: "Built in" },
-      { label: "Packaging", value: "35L · 50L · 200L · 1000L" },
+      { label: "Packaging", value: "20L · 50L · 200L · 1000L" },
       { label: "Properties", value: "Non-flammable, dilutable & reusable" },
     ],
     dilution: {
       heading: "Zero Foam at Full Pressure",
-      body: "At up to 1:100 dilution, one 35-litre pail of LF makes up to 3,500 litres of working bath that stays foam-free even at high jet pressure — with rust protection included in the same stage.",
+      body: "At up to 1:100 dilution, one 20-litre pail of LF makes up to 3,500 litres of working bath that stays foam-free even at high jet pressure — with rust protection included in the same stage.",
       stats: [
         { count: 100, prefix: "1:", caption: "maximum dilution ratio" },
-        { count: 3500, suffix: "L", caption: "bath from one 35L pail" },
+        { count: 3500, suffix: "L", caption: "bath from one 20L pail" },
         { count: 0, caption: "foam — even at full jet pressure" },
       ],
       barsTitle: "Working bath composition",
@@ -365,15 +365,15 @@ export const solutions: Solution[] = [
       { label: "Metals", value: "Mild steel · Cast iron" },
       { label: "Dilution", value: "3:100" },
       { label: "Protection", value: "Multi-day rust protection" },
-      { label: "Packaging", value: "35L · 50L · 200L · 1000L" },
+      { label: "Packaging", value: "20L · 50L · 200L · 1000L" },
       { label: "Properties", value: "Non-corrosive, water-based" },
     ],
     dilution: {
       heading: "Clean and Protect in One Pass",
-      body: "At its 3:100 working dilution, one 35-litre pail of SP makes over 1,150 litres of bath — and every part leaves the wash with multi-day rust protection already on it.",
+      body: "At its 3:100 working dilution, one 20-litre pail of SP makes over 1,150 litres of bath — and every part leaves the wash with multi-day rust protection already on it.",
       stats: [
         { count: 3, suffix: ":100", caption: "working dilution" },
-        { count: 1150, suffix: "L", caption: "bath from one 35L pail" },
+        { count: 1150, suffix: "L", caption: "bath from one 20L pail" },
         { count: 100, suffix: "%", caption: "water-based chemistry" },
       ],
       barsTitle: "Working bath composition",
@@ -429,7 +429,7 @@ export const solutions: Solution[] = [
       { label: "Chemistry", value: "n-propyl bromide" },
       { label: "Replaces", value: "TCE · Perchloroethylene" },
       { label: "Flash point", value: "High" },
-      { label: "Packaging", value: "35L · 50L · 200L" },
+      { label: "Packaging", value: "20L · 50L · 200L" },
       { label: "Use", value: "As supplied — no dilution" },
     ],
     dilution: {
@@ -492,7 +492,7 @@ export const solutions: Solution[] = [
       { label: "Base", value: "Oil-based" },
       { label: "Protection", value: "3–6 months" },
       { label: "Touch-dry", value: "10–15 min" },
-      { label: "Packaging", value: "35L · 50L · 200L" },
+      { label: "Packaging", value: "20L · 50L · 200L" },
       { label: "Use", value: "As supplied — thin film" },
     ],
     dilution: {

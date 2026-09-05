@@ -42,7 +42,7 @@ const AT_A_GLANCE = [
   { label: "Working strength", value: "1–5% (1:100 to 5:100)" },
   { label: "Wash temperature", value: "55–65 °C" },
   { label: "Rust protection", value: "7–15 days indoors" },
-  { label: "Packing", value: "35 L to 1000 L" },
+  { label: "Packing", value: "20 L to 1000 L" },
   { label: "Quality system", value: "ISO 9001 certified" },
 ];
 
@@ -61,7 +61,7 @@ const TRIAL_STEPS = [
   },
   {
     name: "Run it on your own line",
-    text: "Supervised, from a single 35 L pail. Scale to bulk only once it is proved.",
+    text: "Supervised, from a single 20 L pail. Scale to bulk only once it is proved.",
   },
 ];
 

@@ -175,7 +175,7 @@ export const contactFaqs: Faq[] = [
   },
   {
     q: "Is there a minimum order quantity?",
-    a: "You can begin with a single 35L pail per product line — packing runs 35L, 50L, 200L and 1000L, with custom packing available. Trials and chemical samples are supplied free of charge for qualified applications.",
+    a: "You can begin with a single 20L pail per product line — packing runs 20L, 50L, 200L and 1000L, with custom packing available. Trials and chemical samples are supplied free of charge for qualified applications.",
     tag: "Supply & Logistics",
   },
   {

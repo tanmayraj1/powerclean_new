@@ -26,6 +26,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     page("/", 1, "weekly"),
     page("/products", 0.9, "weekly"),
+    page("/products/quick-view", 0.85, "monthly"),
+    page("/products/selection-matrix", 0.85, "monthly"),
     // the four family hubs — head terms in their own right
     ...Object.values(CATEGORY_SLUG).map((slug) =>
       page(`/products/${slug}`, 0.85, "monthly")
@@ -64,6 +66,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page("/cleaning-videos", 0.8, "monthly"),
     page("/resources/case-studies", 0.8, "monthly"),
     page("/get-consultation", 0.9, "monthly"),
+    page("/request-cleanup", 0.95, "monthly"),
+    page("/questionnaire", 0.85, "monthly"),
     page("/solutions", 0.9, "weekly"),
     ...methods.map((m) => ({
       ...page(`/solutions/${m.slug}`, 0.85, "monthly"),

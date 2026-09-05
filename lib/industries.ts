@@ -88,7 +88,7 @@ export const industryPages: IndustryPage[] = [
       { label: "Wash temperature", value: "55–65 °C" },
       { label: "Common equipment", value: "Spray tunnel, ultrasonic, dip tank" },
       { label: "Post-wash protection", value: "7–15 days indoors" },
-      { label: "Trial packing", value: "35 L pail" },
+      { label: "Trial packing", value: "20 L pail" },
     ],
     faqs: [
       {
@@ -499,7 +499,7 @@ export const industryPages: IndustryPage[] = [
       },
       {
         q: "What packing sizes are available for depot use?",
-        a: "Power Clean supplies from 35 L pails up to 1000 L containers, so a depot can trial in a pail and move to bulk once the process is proven.",
+        a: "Power Clean supplies from 20 L pails up to 1000 L containers, so a depot can trial in a pail and move to bulk once the process is proven.",
       },
     ],
     related: [
@@ -520,7 +520,7 @@ export const industryPages: IndustryPage[] = [
     title: "Industrial Cleaning Chemicals for General Engineering",
     metaTitle: "Machine Shop Cleaning Chemicals",
     metaDescription:
-      "Machine shop degreasing for cutting oil, coolant residue and grinding swarf — aqueous concentrates at 1–5% and 55–65 °C, in 35 L to 1000 L packs.",
+      "Machine shop degreasing for cutting oil, coolant residue and grinding swarf — aqueous concentrates at 1–5% and 55–65 °C, in 20 L to 1000 L packs.",
     answer:
       "General engineering cleaning covers cutting oil, coolant residue, drawing compound and grinding swarf on steel and cast iron. An alkaline aqueous concentrate at 2–4% and 55–65 °C handles most of it, with a low-foam grade where a spray washer is used and a neutral grade wherever aluminium or brass enters the basket.",
     intro:
@@ -567,7 +567,7 @@ export const industryPages: IndustryPage[] = [
       { label: "Wash temperature", value: "55–65 °C" },
       { label: "Equipment", value: "Soak, spray, ultrasonic" },
       { label: "Rust protection", value: "7–15 days indoors" },
-      { label: "Packing", value: "35 L to 1000 L" },
+      { label: "Packing", value: "20 L to 1000 L" },
     ],
     faqs: [
       {
@@ -725,7 +725,7 @@ export const industryPages: IndustryPage[] = [
       { label: "Wash temperature", value: "55–65 °C" },
       { label: "Final rinse", value: "DI, below 10 µS/cm" },
       { label: "Critical stage", value: "Spot-free drying before coating" },
-      { label: "Packing", value: "35 L to 1000 L" },
+      { label: "Packing", value: "20 L to 1000 L" },
     ],
     faqs: [
       {

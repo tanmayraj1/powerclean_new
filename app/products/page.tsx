@@ -10,11 +10,11 @@ import { Backdrop } from "@/components/ui/Backdrop";
 import { CatalogueGrid } from "@/components/sections/products/CatalogueGrid";
 import { RangeHierarchy } from "@/components/sections/products/RangeHierarchy";
 import { RangeMap } from "@/components/sections/products/RangeMap";
-import { SelectionMatrix } from "@/components/sections/products/SelectionMatrix";
 import { products } from "@/lib/products";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { TransitionLink } from "@/components/layout/TransitionLink";
 import { FaqList } from "@/components/ui/FaqList";
+import { Arrow } from "@/components/ui/Arrow";
 import { BROWSE_BY } from "@/lib/browse-by";
 import {
   SITE_URL,
@@ -63,7 +63,7 @@ const CATALOGUE_FAQS = [
   },
   {
     q: "What pack sizes are available?",
-    a: "35 L, 50 L, 200 L and 1000 L, with custom packing available. Trials normally start with a single 35 L pail once the lab has matched a formulation to your part and soil.",
+    a: "20 L, 50 L, 200 L and 1000 L, with custom packing available. Trials normally start with a single 20 L pail once the lab has matched a formulation to your part and soil.",
   },
   {
     q: "Do products come with a safety data sheet?",
@@ -76,6 +76,23 @@ const CATALOGUE_FAQS = [
   {
     q: "Can Power Clean replace trichloroethylene on our line?",
     a: "Yes, by one of two routes. An aqueous line — wash, rinse, dry — at 1–5% and 55–65 °C, which is cheaper to run and far simpler to comply with; or PC-S 342, a high-flash non-chlorinated solvent, where the existing equipment has to be kept.",
+  },
+];
+
+const COMPARE_ROUTES = [
+  {
+    eyebrow: "SPEC SHEET",
+    title: "Selection matrix",
+    body: "Every product on one sheet — metal compatibility, operating temperature, dilution, chemistry, foam, application method and rust protection, side by side. Work left to right, metal first.",
+    cta: "Open the selection matrix",
+    href: "/products/selection-matrix",
+  },
+  {
+    eyebrow: "PLAIN LIST",
+    title: "Product list — quick view",
+    body: "Name, SKU code and a one-line description for all 41 products, grouped by family and series. The fastest way to find a code you already half-remember.",
+    cta: "Open the quick view",
+    href: "/products/quick-view",
   },
 ];
 
@@ -135,7 +152,7 @@ export default function ProductsPage() {
           <p className="text-[14.5px] leading-[1.75] text-muted-3 [text-wrap:pretty]">
             Most aqueous grades work between 1% and 5% at 55–65&nbsp;°C, carry
             an in-built corrosion inhibitor giving 7–15 days of indoor rust
-            protection, and are supplied in 35&nbsp;L, 50&nbsp;L, 200&nbsp;L
+            protection, and are supplied in 20&nbsp;L, 50&nbsp;L, 200&nbsp;L
             and 1000&nbsp;L packs with dosing guidance and a safety data
             sheet. Every product below links to its own page with the full
             specification.
@@ -183,15 +200,38 @@ export default function ProductsPage() {
         </Suspense>
       </div>
 
-      {/* SELECTION MATRIX */}
+      {/* SELECTION MATRIX + QUICK VIEW — both now have their own pages, so
+          this is the signpost rather than the full table */}
       <SectionPanel outerClassName="p-3">
         <SectionHeading
-          eyebrow="SELECTION MATRIX"
+          eyebrow="TWO WAYS TO COMPARE"
           title="Pick by the Parameters"
-          lede="Every product on one spec sheet — metal compatibility, process window, application methods and corrosion protection, side by side. Pan the table on a phone."
+          lede="The full range, laid out two ways — as a spec sheet you can compare across, and as a plain list of every code and description."
           className="mb-9 max-w-[680px]"
         />
-        <SelectionMatrix />
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-5">
+          {COMPARE_ROUTES.map((c, i) => (
+            <Reveal key={c.href} dir="up" delay={i * 80}>
+              <TransitionLink
+                href={c.href}
+                className="group flex h-full flex-col rounded-card-lg bg-white p-8 no-underline ring-1 ring-inset ring-line-2 transition-[transform,box-shadow,ring-color] duration-[350ms] hover:-translate-y-1.5 hover:shadow-card-lg hover:ring-green/25"
+              >
+                <span className="mb-3 font-mono text-[10.5px] uppercase tracking-[0.12em] text-green-deep">
+                  {c.eyebrow}
+                </span>
+                <h3 className="mb-2.5 text-[clamp(18px,2vw,22px)] font-semibold leading-[1.28] text-navy">
+                  {c.title}
+                </h3>
+                <p className="mb-6 flex-1 text-[13.5px] leading-[1.68] text-muted-3">
+                  {c.body}
+                </p>
+                <span className="flex items-center gap-2 text-[13.5px] font-semibold text-navy transition-colors group-hover:text-green">
+                  {c.cta} <Arrow />
+                </span>
+              </TransitionLink>
+            </Reveal>
+          ))}
+        </div>
       </SectionPanel>
 
       <RippleDivider />

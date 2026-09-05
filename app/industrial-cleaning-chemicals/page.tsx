@@ -19,7 +19,7 @@ import { siteConfig } from "@/lib/site-config";
 export const metadata: Metadata = {
   title: "Cleaning Chemicals Supplier in India",
   description:
-    "Industrial cleaning chemicals made in Bangalore and supplied across Karnataka, Tamil Nadu, Maharashtra, Telangana and Gujarat in 35 L–1000 L packs.",
+    "Industrial cleaning chemicals made in Bangalore and supplied across Karnataka, Tamil Nadu, Maharashtra, Telangana and Gujarat in 20 L–1000 L packs.",
   keywords: [
     "industrial cleaning chemicals india",
     "industrial cleaning chemicals supplier",
@@ -85,7 +85,7 @@ export default function LocationsIndexPage() {
             Power Clean is manufactured by Roovel Solutions Pvt. Ltd. at its
             ISO 9001 certified plant in Bangalore, and supplied across
             Karnataka, Tamil Nadu, Maharashtra, Telangana and Gujarat in packs
-            from 35&nbsp;litre pails to 1000&nbsp;litre containers. Formulation,
+            from 20&nbsp;litre pails to 1000&nbsp;litre containers. Formulation,
             batch-wise quality control and production all sit on one site, so
             the chemistry that passes a trial is the chemistry that ships.
           </p>
@@ -178,7 +178,7 @@ export default function LocationsIndexPage() {
       <CtaBanner
         eyebrow="START HERE"
         heading="Trial It on Your Own Line"
-        body="Trials normally start with a single 35 L pail, after the lab has matched a formulation to your part and soil."
+        body="Trials normally start with a single 20 L pail, after the lab has matched a formulation to your part and soil."
         ctaLabel="Request a Trial"
         ctaHref="/contact"
         image="/photos/packaging.webp"

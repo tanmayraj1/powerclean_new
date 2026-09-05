@@ -216,7 +216,7 @@ export default async function LocationPage(props: {
         <SectionHeading
           eyebrow="THE RANGE"
           title={`What Ships to ${loc.city}`}
-          lede="Four product families, 41 products — supplied with dosing guidance and a safety data sheet, in packs from 35 L to 1000 L."
+          lede="Four product families, 41 products — supplied with dosing guidance and a safety data sheet, in packs from 20 L to 1000 L."
           className="mb-9 max-w-[660px]"
         />
         <div className="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-4">

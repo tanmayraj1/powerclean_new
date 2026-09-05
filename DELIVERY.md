@@ -98,7 +98,7 @@ Then, in order:
 
 ### What is already in place
 
-**157 indexable pages**, all internally linked (no orphans), all with a unique
+**161 indexable pages**, all internally linked (no orphans), all with a unique
 title and description inside Google's display budget.
 
 - **Structured data** (0 validation errors sitewide): Organization, WebSite with
@@ -155,6 +155,34 @@ inline micro-form (name, phone, application) on product, family, method,
 industry, city and video pages; a "Request a free sample" pill added to the
 existing floating dock rather than a second competing sticky bar; and a TDS/SDS
 request block on all 41 product pages.
+
+### Client-architecture additions (second pass)
+
+- **`/products/quick-view`** — the client's `products-list-all.aspx` rebuilt
+  from our own data: name, SKU code and description for all 41 products,
+  grouped by family and series.
+- **`/products/selection-matrix`** — "Pick by the Parameters" lifted onto its
+  own page. The products index now signposts both rather than carrying the
+  full table.
+- **`/request-cleanup`** — customers post components to the Bangalore lab for
+  a free wash trial. The home hero's primary button now reads *Request a
+  Cleanup* and points here.
+- **`/questionnaire`** — the client's `Questions2.aspx` rebuilt field-for-field
+  (25 questions) in four steps, posting to the same enquiry action. The
+  arithmetic captcha is replaced by a honeypot, and the enquiry action now
+  accepts an email **or** a phone number.
+- **Dropdown menus** on Products and Get in Touch, mirroring the client's own
+  Products menu. The trigger stays a real link, so clicking still navigates.
+- **Site-wide instant search** (`lib/search-index.ts`) built from the same data
+  the pages render — 164 entries covering products, SKU codes, families,
+  solutions, methods, industries, cities, glossary, articles and videos. Typing
+  `845` finds LF-45; `tce` finds the replacement guide; `sample` finds the
+  cleanup trial. No backend, no request per keystroke.
+- **Packaging is now 20 L** (was 35 L) everywhere — 57 replacements. The
+  product *PC Rust Preventive 35* and the 25–35 °C temperatures were left
+  alone.
+- **"Designed in USA, developed in India"** now appears wherever the USA/India
+  pairing already did (home proof chips, home Why block, About story).
 
 ### Two things still waiting on Roovel
 

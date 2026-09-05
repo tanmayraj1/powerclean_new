@@ -51,7 +51,7 @@ export function GET() {
     `- Products: ${products.length} across ${categories.length} families`,
     "- Aqueous wash temperature: 55–65 °C (TCE requires 90–100 °C)",
     "- Typical dilution: 1:100 to 5:100 (1–5%)",
-    "- Packing: 35 L, 50 L, 200 L, 1000 L; custom packing available",
+    "- Packing: 20 L, 50 L, 200 L, 1000 L; custom packing available",
     "- Post-wash rust protection: 7–15 days indoors",
     "- Properties: biodegradable, non-toxic, non-corrosive, non-flammable, zero VOC"
   );

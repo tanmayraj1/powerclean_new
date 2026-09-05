@@ -24,6 +24,8 @@ const LEARN_LINKS = [
   { label: "Cleaning videos", href: "/cleaning-videos" },
   { label: "Case studies", href: "/resources/case-studies" },
   { label: "Free consultation", href: "/get-consultation" },
+  { label: "Request a cleanup", href: "/request-cleanup" },
+  { label: "Chemical questionnaire", href: "/questionnaire" },
   { label: "Where we supply", href: "/industrial-cleaning-chemicals" },
   { label: "QR range map", href: "/range" },
 ];

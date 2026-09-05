@@ -52,7 +52,7 @@ const INCLUDED = [
   },
   {
     title: "A supervised trial",
-    body: "Run on your own line, from a single 35 L pail, with our engineer present. You move forward only if the numbers clear the bar.",
+    body: "Run on your own line, from a single 20 L pail, with our engineer present. You move forward only if the numbers clear the bar.",
   },
   {
     title: "Documentation from day one",
@@ -68,13 +68,13 @@ const STEPS = [
   { name: "Tell us about the line", text: "Component, soil, substrate, wash equipment and the cleanliness standard you have to meet." },
   { name: "Send a sample part", text: "Posted to the Bangalore lab, where substrate and soil compatibility are tested on your actual component." },
   { name: "Receive a matched plan", text: "A grade, a working strength, a temperature and an application method, with agreed pass/fail criteria." },
-  { name: "Run the trial", text: "Supervised, on your own equipment, from a 35 L pail — then scale to bulk packing only once it is proved." },
+  { name: "Run the trial", text: "Supervised, on your own equipment, from a 20 L pail — then scale to bulk packing only once it is proved." },
 ];
 
 const FAQS = [
   {
     q: "Is the consultation really free?",
-    a: "Yes. The lab assessment and the trial plan cost nothing, and trials normally start from a single 35 L pail. If your existing process is already the right one, we will tell you that rather than sell you a change.",
+    a: "Yes. The lab assessment and the trial plan cost nothing, and trials normally start from a single 20 L pail. If your existing process is already the right one, we will tell you that rather than sell you a change.",
   },
   {
     q: "What do I need to send?",
@@ -86,7 +86,7 @@ const FAQS = [
   },
   {
     q: "Do you supply outside Bangalore?",
-    a: "Yes — Karnataka, Tamil Nadu, Maharashtra, Telangana and Gujarat are covered from the Bangalore plant, in packs from 35 L to 1000 L. Remote trials work the same way: sample part in, matched plan and pail out.",
+    a: "Yes — Karnataka, Tamil Nadu, Maharashtra, Telangana and Gujarat are covered from the Bangalore plant, in packs from 20 L to 1000 L. Remote trials work the same way: sample part in, matched plan and pail out.",
   },
   {
     q: "What documentation comes with the product?",

@@ -1,27 +1,56 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useEffect, useId, useRef, useState } from "react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Magnetic } from "@/components/motion/Magnetic";
 import { TransitionLink } from "./TransitionLink";
 import { MobileMenu } from "./MobileMenu";
+import { SiteSearch } from "./SiteSearch";
 
-const LINKS = [
+type NavLink = {
+  key: string;
+  label: string;
+  href: string;
+  /** optional dropdown, mirroring the client's own Products menu */
+  menu?: { label: string; href: string; hint: string }[];
+};
+
+const LINKS: NavLink[] = [
   { key: "home", label: "Home", href: "/" },
   { key: "about", label: "About", href: "/about" },
   { key: "solutions", label: "Solutions", href: "/solutions" },
-  { key: "products", label: "Products", href: "/products" },
+  {
+    key: "products",
+    label: "Products",
+    href: "/products",
+    menu: [
+      { label: "All products", href: "/products", hint: "The full 41-product range" },
+      { label: "Product list — quick view", href: "/products/quick-view", hint: "Name, SKU and description on one page" },
+      { label: "Selection matrix", href: "/products/selection-matrix", hint: "Pick by metal, process and protection" },
+      { label: "Water-based cleaners", href: "/products/aqueous", hint: "30 aqueous degreasers" },
+      { label: "Rust preventives & removers", href: "/products/rust-preventive", hint: "Protection and de-rusting" },
+      { label: "Cooling tower chemicals", href: "/products/cooling", hint: "Descalers and biocides" },
+      { label: "Solvent cleaners", href: "/products/solvent", hint: "TCE replacements" },
+    ],
+  },
   { key: "industries", label: "Industries", href: "/industries" },
   { key: "blog", label: "Blog", href: "/blog" },
   { key: "resources", label: "Resources", href: "/resources" },
+];
+
+/** the "Get in Touch" CTA opens the same way the Products menu does */
+const CONTACT_MENU = [
+  { label: "Request a Cleanup", href: "/request-cleanup", hint: "Send parts for a free wash trial" },
+  { label: "Chemical questionnaire", href: "/questionnaire", hint: "Tell us your parts, soils and equipment" },
+  { label: "Free consultation", href: "/get-consultation", hint: "Matched grade, dilution and trial plan" },
+  { label: "Contact us", href: "/contact", hint: "Offices, phone and email" },
 ];
 
 function activeKey(pathname: string): string {
   if (pathname === "/") return "home";
   if (pathname === "/about") return "about";
   if (pathname.startsWith("/products")) return "products";
+  if (pathname.startsWith("/industries")) return "industries";
   if (pathname.startsWith("/solutions")) return "solutions";
   if (pathname.startsWith("/blog")) return "blog";
   if (pathname.startsWith("/resources")) return "resources";
@@ -35,8 +64,6 @@ function activeKey(pathname: string): string {
  * full-screen menu; magnetic CTA.
  */
 export function SiteNav() {
-  const router = useRouter();
-  const [query, setQuery] = useState("");
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -72,23 +99,37 @@ export function SiteNav() {
           <nav className="hidden flex-1 items-center gap-0.5 nav:flex">
             {LINKS.map((l) => {
               const isActive = active === l.key;
+              const cls = `relative rounded-full px-4 py-[9px] text-sm no-underline transition-[background,color] duration-[250ms] ${
+                solid
+                  ? isActive
+                    ? "bg-green-tint font-semibold text-navy"
+                    : "font-medium text-navy hover:bg-azure"
+                  : isActive
+                    ? "bg-white/20 font-semibold text-white ring-1 ring-inset ring-white/40"
+                    : "font-medium text-white hover:bg-white/12"
+              }`;
+              if (!l.menu) {
+                return (
+                  <TransitionLink
+                    key={l.key}
+                    href={l.href}
+                    aria-current={isActive ? "page" : undefined}
+                    className={cls}
+                  >
+                    {l.label}
+                  </TransitionLink>
+                );
+              }
               return (
-                <TransitionLink
+                <NavMenu
                   key={l.key}
+                  label={l.label}
                   href={l.href}
-                  aria-current={isActive ? "page" : undefined}
-                  className={`relative rounded-full px-4 py-[9px] text-sm no-underline transition-[background,color] duration-[250ms] ${
-                    solid
-                      ? isActive
-                        ? "bg-green-tint font-semibold text-navy"
-                        : "font-medium text-navy hover:bg-azure"
-                      : isActive
-                        ? "bg-white/20 font-semibold text-white ring-1 ring-inset ring-white/40"
-                        : "font-medium text-white hover:bg-white/12"
-                  }`}
-                >
-                  {l.label}
-                </TransitionLink>
+                  items={l.menu}
+                  triggerClass={cls}
+                  isActive={isActive}
+                  solid={solid}
+                />
               );
             })}
           </nav>
@@ -112,64 +153,18 @@ export function SiteNav() {
 
           {/* desktop search + CTA */}
           <div className="hidden flex-1 items-center justify-end gap-2.5 nav:flex">
-            <form
-              role="search"
-              onSubmit={(e) => {
-                e.preventDefault();
-                const q = query.trim();
-                router.push(q ? `/products?q=${encodeURIComponent(q)}` : "/products");
-              }}
-              // 7 nav links + logo + search + CTA no longer fit between the
-              // 940px nav breakpoint and ~1180px. Search is the least critical
-              // of the three (the products index has its own filter and search), so
-              // it drops out first rather than the CTA being clipped.
-              className={`hidden items-center gap-2 rounded-full py-[7px] pl-[18px] pr-[7px] transition-[background,box-shadow] duration-300 min-[1180px]:flex ${
-                solid
-                  ? "bg-azure"
-                  : "bg-white/12 ring-1 ring-inset ring-white/25"
-              }`}
-            >
-              <input
-                placeholder="Search products"
-                aria-label="Search products"
-                name="q"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                className={`w-[104px] border-none bg-transparent font-sans text-[13px] outline-none ${
-                  solid
-                    ? "text-navy placeholder:text-muted"
-                    : "text-white placeholder:text-white/75"
-                }`}
-              />
-              <button
-                type="submit"
-                aria-label="Search the product range"
-                className={`flex h-7 w-7 cursor-pointer items-center justify-center rounded-full border-none transition-colors ${
-                  solid ? "bg-navy" : "bg-white"
-                }`}
-              >
-                <svg
-                  width="13"
-                  height="13"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke={solid ? "#ffffff" : "#292F6E"}
-                  strokeWidth="2.4"
-                  aria-hidden="true"
-                >
-                  <circle cx="11" cy="11" r="7" />
-                  <path d="M21 21l-4.3-4.3" />
-                </svg>
-              </button>
-            </form>
-            <Magnetic>
-              <TransitionLink
-                href="/contact"
-                className="whitespace-nowrap rounded-full bg-green-cta px-[22px] py-[11px] text-sm font-semibold text-white no-underline shadow-[0_4px_16px_rgba(0,166,81,.35)] transition-colors hover:bg-green-cta-dark"
-              >
-                Get in Touch
-              </TransitionLink>
-            </Magnetic>
+            <div className="hidden min-[1180px]:block">
+              <SiteSearch solid={solid} />
+            </div>
+            <NavMenu
+              label="Get in Touch"
+              href="/contact"
+              items={CONTACT_MENU}
+              triggerClass="whitespace-nowrap rounded-full bg-green-cta px-[22px] py-[11px] text-sm font-semibold text-white no-underline shadow-[0_4px_16px_rgba(0,166,81,.35)] transition-colors hover:bg-green-cta-dark"
+              isActive={false}
+              solid={solid}
+              align="right"
+            />
           </div>
 
           {/* mobile hamburger */}
@@ -205,5 +200,114 @@ export function SiteNav() {
         active={active}
       />
     </>
+  );
+}
+
+/**
+ * A nav item that also opens a menu.
+ *
+ * The trigger stays a real link — clicking "Products" goes to /products, as it
+ * always did — and the menu opens on hover or keyboard focus. That keeps the
+ * top-level destination reachable while exposing the sub-pages the client's
+ * architecture calls for.
+ */
+function NavMenu({
+  label,
+  href,
+  items,
+  triggerClass,
+  isActive,
+  solid,
+  align = "left",
+}: {
+  label: string;
+  href: string;
+  items: { label: string; href: string; hint: string }[];
+  triggerClass: string;
+  isActive: boolean;
+  solid: boolean;
+  align?: "left" | "right";
+}) {
+  const [open, setOpen] = useState(false);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const menuId = useId();
+
+  // a short grace period so the pointer can cross the gap to the panel
+  const scheduleClose = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    closeTimer.current = setTimeout(() => setOpen(false), 120);
+  };
+  const cancelClose = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+  };
+  useEffect(() => () => cancelClose(), []);
+
+  return (
+    <div
+      className="relative"
+      onMouseEnter={() => {
+        cancelClose();
+        setOpen(true);
+      }}
+      onMouseLeave={scheduleClose}
+      onFocus={() => {
+        cancelClose();
+        setOpen(true);
+      }}
+      onBlur={scheduleClose}
+      onKeyDown={(e) => {
+        if (e.key === "Escape") setOpen(false);
+      }}
+    >
+      <TransitionLink
+        href={href}
+        aria-current={isActive ? "page" : undefined}
+        aria-expanded={open}
+        aria-controls={menuId}
+        className={`${triggerClass} inline-flex items-center gap-1.5`}
+      >
+        {label}
+        <svg
+          width="9"
+          height="6"
+          viewBox="0 0 10 6"
+          fill="none"
+          aria-hidden="true"
+          className={`shrink-0 transition-transform duration-300 ${open ? "rotate-180" : ""}`}
+        >
+          <path
+            d="M1 1l4 4 4-4"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </TransitionLink>
+
+      <div
+        id={menuId}
+        hidden={!open}
+        className={`absolute top-[calc(100%+8px)] z-[1200] w-[300px] rounded-card border border-line-2 bg-white p-2 shadow-[0_24px_60px_-20px_rgba(29,31,35,.4)] ${
+          align === "right" ? "right-0" : "left-0"
+        }`}
+      >
+        {items.map((it) => (
+          <TransitionLink
+            key={it.href}
+            href={it.href}
+            onClick={() => setOpen(false)}
+            className="block rounded-xl px-3 py-2.5 no-underline transition-colors hover:bg-green-tint"
+          >
+            <span className="block text-[13.5px] font-semibold text-navy">
+              {it.label}
+            </span>
+            <span className="mt-0.5 block text-[12px] leading-[1.45] text-muted">
+              {it.hint}
+            </span>
+          </TransitionLink>
+        ))}
+      </div>
+    </div>
   );
 }

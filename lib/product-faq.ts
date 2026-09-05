@@ -161,7 +161,7 @@ export function productFaqs(p: CatalogueProduct): ProductFaq[] {
   // — supply ————————————————————————————————————————————————————————
   faqs.push({
     q: `What pack sizes does ${N} come in, and is an SDS supplied?`,
-    a: `35 L, 50 L, 200 L and 1000 L, with custom packing available. Every product ships with a safety data sheet plus dosing and PPE guidance, and production runs to an ISO 9001 certified system with batch-wise quality control. Trials normally start with a single 35 L pail.`,
+    a: `20 L, 50 L, 200 L and 1000 L, with custom packing available. Every product ships with a safety data sheet plus dosing and PPE guidance, and production runs to an ISO 9001 certified system with batch-wise quality control. Trials normally start with a single 20 L pail.`,
   });
 
   return faqs;

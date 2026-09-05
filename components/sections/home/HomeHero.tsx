@@ -115,10 +115,10 @@ export function HomeHero() {
             <div className="flex flex-wrap gap-2.5">
               <Magnetic>
                 <TransitionLink
-                  href="/contact"
+                  href="/request-cleanup"
                   className="inline-block rounded-full bg-green-cta px-6 py-[13px] text-sm font-semibold text-white no-underline shadow-cta-strong transition-colors hover:bg-green-cta-dark"
                 >
-                  Request a Consultation
+                  Request a Cleanup
                 </TransitionLink>
               </Magnetic>
               <TransitionLink
