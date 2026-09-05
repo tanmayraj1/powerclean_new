@@ -48,8 +48,19 @@ const LINKS: NavLink[] = [
       { label: "Plant & facility care", href: "/industries/plant-facility", hint: "Floors, coils and cooling towers" },
     ],
   },
-  { key: "blog", label: "Blog", href: "/blog" },
-  { key: "resources", label: "Resources", href: "/resources" },
+  {
+    key: "resources",
+    label: "Resources",
+    href: "/resources",
+    menu: [
+      { label: "Knowledge hub", href: "/resources", hint: "6 technical reference guides" },
+      { label: "Blog", href: "/blog", hint: "15 buyer-intent articles" },
+      { label: "Cleaning videos", href: "/cleaning-videos", hint: "10 filmed cleaning trials" },
+      { label: "Case studies", href: "/resources/case-studies", hint: "Measured results from plant trials" },
+      { label: "Glossary", href: "/glossary", hint: "44 industrial cleaning terms defined" },
+      { label: "FAQ", href: "/faq", hint: "Answers for plant engineers" },
+    ],
+  },
 ];
 
 /** the "Get in Touch" CTA opens the same way the Products menu does */
@@ -66,8 +77,14 @@ function activeKey(pathname: string): string {
   if (pathname.startsWith("/products")) return "products";
   if (pathname.startsWith("/industries")) return "industries";
   if (pathname.startsWith("/solutions")) return "solutions";
-  if (pathname.startsWith("/blog")) return "blog";
-  if (pathname.startsWith("/resources")) return "resources";
+  if (
+    pathname.startsWith("/resources") ||
+    pathname.startsWith("/blog") ||
+    pathname.startsWith("/glossary") ||
+    pathname === "/faq" ||
+    pathname === "/cleaning-videos"
+  )
+    return "resources";
   return "none";
 }
 
