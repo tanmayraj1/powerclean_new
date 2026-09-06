@@ -75,6 +75,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     page("/about", 0.6),
     page("/contact", 0.8),
+    page("/privacy", 0.3, "yearly"),
     ...solutions.map((s) => page(`/solutions/${s.slug}`, 0.8)),
     ...products.map((p) => page(`/products/${p.slug}`, 0.7)),
   ];

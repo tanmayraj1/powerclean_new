@@ -5,6 +5,7 @@ import { submitInquiry, type InquiryState } from "@/app/actions";
 import { Arrow } from "./Arrow";
 import { questionnaireSteps, type Field } from "@/lib/questionnaire";
 import { siteConfig } from "@/lib/site-config";
+import { ConsentCheckbox } from "./ConsentCheckbox";
 
 /**
  * The chemical questionnaire, in four steps.
@@ -30,13 +31,15 @@ export function QuestionnaireForm() {
     return (
       <div className="rounded-card-lg bg-green-tint p-[clamp(24px,3vw,36px)]">
         <h2 className="mb-2 text-[clamp(20px,2.2vw,26px)] font-semibold text-navy">
-          Thanks — your questionnaire is ready to send
+          {state.delivered
+            ? "Thanks — your questionnaire is with our team"
+            : "Thanks — your questionnaire is ready to send"}
         </h2>
         <p className="mb-6 text-[14px] leading-[1.7] text-muted-3">
           {state.message}
         </p>
         <div className="mb-6 flex flex-wrap gap-3">
-          {state.mailto && (
+          {state.mailto && !state.delivered && (
             <a
               href={state.mailto}
               className="rounded-full bg-green-cta px-7 py-3.5 text-[14px] font-semibold text-white no-underline transition-colors hover:bg-green-cta-dark"
@@ -125,7 +128,11 @@ export function QuestionnaireForm() {
         </p>
       )}
 
-      <div className="mt-8 flex flex-wrap items-center gap-3 border-t border-line-2 pt-6">
+      <div className="mt-8 border-t border-line-2 pt-6">
+        <ConsentCheckbox id="q-consent" />
+      </div>
+
+      <div className="mt-5 flex flex-wrap items-center gap-3">
         {step > 0 && (
           <button
             type="button"

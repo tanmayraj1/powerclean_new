@@ -6,6 +6,7 @@ import { industryOptions } from "@/lib/site-config";
 import { Magnetic } from "@/components/motion/Magnetic";
 import { Arrow } from "./Arrow";
 import { InlineContact } from "./InlineContact";
+import { ConsentCheckbox } from "./ConsentCheckbox";
 import { siteConfig } from "@/lib/site-config";
 
 type FieldDef = {
@@ -65,6 +66,16 @@ export function InquiryForm({ variant }: InquiryFormProps) {
       setClientError("Please enter a valid email address.");
       return;
     }
+    // The form carries `noValidate`, so the checkbox's own `required` never
+    // fires — without this the visitor would learn they missed it only after
+    // a server round-trip.
+    if (!fd.get("consent")) {
+      e.preventDefault();
+      setClientError(
+        "Please tick the box so we know we may contact you about this enquiry."
+      );
+      return;
+    }
     setClientError(null);
   };
 
@@ -107,6 +118,16 @@ export function InquiryForm({ variant }: InquiryFormProps) {
           </div>
         ))}
       </div>
+      {/* bots fill hidden fields; humans do not */}
+      <input
+        type="text"
+        name="website"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="absolute left-[-9999px] h-px w-px opacity-0"
+      />
+
       <div className="mt-3">
         <label
           htmlFor={`${variant}-message`}
@@ -143,7 +164,7 @@ export function InquiryForm({ variant }: InquiryFormProps) {
               {message}
             </p>
           )}
-          {state?.ok && state.summary && (
+          {state?.ok && state.summary && !state.delivered && (
             <div className="mt-3 rounded-[10px] border border-line-2 bg-white p-3.5">
               <pre className="mb-3 max-h-[132px] overflow-auto whitespace-pre-wrap font-mono text-[11.5px] leading-[1.6] text-muted-3">
                 {state.summary}
@@ -174,11 +195,14 @@ export function InquiryForm({ variant }: InquiryFormProps) {
           )}
         </div>
       </div>
-      <div className="mt-[18px] flex flex-wrap items-center justify-between gap-3.5">
+      <div className="mt-[18px]">
+        <ConsentCheckbox id={`${variant}-consent`} />
+      </div>
+
+      <div className="mt-4 flex flex-wrap items-center justify-between gap-3.5">
         <span className="max-w-[300px] text-xs text-muted">
-          {variant === "home"
-            ? "Sends through your email app — our team replies within one business day."
-            : "Sends through your email app, or reach us instantly on WhatsApp below."}
+          Our team replies within one business day, or reach us instantly on
+          WhatsApp below.
         </span>
         <Magnetic>
           <button

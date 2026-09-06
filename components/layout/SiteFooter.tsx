@@ -164,6 +164,12 @@ export function SiteFooter() {
           <span className="text-xs text-muted-2">
             GST# {siteConfig.contact.gst}
           </span>
+          <TransitionLink
+            href="/privacy"
+            className="text-xs text-muted-2 no-underline transition-colors hover:text-green-deep"
+          >
+            Privacy Policy
+          </TransitionLink>
           <span className="text-xs text-muted-2">
             CIN# {siteConfig.contact.cin}
           </span>

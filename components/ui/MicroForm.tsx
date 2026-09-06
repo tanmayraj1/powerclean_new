@@ -4,6 +4,7 @@ import { useActionState } from "react";
 import { submitInquiry, type InquiryState } from "@/app/actions";
 import { Arrow } from "./Arrow";
 import { siteConfig } from "@/lib/site-config";
+import { ConsentCheckbox } from "./ConsentCheckbox";
 
 /**
  * Three-field inline enquiry form.
@@ -38,13 +39,15 @@ export function MicroForm({
     return (
       <div className="rounded-card-lg bg-green-tint p-7">
         <h3 className="mb-2 text-[16px] font-semibold text-navy">
-          Thanks — here is your enquiry
+          {state.delivered ? "Thanks — we have your enquiry" : "Thanks — here is your enquiry"}
         </h3>
         <p className="mb-5 text-[13.5px] leading-[1.65] text-muted-3">
           {state?.message}
         </p>
         <div className="flex flex-wrap gap-3">
-          {state?.mailto && (
+          {/* Once the lead is in the CRM the email route is a convenience, not
+              the delivery mechanism, so it stops being the primary action. */}
+          {state?.mailto && !state.delivered && (
             <a
               href={state.mailto}
               className="rounded-full bg-green-cta px-6 py-3 text-[13.5px] font-semibold text-white no-underline transition-colors hover:bg-green-cta-dark"
@@ -56,9 +59,13 @@ export function MicroForm({
             href={siteConfig.contact.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full border-[1.5px] border-navy px-6 py-3 text-[13.5px] font-semibold text-navy no-underline transition-colors hover:bg-navy hover:text-white"
+            className={
+              state.delivered
+                ? "rounded-full bg-green-cta px-6 py-3 text-[13.5px] font-semibold text-white no-underline transition-colors hover:bg-green-cta-dark"
+                : "rounded-full border-[1.5px] border-navy px-6 py-3 text-[13.5px] font-semibold text-navy no-underline transition-colors hover:bg-navy hover:text-white"
+            }
           >
-            WhatsApp instead
+            {state.delivered ? "Talk to us now on WhatsApp" : "WhatsApp instead"}
           </a>
         </div>
       </div>
@@ -76,6 +83,16 @@ export function MicroForm({
 
       {/* names the page this lead came from, so the email says what prompted it */}
       <input type="hidden" name="context" value={context} />
+
+      {/* bots fill hidden fields; humans do not */}
+      <input
+        type="text"
+        name="website"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="absolute left-[-9999px] h-px w-px opacity-0"
+      />
 
       <div className="mb-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
         <div>
@@ -116,6 +133,10 @@ export function MicroForm({
           placeholder="What are you cleaning? e.g. aluminium housings, ultrasonic"
           className={field}
         />
+      </div>
+
+      <div className="mb-4">
+        <ConsentCheckbox id={`mf-consent-${context}`} />
       </div>
 
       {state && state.message && !state.ok && (

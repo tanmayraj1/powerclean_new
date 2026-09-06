@@ -19,6 +19,13 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       // the old ASP.NET page this content came from
+      // the old site's privacy URL — one of two in its sitemap that had no
+      // destination on the new site until this page existed
+      {
+        source: "/privacy-policy.aspx",
+        destination: "/privacy",
+        permanent: true,
+      },
       {
         source: "/cleaning-videos.aspx",
         destination: "/cleaning-videos",

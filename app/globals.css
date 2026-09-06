@@ -182,3 +182,41 @@
     animation-iteration-count: 1 !important;
   }
 }
+
+/* Legal-page body copy (privacy policy). In @layer components so Tailwind
+   utilities still outrank it — the layer-order trap that has bitten this
+   codebase before applies to unlayered rules, not to this one. */
+@layer components {
+  .prose-legal p,
+  .prose-legal ul {
+    margin: 0 0 14px;
+    font-size: 14.5px;
+    line-height: 1.75;
+    color: var(--color-muted-3);
+  }
+
+  .prose-legal ul {
+    padding-left: 20px;
+  }
+
+  .prose-legal li {
+    margin-bottom: 8px;
+    list-style: disc;
+  }
+
+  .prose-legal strong {
+    font-weight: 600;
+    color: var(--color-navy);
+  }
+
+  .prose-legal a {
+    color: var(--color-green-deep);
+    font-weight: 500;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .prose-legal > :last-child {
+    margin-bottom: 0;
+  }
+}
