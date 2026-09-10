@@ -19,11 +19,13 @@ import { siteConfig } from "@/lib/site-config";
 export const metadata: Metadata = {
   title: "Cleaning Chemical Questionnaire",
   description:
-    "Answer a few questions about your parts, soils and wash equipment and get a matched cleaning chemical, dilution and temperature within one business day.",
+    "Two minutes: tell us your components, soils, metal grade and wash equipment, and get a matched cleaning chemical, dilution and temperature within one business day.",
   keywords: [
     "cleaning chemical questionnaire",
     "degreaser selection questionnaire",
     "industrial cleaning requirement form",
+    "cleaning chemical selection by metal grade",
+    "component cleaning enquiry form",
   ],
   alternates: { canonical: "/questionnaire" },
   openGraph: {
@@ -38,7 +40,7 @@ export const metadata: Metadata = {
 const FAQS = [
   {
     q: "How long does the questionnaire take?",
-    a: "Five to ten minutes if you know your wash parameters. Only company, name, phone and email are required — leave anything you are unsure of blank rather than guessing, because a wrong number is worse than a missing one.",
+    a: "About two minutes for the essentials — company, name, phone and email are the only required fields, and you can submit from any step. Answering everything takes five to ten minutes if you have your wash parameters to hand. Leave anything you are unsure of blank rather than guessing: a wrong number is worse than a missing one.",
   },
   {
     q: "What happens after I submit it?",
@@ -77,7 +79,7 @@ export default function QuestionnairePage() {
       <PageHero
         title="Cleaning Chemical Questionnaire"
         eyebrow="TELL US ABOUT YOUR LINE"
-        blurb="The questions our applications lab actually needs answered — your parts, your soils, your equipment and your wash parameters. Assured response within one business day."
+        blurb="The questions our applications lab actually needs answered — your components, your soils, your equipment and your wash parameters. Four short steps, about two minutes, and an assured response within one business day."
         minHeight="min(50vh, 440px)"
         titleClassName="text-[clamp(28px,3.8vw,52px)]"
         image="/photos/qc-lab.webp"
@@ -86,12 +88,19 @@ export default function QuestionnairePage() {
 
       <SectionPanel outerClassName="px-3 pb-3 pt-10">
         <div className="page-answer mx-auto mb-10 max-w-[860px]">
-          <p className="text-[clamp(16px,1.9vw,20px)] leading-[1.6] text-muted-3 [text-wrap:pretty]">
-            {fieldCount} questions in {questionnaireSteps.length} short steps,
-            covering what you clean, what is on it, the equipment you run and
-            the wash parameters you hold. Only your contact details are
-            required — leave anything you are unsure of blank. A wrong figure
-            sends us down the wrong route; a blank one just tells us what the
+          {/* The lead sentence is the whole pitch — four steps, two minutes,
+              only four required fields. The detail that used to open this
+              block still follows; it just no longer stands between a visitor
+              and the decision to start. */}
+          <p className="text-[clamp(19px,2.3vw,25px)] font-medium leading-[1.4] tracking-[-0.01em] text-navy [text-wrap:balance]">
+            {questionnaireSteps.length} short steps. About two minutes for the
+            essentials — only company, name, phone and email are required.
+          </p>
+          <p className="mt-3.5 text-[clamp(14px,1.6vw,16px)] leading-[1.65] text-muted-3 [text-wrap:pretty]">
+            The full {fieldCount} questions cover what you clean, what is on
+            it, the equipment you run and the wash parameters you hold. Answer
+            what you know and leave the rest blank — a wrong figure sends us
+            down the wrong route, while a blank one simply tells us what the
             trial needs to establish.
           </p>
         </div>

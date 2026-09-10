@@ -282,12 +282,19 @@ export const milestones = [
 ];
 
 
+// Mirrors lib/industries.ts so an enquiry can name the sector it came from and
+// land on the same vocabulary the matching industry page uses.
 export const industryOptions = [
   "Automotive",
   "Aerospace & Defense",
   "Railways & Airlines",
   "Bearing Manufacturing",
   "Electrical & Electronics",
+  "Foundry & Die Casting",
+  "Home Appliance & Cookware",
+  "Tools & Cutting",
+  "Earth Moving",
+  "Plant & Facility",
   "General Engineering",
   "Other",
 ];

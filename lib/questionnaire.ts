@@ -43,12 +43,12 @@ export const questionnaireSteps: Step[] = [
   },
   {
     title: "What you clean today",
-    blurb: "The starting point — what is on the parts and how you deal with it now.",
+    blurb: "The starting point — what is on the components and how you deal with it now.",
     fields: [
       { kind: "textarea", name: "howClean", label: "How are you cleaning or degreasing today?", placeholder: "e.g. manual wipe with kerosene, then a hot soak tank", rows: 3 },
       { kind: "textarea", name: "issue", label: "What issue are you facing?", placeholder: "e.g. white rust on aluminium housings within a week of packing", rows: 3 },
       { kind: "textarea", name: "contamination", label: "What contaminant are you removing?", placeholder: "Oil, grease, buffing compound, carbon, coolant, drawing compound…", rows: 2 },
-      { kind: "textarea", name: "metalType", label: "What metal are the components?", placeholder: "Mild steel, cast iron, ADC12 aluminium, brass, mixed…", rows: 2 },
+      { kind: "textarea", name: "metalType", label: "What metal are the components? (metal type and grade)", placeholder: "Both, where you know them — e.g. aluminium ADC12, mild steel EN8, cast iron FG260, brass, mixed loads…", rows: 2 },
     ],
   },
   {
@@ -81,9 +81,9 @@ export const questionnaireSteps: Step[] = [
       { kind: "text", name: "monthlyVolume", label: "Chemical needed per month (litres)", placeholder: "e.g. 200" },
       {
         kind: "radio", name: "trial", label: "Would you like to send components for a free cleaning trial?",
-        options: ["Yes — we will send parts", "Not yet"],
+        options: ["Yes — we will send components", "Not yet"],
       },
-      { kind: "textarea", name: "comments", label: "Anything else?", placeholder: "Parts cleaned per day/week/month, number of shifts, whether you need a corrosion inhibitor to prevent rust…", rows: 4 },
+      { kind: "textarea", name: "comments", label: "Anything else?", placeholder: "Components cleaned per day/week/month, number of shifts, whether you need a corrosion inhibitor to prevent rust…", rows: 4 },
     ],
   },
 ];

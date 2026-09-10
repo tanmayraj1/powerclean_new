@@ -508,7 +508,7 @@ export default async function SolutionDetailPage(props: {
 
       {/* SCROLL-DRIVEN GALLERY */}
       <div className="mx-auto max-w-[1320px] px-5 pb-[clamp(30px,5vw,50px)] pt-5">
-        <HScrollGallery>
+        <HScrollGallery label={`${solution.name} in use — photo gallery`}>
           {solution.gallery.map((g, i) => (
             <Reveal
               key={g}

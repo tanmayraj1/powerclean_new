@@ -676,15 +676,15 @@ export const industryPages: IndustryPage[] = [
   },
   {
     slug: "appliance",
-    name: "Home Appliance",
-    title: "Cleaning Chemicals for Home Appliance Manufacturing",
-    metaTitle: "Home Appliance Cleaning Chemicals",
+    name: "Home Appliance & Cookware",
+    title: "Cleaning Chemicals for Cookware & Home Appliance Manufacturing",
+    metaTitle: "Cookware & Appliance Cleaning Chemicals",
     metaDescription:
-      "Cleaning chemistry for appliance manufacturing — pressed steel panels, aluminium and copper components, pre-paint degreasing and cosmetic spot-free finishing.",
+      "Cleaning chemistry for cookware and appliance manufacturing — cooker bodies, tawas, saucepans and sauté pans, pressed panels and pre-coating degreasing.",
     answer:
-      "Appliance manufacturing cleans pressed steel panels, aluminium castings and copper tubing to a cosmetic standard, then paints or coats them. That needs alkaline degreasing for steel, neutral-pH chemistry for the non-ferrous parts, and a deionised final rinse — because water spots that would pass on a machined part are a visible reject here.",
+      "Cookware and appliance manufacturing cleans aluminium and stainless cooker bodies, tawas, saucepans and sauté pans, along with pressed steel panels and copper tubing, to a cosmetic standard before coating. That needs neutral-pH chemistry for the aluminium, alkaline degreasing for the steel, and a deionised final rinse — because a water spot that would pass on a machined part is a visible reject on a pan.",
     intro:
-      "Appliance work is judged by eye as much as by function. A part that would ship happily out of a machine shop becomes a reject when it carries a water spot, a dull etched patch or a fingerprint under a gloss finish — and everything downstream of the wash has to survive painting or coating adhesion.",
+      "Cookware and appliance work is judged by eye as much as by function. A part that would ship happily out of a machine shop becomes a reject when it carries a water spot, a dull etched patch or a fingerprint under a gloss finish — and everything downstream of the wash has to survive painting or coating adhesion.",
     photo: "/photos/gallery-4.webp",
     photoAlt:
       "Pressed and machined metal components on an appliance assembly line",
@@ -705,8 +705,17 @@ export const industryPages: IndustryPage[] = [
         title: "Drawing and forming compound",
         body: "Press shops leave persistent lubricant films that ordinary light-duty cleaning will not shift. They need adequate surfactancy and dwell, and they load a bath fast without skimming.",
       },
+      {
+        title: "Cookware is deep-drawn aluminium, then coated",
+        body: "Cooker bodies, tawas and pans are drawn and spun from aluminium, so they carry heavy forming lubricant on a metal that alkaline cleaner etches. Anything left on the surface — lubricant, cleaner film or dissolved solids from a hard rinse — shows up later as a non-stick or hard-anodised coating that lifts. Neutral pH and a deionised final rinse are not optional here.",
+      },
     ],
     applications: [
+      "Cooker body and pressure cooker cleaning",
+      "Tawa and griddle cleaning",
+      "Saucepan and sauté pan degreasing",
+      "Deep-drawing and spinning lubricant removal",
+      "Pre-coating cleaning for non-stick and hard-anodised finishes",
       "Pressed steel panel cleaning",
       "Pre-paint and pre-coating degreasing",
       "Drawing and forming compound removal",
@@ -740,6 +749,14 @@ export const industryPages: IndustryPage[] = [
         q: "Can steel panels and aluminium parts share a wash?",
         a: "Yes, with a neutral-pH cleaner. The chemistry has to suit the most sensitive metal in the load, so one aluminium part sets a pH ceiling of about 9 for the whole bath. Steel cleans perfectly well at neutral pH; aluminium does not survive alkaline.",
       },
+      {
+        q: "Which cleaner suits aluminium cookware — cooker bodies, tawas and pans?",
+        a: "A neutral-pH cleaner such as Power Clean NF-14. Aluminium cookware is deep-drawn or spun, so it arrives carrying heavy forming lubricant, but the metal itself will not tolerate the alkalinity that would shift that soil quickly on steel. Alkaline cleaner etches aluminium, dulls the surface and leaves a grey smut that shows through a coating. Neutral pH with adequate temperature and dwell does the same job without attacking the metal.",
+      },
+      {
+        q: "How clean does cookware need to be before a non-stick coating?",
+        a: "Residue-free, and the test is adhesion rather than appearance. Forming lubricant, cleaner film or dissolved solids left by a hard-water rinse all sit between the metal and the coating, and the failure shows up as lifting or blistering after the customer has been using the pan. A deionised final rinse below 10 µS/cm followed by a spot-free dry is the usual specification.",
+      },
     ],
     related: [
       { label: "The right cleaning chemical for aluminium", href: "/blog/aluminium-cleaning-chemical-guide" },
@@ -751,6 +768,12 @@ export const industryPages: IndustryPage[] = [
       "pre paint degreasing",
       "pressed steel panel cleaner",
       "spot free rinse appliance",
+      "cookware cleaning chemical",
+      "cooker manufacturing degreaser",
+      "tawa cleaning chemical",
+      "aluminium cookware cleaner",
+      "pan manufacturing cleaning chemical",
+      "pre coating cleaner non stick",
     ],
   },
   {

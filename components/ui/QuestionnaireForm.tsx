@@ -72,6 +72,36 @@ export function QuestionnaireForm() {
 
   return (
     <form action={action} className="rounded-card-lg bg-white p-[clamp(22px,3vw,36px)] ring-1 ring-inset ring-line-2">
+      {/* Explicit "Step 1 of 4" above the rail. The numbered pills already
+          implied the count, but only once you stopped to read them — someone
+          deciding whether to start needs to see how short it is at a glance. */}
+      <div className="mb-3 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+        <p className="text-[12.5px] font-semibold uppercase tracking-[0.12em] text-green-deep">
+          Step {step + 1} of {questionnaireSteps.length}
+          <span className="ml-2 normal-case tracking-normal text-muted-2">
+            {questionnaireSteps[step].title}
+          </span>
+        </p>
+        <p className="text-[12.5px] text-muted-2">
+          About 2 minutes for the essentials
+        </p>
+      </div>
+
+      {/* progress bar — same read as the label, without needing to be read */}
+      <div
+        className="mb-5 h-1.5 overflow-hidden rounded-full bg-azure"
+        role="progressbar"
+        aria-valuenow={step + 1}
+        aria-valuemin={1}
+        aria-valuemax={questionnaireSteps.length}
+        aria-label={`Questionnaire progress: step ${step + 1} of ${questionnaireSteps.length}`}
+      >
+        <div
+          className="h-full rounded-full bg-green-cta transition-[width] duration-500"
+          style={{ width: `${((step + 1) / questionnaireSteps.length) * 100}%` }}
+        />
+      </div>
+
       {/* step rail */}
       <ol className="mb-8 flex flex-wrap gap-2 pl-0">
         {questionnaireSteps.map((s, i) => (

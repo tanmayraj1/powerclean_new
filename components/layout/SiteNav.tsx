@@ -45,6 +45,7 @@ const LINKS: NavLink[] = [
       { label: "Foundry & die casting", href: "/industries/foundry-die-casting", hint: "ADC10 / ADC12 and white rust" },
       { label: "Aerospace & defence", href: "/industries/aerospace-defence", hint: "Residue-critical component cleaning" },
       { label: "Electrical & electronics", href: "/industries/electrical-electronics", hint: "Copper, brass and defluxing" },
+      { label: "Home appliance & cookware", href: "/industries/appliance", hint: "Cookers, tawas, pans and panels" },
       { label: "Plant & facility care", href: "/industries/plant-facility", hint: "Floors, coils and cooling towers" },
     ],
   },
