@@ -1,6 +1,7 @@
 "use server";
 
 import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 import { siteConfig } from "@/lib/site-config";
 import { questionnaireFields } from "@/lib/questionnaire";
 import { createZohoLead, zohoConfigured, type LeadEntry } from "@/lib/zoho";
@@ -143,6 +144,12 @@ export async function submitInquiry(
   const delivered = zohoConfigured()
     ? (await createZohoLead({ values, entries, context })).ok
     : false;
+
+  // Saved in the CRM: send the visitor to a confirmation page with nothing to
+  // resubmit. redirect() works by throwing, so it must stay outside any
+  // try/catch. When the CRM did not take it, fall through and keep the email /
+  // WhatsApp routes on screen — the lead has not been stored anywhere yet.
+  if (delivered) redirect("/thank-you");
 
   // Same enquiry, pre-filled for WhatsApp. Previously every "Send on WhatsApp"
   // button opened a blank chat, so a visitor who had just filled the form in

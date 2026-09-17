@@ -84,7 +84,8 @@ export function QuickContact() {
   if (
     pathname === "/contact" ||
     pathname === "/range" ||
-    pathname === "/get-consultation"
+    pathname === "/get-consultation" ||
+    pathname === "/thank-you"
   )
     return null;
 
