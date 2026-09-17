@@ -67,13 +67,13 @@ const SECTIONS: Section[] = [
         <ul>
           <li>
             <strong>Enquiry and consultation forms</strong> — your name,
-            company, email address, phone number, industry, and whatever you
-            write in the message field.
+            mobile number and email address, and optionally your company,
+            industry, and whatever you write in the message field.
           </li>
           <li>
             <strong>The inline enquiry form</strong> on product, industry and
-            location pages — your name, phone number, and what you are
-            cleaning. It also records which page you sent it from, so we can
+            location pages — your name, mobile number and email address, and
+            optionally what you are cleaning. It also records which page you sent it from, so we can
             answer with the right grade.
           </li>
           <li>
@@ -89,8 +89,9 @@ const SECTIONS: Section[] = [
           </li>
         </ul>
         <p>
-          Every one of those fields is optional except the minimum we need to
-          reply to you: an email address or a phone number.
+          Only three fields are required on any form — your name, mobile
+          number and email address — because they are the minimum we need to
+          reply to you. Everything else is optional.
         </p>
       </>
     ),

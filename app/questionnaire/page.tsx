@@ -40,7 +40,7 @@ export const metadata: Metadata = {
 const FAQS = [
   {
     q: "How long does the questionnaire take?",
-    a: "About two minutes for the essentials — company, name, phone and email are the only required fields, and you can submit from any step. Answering everything takes five to ten minutes if you have your wash parameters to hand. Leave anything you are unsure of blank rather than guessing: a wrong number is worse than a missing one.",
+    a: "About two minutes for the essentials — your name, mobile number and email are the only required fields, and you can submit from any step. Answering everything takes five to ten minutes if you have your wash parameters to hand. Leave anything you are unsure of blank rather than guessing: a wrong number is worse than a missing one.",
   },
   {
     q: "What happens after I submit it?",
@@ -89,12 +89,12 @@ export default function QuestionnairePage() {
       <SectionPanel outerClassName="px-3 pb-3 pt-10">
         <div className="page-answer mx-auto mb-10 max-w-[860px]">
           {/* The lead sentence is the whole pitch — four steps, two minutes,
-              only four required fields. The detail that used to open this
+              only three required fields. The detail that used to open this
               block still follows; it just no longer stands between a visitor
               and the decision to start. */}
           <p className="text-[clamp(19px,2.3vw,25px)] font-medium leading-[1.4] tracking-[-0.01em] text-navy [text-wrap:balance]">
             {questionnaireSteps.length} short steps. About two minutes for the
-            essentials — only company, name, phone and email are required.
+            essentials — only your name, mobile number and email are required.
           </p>
           <p className="mt-3.5 text-[clamp(14px,1.6vw,16px)] leading-[1.65] text-muted-3 [text-wrap:pretty]">
             The full {fieldCount} questions cover what you clean, what is on

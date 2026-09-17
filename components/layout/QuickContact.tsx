@@ -122,7 +122,7 @@ export function QuickContact() {
         rel="noopener noreferrer"
         aria-label="Chat with Power Clean on WhatsApp"
         tabIndex={open ? 0 : -1}
-        className={`${shell} bg-[#25D366]`}
+        className={`${shell} bg-[#0E7C5A]`}
       >
         <span
           aria-hidden="true"

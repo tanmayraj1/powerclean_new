@@ -5,12 +5,15 @@ import { siteConfig } from "@/lib/site-config";
 import { questionnaireFields } from "@/lib/questionnaire";
 import { createZohoLead, zohoConfigured, type LeadEntry } from "@/lib/zoho";
 import { rateLimit } from "@/lib/rate-limit";
+import { whatsappEnquiry } from "@/lib/whatsapp";
 
 export type InquiryState = {
   ok: boolean;
   message: string;
   /** ready-to-send mailto: composed from the submitted enquiry */
   mailto?: string;
+  /** wa.me link with the same enquiry pre-filled — the visitor only taps Send */
+  whatsapp?: string;
   /** plain-text summary the visitor can copy if mail does not open */
   summary?: string;
   /** true once the enquiry is safely in the CRM — the mailto is then optional */
@@ -23,7 +26,7 @@ const LABELS: Record<string, string> = {
   company: "Company",
   industry: "Industry",
   email: "Email",
-  phone: "Phone",
+  phone: "Mobile",
   process: "Current cleaning process",
   message: "Message",
 };
@@ -73,20 +76,25 @@ export async function submitInquiry(
     return { ok: true, message: "Thanks — your enquiry has been noted." };
   }
 
-  // Either route back is enough. The full forms ask for an email; the inline
-  // micro-form asks for a phone, which is often what an Indian plant buyer
-  // would rather give — requiring both would lose leads for no reason.
+  // Name, mobile and email are required on every form; everything else is
+  // optional. Enforced here as well as in each form, because the server is the
+  // only check a bot or a stale cached page cannot skip — and a CRM lead
+  // without a way to reach the person is worthless to sales.
+  const name = String(formData.get("name") ?? "").trim();
   const email = String(formData.get("email") ?? "").trim();
   const phone = String(formData.get("phone") ?? "").trim();
+  const phoneDigits = phone.replace(/\D/g, "");
 
-  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return { ok: false, message: "Please enter a valid email address." };
+  if (!name) {
+    return { ok: false, message: "Please enter your name." };
   }
-  if (!email && phone.replace(/\D/g, "").length < 8) {
-    return {
-      ok: false,
-      message: "Please leave an email address or a phone number we can reach you on.",
-    };
+  // 10 digits for an Indian mobile; up to 15 allows a country code (+91 …)
+  // or an international number.
+  if (phoneDigits.length < 10 || phoneDigits.length > 15) {
+    return { ok: false, message: "Please enter a valid mobile number." };
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return { ok: false, message: "Please enter a valid email address." };
   }
 
   // Consent is required only where the form asks for it, so an older cached
@@ -136,9 +144,15 @@ export async function submitInquiry(
     ? (await createZohoLead({ values, entries, context })).ok
     : false;
 
+  // Same enquiry, pre-filled for WhatsApp. Previously every "Send on WhatsApp"
+  // button opened a blank chat, so a visitor who had just filled the form in
+  // had to type it all again — most would not.
+  const whatsapp = whatsappEnquiry({ summary, context, delivered });
+
   return {
     ok: true,
     delivered,
+    whatsapp,
     message: delivered
       ? "Thanks — your enquiry is with our team. We reply within one business day."
       : "Almost there — choose how to send it. Your enquiry is ready below.",

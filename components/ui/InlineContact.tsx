@@ -1,4 +1,11 @@
 import { siteConfig } from "@/lib/site-config";
+import { whatsappHref } from "@/lib/whatsapp";
+
+// Someone choosing to chat instead of filling the form in still arrives with an
+// opener, rather than a blank chat they have to start from nothing.
+const WA_HREF = whatsappHref(
+  "Hi Power Clean — I have a question about a cleaning chemical for my line."
+);
 
 const PHONE = siteConfig.contact.phones[0];
 const TEL_HREF = `tel:${PHONE.replace(/[^+\d]/g, "")}`;
@@ -31,7 +38,7 @@ export function InlineContact({
         ·
       </span>
       <a
-        href={siteConfig.contact.whatsapp}
+        href={WA_HREF}
         target="_blank"
         rel="noopener noreferrer"
         className={link}

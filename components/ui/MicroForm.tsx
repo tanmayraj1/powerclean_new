@@ -56,7 +56,7 @@ export function MicroForm({
             </a>
           )}
           <a
-            href={siteConfig.contact.whatsapp}
+            href={state.whatsapp ?? siteConfig.contact.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
             className={
@@ -65,7 +65,7 @@ export function MicroForm({
                 : "rounded-full border-[1.5px] border-navy px-6 py-3 text-[13.5px] font-semibold text-navy no-underline transition-colors hover:bg-navy hover:text-white"
             }
           >
-            {state.delivered ? "Talk to us now on WhatsApp" : "WhatsApp instead"}
+            {state.delivered ? "Follow up on WhatsApp" : "Send on WhatsApp"}
           </a>
         </div>
       </div>
@@ -94,43 +94,63 @@ export function MicroForm({
         className="absolute left-[-9999px] h-px w-px opacity-0"
       />
 
+      {/* Name, mobile and email required — same rule as every form on the
+          site. Labels are visually hidden here, so the asterisk rides in the
+          placeholder; `required` carries it to assistive technology. */}
       <div className="mb-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
         <div>
           <label htmlFor={`mf-name-${context}`} className="sr-only">
-            Your name
+            Your name (required)
           </label>
           <input
             id={`mf-name-${context}`}
             name="name"
             required
-            placeholder="Your name"
+            autoComplete="name"
+            placeholder="Your name *"
             className={field}
           />
         </div>
         <div>
           <label htmlFor={`mf-phone-${context}`} className="sr-only">
-            Phone number
+            Mobile number (required)
           </label>
           <input
             id={`mf-phone-${context}`}
             name="phone"
             type="tel"
             required
-            placeholder="Phone number"
+            autoComplete="tel"
+            minLength={10}
+            placeholder="Mobile number *"
             className={field}
           />
         </div>
       </div>
 
+      <div className="mb-3">
+        <label htmlFor={`mf-email-${context}`} className="sr-only">
+          Email address (required)
+        </label>
+        <input
+          id={`mf-email-${context}`}
+          name="email"
+          type="email"
+          required
+          autoComplete="email"
+          placeholder="Email address *"
+          className={field}
+        />
+      </div>
+
       <div className="mb-4">
         <label htmlFor={`mf-app-${context}`} className="sr-only">
-          What are you cleaning?
+          What are you cleaning? (optional)
         </label>
         <input
           id={`mf-app-${context}`}
           name="message"
-          required
-          placeholder="What are you cleaning? e.g. aluminium housings, ultrasonic"
+          placeholder="What are you cleaning? (optional) e.g. aluminium housings"
           className={field}
         />
       </div>

@@ -22,16 +22,26 @@ type InquiryFormProps = {
   variant: "home" | "contact";
 };
 
-const HOME_FIELDS: FieldDef[] = [
-  { name: "company", label: "Company", placeholder: "Your company name", required: true },
-  { name: "industry", label: "Industry", placeholder: "Choose your industry", type: "select" },
+/**
+ * Name, mobile and email are required on every form on the site, in that
+ * order; company and industry are optional. The home variant used to ask for
+ * company and not for a name, and the contact variant had no phone field at
+ * all — a lead sales could not call back.
+ */
+const REQUIRED_FIELDS: FieldDef[] = [
+  { name: "name", label: "Full Name", placeholder: "Your full name", required: true },
+  { name: "phone", label: "Mobile Number", placeholder: "+91 98450 12345", type: "tel", required: true },
   { name: "email", label: "Email Address", placeholder: "you@company.com", type: "email", required: true },
-  { name: "phone", label: "Phone Number", placeholder: "+91", type: "tel" },
+];
+
+const HOME_FIELDS: FieldDef[] = [
+  ...REQUIRED_FIELDS,
+  { name: "company", label: "Company", placeholder: "Your company name" },
+  { name: "industry", label: "Industry", placeholder: "Choose your industry", type: "select" },
 ];
 
 const CONTACT_FIELDS: FieldDef[] = [
-  { name: "name", label: "Full Name", placeholder: "Your full name", required: true },
-  { name: "email", label: "Email Address", placeholder: "you@company.com", type: "email", required: true },
+  ...REQUIRED_FIELDS,
   { name: "company", label: "Company", placeholder: "Company name" },
   { name: "industry", label: "Industry", placeholder: "Choose your industry", type: "select" },
 ];
@@ -59,6 +69,12 @@ export function InquiryForm({ variant }: InquiryFormProps) {
         setClientError(`Please fill in the ${f.label.toLowerCase()} field.`);
         return;
       }
+    }
+    const digits = String(fd.get("phone") ?? "").replace(/\D/g, "");
+    if (digits.length < 10 || digits.length > 15) {
+      e.preventDefault();
+      setClientError("Please enter a valid mobile number.");
+      return;
     }
     const email = String(fd.get("email") ?? "").trim();
     if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -89,6 +105,9 @@ export function InquiryForm({ variant }: InquiryFormProps) {
               className="mb-1.5 block text-xs font-semibold text-navy"
             >
               {f.label}
+              {f.required && (
+                <span aria-hidden="true" className="ml-1 text-green-deep">*</span>
+              )}
             </label>
             {f.type === "select" ? (
               <select
@@ -112,6 +131,14 @@ export function InquiryForm({ variant }: InquiryFormProps) {
                 name={f.name}
                 type={f.type ?? "text"}
                 placeholder={f.placeholder}
+                required={f.required}
+                autoComplete={
+                  f.name === "name" ? "name"
+                  : f.name === "phone" ? "tel"
+                  : f.name === "email" ? "email"
+                  : f.name === "company" ? "organization"
+                  : undefined
+                }
                 className={`w-full rounded-[10px] border border-transparent px-3.5 py-3 font-sans text-[13px] text-ink outline-none placeholder:text-muted-2 focus:border-green ${inputBg}`}
               />
             )}
@@ -164,6 +191,19 @@ export function InquiryForm({ variant }: InquiryFormProps) {
               {message}
             </p>
           )}
+          {state?.ok && state.delivered && state.whatsapp && (
+            <p className="mt-2.5 text-[12.5px] leading-[1.6] text-muted-3">
+              Need an answer sooner?{" "}
+              <a
+                href={state.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-green-deep underline-offset-4 hover:underline"
+              >
+                Send the same enquiry on WhatsApp
+              </a>
+            </p>
+          )}
           {state?.ok && state.summary && !state.delivered && (
             <div className="mt-3 rounded-[10px] border border-line-2 bg-white p-3.5">
               <pre className="mb-3 max-h-[132px] overflow-auto whitespace-pre-wrap font-mono text-[11.5px] leading-[1.6] text-muted-3">
@@ -177,10 +217,10 @@ export function InquiryForm({ variant }: InquiryFormProps) {
                   Send by email
                 </a>
                 <a
-                  href={siteConfig.contact.whatsapp}
+                  href={state.whatsapp ?? siteConfig.contact.whatsapp}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-full bg-[#25D366] px-4 py-2 text-[12px] font-semibold text-white no-underline"
+                  className="rounded-full bg-[#0E7C5A] px-4 py-2 text-[12px] font-semibold text-white no-underline transition-colors hover:bg-[#075E54]"
                 >
                   Send on WhatsApp
                 </a>

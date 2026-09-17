@@ -31,10 +31,10 @@ export const questionnaireSteps: Step[] = [
     title: "Who you are",
     blurb: "So we can send the recommendation back to the right person.",
     fields: [
-      { kind: "text", name: "company", label: "Company name", placeholder: "Your company", required: true },
       { kind: "text", name: "name", label: "Contact name", placeholder: "Your full name", required: true },
-      { kind: "text", name: "phone", label: "Mobile number", placeholder: "10 digits", type: "tel", required: true },
+      { kind: "text", name: "phone", label: "Mobile number", placeholder: "+91 98450 12345", type: "tel", required: true },
       { kind: "text", name: "email", label: "Email address", placeholder: "you@company.com", type: "email", required: true },
+      { kind: "text", name: "company", label: "Company name", placeholder: "Your company" },
       { kind: "text", name: "address", label: "Street address", placeholder: "Plant or office address" },
       { kind: "text", name: "city", label: "City", placeholder: "City" },
       { kind: "select", name: "state", label: "State", options: INDIAN_STATES },

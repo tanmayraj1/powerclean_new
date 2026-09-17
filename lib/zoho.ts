@@ -213,6 +213,11 @@ export async function createZohoLead({
     if (v) record[theirs] = v;
     mapped.add(ours);
   }
+  // Every form asks for a mobile number. Zoho Leads keeps Phone and Mobile as
+  // separate fields; Phone is the one in the default list view, Mobile is the
+  // one a salesperson on WhatsApp looks for. Fill both.
+  if (values.phone?.trim()) record.Mobile = values.phone.trim();
+
   if (cfg.customFields) {
     for (const [ours, theirs] of Object.entries(CUSTOM)) {
       const v = values[ours]?.trim();
@@ -231,7 +236,10 @@ export async function createZohoLead({
     record.First_Name = first;
     record.Last_Name = restName.join(" ");
   }
-  record.Company = company || name || "Not given";
+  // Company is optional on every form now, and Zoho requires it. Falling back
+  // to the person's name made a lead read as a firm called "Meena Iyer";
+  // "Not given" tells sales to ask.
+  record.Company = company || "Not given";
   record.Lead_Source = cfg.leadSource;
   if (cfg.ownerId) record.Owner = cfg.ownerId;
 

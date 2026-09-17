@@ -25,7 +25,47 @@ export function QuestionnaireForm() {
     null
   );
   const [step, setStep] = useState(0);
+  const [clientError, setClientError] = useState<string | null>(null);
   const last = questionnaireSteps.length - 1;
+
+  /**
+   * Submitting is allowed from any step, but the required fields live on step
+   * 1 and every other step is `hidden`. Native validation cannot focus a
+   * hidden control, so Chrome blocked the submit and reported it only in the
+   * console — the visitor saw nothing happen. Check here instead, and take
+   * them back to the field.
+   */
+  const validate = (e: React.FormEvent<HTMLFormElement>) => {
+    const fd = new FormData(e.currentTarget);
+    const problem = (name: string): string | null => {
+      const v = String(fd.get(name) ?? "").trim();
+      if (name === "name" && !v) return "Please enter your name.";
+      if (name === "phone") {
+        const d = v.replace(/\D/g, "");
+        if (d.length < 10 || d.length > 15) return "Please enter a valid mobile number.";
+      }
+      if (name === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v))
+        return "Please enter a valid email address.";
+      return null;
+    };
+    for (const name of ["name", "phone", "email"]) {
+      const msg = problem(name);
+      if (!msg) continue;
+      e.preventDefault();
+      const at = questionnaireSteps.findIndex((s) => s.fields.some((f) => f.name === name));
+      setStep(at);
+      setClientError(msg);
+      // after the step is shown, so the field is focusable
+      requestAnimationFrame(() => document.getElementById(`q-${name}`)?.focus());
+      return;
+    }
+    if (!fd.get("consent")) {
+      e.preventDefault();
+      setClientError("Please tick the box so we know we may contact you about this enquiry.");
+      return;
+    }
+    setClientError(null);
+  };
 
   if (state?.ok) {
     return (
@@ -48,7 +88,7 @@ export function QuestionnaireForm() {
             </a>
           )}
           <a
-            href={siteConfig.contact.whatsapp}
+            href={state.whatsapp ?? siteConfig.contact.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-full border-[1.5px] border-navy px-7 py-3.5 text-[14px] font-semibold text-navy no-underline transition-colors hover:bg-navy hover:text-white"
@@ -71,7 +111,7 @@ export function QuestionnaireForm() {
   }
 
   return (
-    <form action={action} className="rounded-card-lg bg-white p-[clamp(22px,3vw,36px)] ring-1 ring-inset ring-line-2">
+    <form action={action} onSubmit={validate} noValidate className="rounded-card-lg bg-white p-[clamp(22px,3vw,36px)] ring-1 ring-inset ring-line-2">
       {/* Explicit "Step 1 of 4" above the rail. The numbered pills already
           implied the count, but only once you stopped to read them — someone
           deciding whether to start needs to see how short it is at a glance. */}
@@ -152,9 +192,9 @@ export function QuestionnaireForm() {
       />
       <input type="hidden" name="context" value="Chemical questionnaire" />
 
-      {state && state.message && !state.ok && (
+      {(clientError || (state && state.message && !state.ok)) && (
         <p role="alert" className="mt-5 text-[13.5px] font-medium text-[#9a3412]">
-          {state.message}
+          {clientError ?? state?.message}
         </p>
       )}
 

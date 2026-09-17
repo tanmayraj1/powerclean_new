@@ -31,7 +31,9 @@ Roovel is Bangalore-based, so `in` is likely, but confirm it.
 
 Still in the API console, on the Self Client's **Generate Code** tab:
 
-- **Scope:** `ZohoCRM.modules.leads.CREATE,ZohoCRM.modules.leads.READ`
+- **Scope:** `ZohoCRM.modules.leads.ALL`
+  (Leads module only. Not CREATE alone: the site *upserts*, so a repeat
+  enquiry updates the existing lead, which CREATE does not cover.)
 - **Time duration:** 10 minutes
 - **Scope Description:** anything, e.g. `powerclean website`
 

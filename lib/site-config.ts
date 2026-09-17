@@ -16,7 +16,7 @@ export const siteConfig = {
   contact: {
     email: "sales@roovel.com",
     phones: ["+91-9731727868", "+91-9731751808"],
-    whatsapp: "https://wa.me/+919731727868",
+    whatsapp: "https://wa.me/919731727868",
     address:
       "P11, ITI Ancillary Industrial Estate, 2nd Main Rd, Mahadevapura Post, Bangalore, Karnataka 560048",
     addressShort: "Mahadevapura, Bangalore",
