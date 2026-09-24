@@ -30,7 +30,7 @@ export function CtaFormBanner() {
             Tell us about your line and we&apos;ll come back with a matched
             formulation and trial plan.
           </p>
-          <InquiryForm variant="home" />
+          <InquiryForm variant="home" formName="Home page consultation form" />
         </Reveal>
       </div>
     </div>

@@ -11,6 +11,8 @@
  * Setup lives in ZOHO-SETUP.md.
  */
 
+import { questionnaireSteps } from "@/lib/questionnaire";
+
 /* ------------------------------------------------------------------ *
  * Configuration
  * ------------------------------------------------------------------ */
@@ -148,142 +150,276 @@ const CUSTOM: Record<string, string> = {
 };
 
 /**
- * Everything else — nineteen questionnaire answers plus the free-text fields —
- * goes into Description as a readable block. Without this the answers would be
- * silently dropped, which is worse than un-filterable.
+ * Fields that already have their own Zoho column, so repeating them in the
+ * Description would be noise. Industry is deliberately NOT here: Zoho's
+ * Industry is a picklist, our sector names are not in it, and an org can be
+ * set to drop unknown picklist values — so it is kept in the text as well.
  */
-function description(
-  entries: LeadEntry[],
-  context: string,
-  skip: Set<string>
-): string {
-  const lines = entries
-    .filter((e) => !skip.has(e.key))
-    .map((e) => `${e.label}: ${e.value}`);
-  return [
-    context ? `Enquiry from: ${context}` : "Enquiry from the Power Clean website",
-    "",
-    ...lines,
-  ].join("\n");
-}
+const IN_OWN_COLUMN = new Set([
+  "name", "context", "email", "phone", "company", "city", "state", "pin", "address",
+]);
+
+/** questionnaire field → the step it belongs to, for the Description headings */
+const STEP_OF: Record<string, string> = Object.fromEntries(
+  questionnaireSteps.flatMap((s) => s.fields.map((f) => [f.name, s.title]))
+);
+
+/** Zoho's multi-line text limit is 32,000; leave headroom. */
+const DESCRIPTION_MAX = 30000;
 
 /** One answer, as it appears in both the CRM description and the fallback email. */
 export type LeadEntry = { key: string; label: string; value: string };
 
+/** Where an enquiry came from — rendered at the top of its Description block. */
+export type LeadSource = {
+  /** which form, e.g. "Contact page form", "Chemical questionnaire" */
+  form: string;
+  /** full URL of the page it was sent from */
+  page?: string;
+  /** what the page was about, e.g. "Product: POWER CLEAN XL" */
+  context?: string;
+};
+
+/**
+ * One enquiry as a Description block:
+ *
+ *   — Chemical questionnaire · 17 Sep 2026, 4:13 pm IST —
+ *   Page: https://powerclean.in/questionnaire
+ *
+ *   What you clean today
+ *   What metal are the components?: aluminium ADC12
+ *
+ * Questionnaire answers sit under their step headings so a 25-question lead
+ * reads like the form did. Everything else is listed plainly.
+ */
+function enquiryBlock(
+  entries: LeadEntry[],
+  source: LeadSource,
+  skip: Set<string>
+): string {
+  const when = new Date().toLocaleString("en-IN", {
+    timeZone: "Asia/Kolkata",
+    dateStyle: "medium",
+    timeStyle: "short",
+  });
+  const lines: string[] = [`— ${source.form} · ${when} IST —`];
+  if (source.page) lines.push(`Page: ${source.page}`);
+  if (source.context && source.context !== source.form)
+    lines.push(`About: ${source.context}`);
+
+  const shown = entries.filter((e) => !skip.has(e.key));
+  const plain = shown.filter((e) => !STEP_OF[e.key]);
+  if (plain.length) {
+    lines.push("");
+    for (const e of plain) lines.push(`${e.label}: ${e.value}`);
+  }
+  for (const step of questionnaireSteps) {
+    const inStep = shown.filter((e) => STEP_OF[e.key] === step.title);
+    if (!inStep.length) continue;
+    lines.push("", step.title);
+    for (const e of inStep) lines.push(`${e.label}: ${e.value}`);
+  }
+  return lines.join("\n");
+}
+
 export type ZohoResult =
-  | { ok: true; id: string }
+  | { ok: true; id: string; action: "created" | "updated" | "upserted" }
   | { ok: false; reason: "unconfigured" | "auth" | "api" | "network" };
 
 /* ------------------------------------------------------------------ *
  * Lead creation
  * ------------------------------------------------------------------ */
 
+type Cfg = NonNullable<ReturnType<typeof config>>;
+
+async function zohoFetch(
+  cfg: Cfg,
+  token: string,
+  path: string,
+  init: { method: string; body?: unknown }
+): Promise<Response> {
+  const res = await fetch(`https://${cfg.hosts.api}/crm/${cfg.version}${path}`, {
+    method: init.method,
+    headers: {
+      Authorization: `Zoho-oauthtoken ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: init.body === undefined ? undefined : JSON.stringify(init.body),
+    cache: "no-store",
+    signal: AbortSignal.timeout(8000),
+  });
+  // A 401 means the cached token went stale early (an admin revoked it, or
+  // the instance slept past expiry). Drop it so the next call re-exchanges.
+  if (res.status === 401) cached = null;
+  return res;
+}
+
+type Row = { code?: string; details?: { id?: string }; message?: string };
+
+async function firstRow(res: Response): Promise<Row | undefined> {
+  const json = (await res.json().catch(() => ({}))) as { data?: Row[] };
+  return json.data?.[0];
+}
+
 /**
- * Upsert a lead, de-duplicating on email then phone so a plant that enquires
- * three times from three product pages becomes one lead with a growing
- * history rather than three records sales has to merge by hand.
+ * Create or update a lead for this enquiry.
  *
- * `entries` arrives already label-mapped and ordered by the caller, so the
- * Description block reads the same as the fallback email.
+ * A returning customer is looked up by email first. Upsert alone used to
+ * overwrite: a plant that sent a detailed questionnaire and later a quick
+ * form with no company had its Company replaced by "Not given" and its
+ * Description — the questionnaire — replaced by one line. Now:
+ *
+ *   - new email   → a new lead
+ *   - known email → only the real values sent are updated (never the
+ *                   placeholders Zoho needs on create), and the new enquiry is
+ *                   added to the TOP of the Description, so the history of
+ *                   what they asked for builds up on one record
+ *   - lookup fails → the previous upsert, which is known to work, so a lead is
+ *                   never lost to a search error
  */
 export async function createZohoLead({
   values,
   entries,
-  context,
+  source,
 }: {
   /** raw form values, keyed by our field names */
   values: Record<string, string>;
   /** ordered answers, as they appear in the fallback email */
   entries: LeadEntry[];
-  /** which page the enquiry came from */
-  context: string;
+  source: LeadSource;
 }): Promise<ZohoResult> {
   const cfg = config();
   if (!cfg) return { ok: false, reason: "unconfigured" };
   const token = await accessToken();
   if (!token) return { ok: false, reason: "auth" };
 
-  const record: Record<string, unknown> = {};
-  // Anything that lands in its own Zoho column is dropped from the
-  // Description block below — repeating it there would just be noise.
-  const mapped = new Set<string>(["name", "context"]);
-
+  // --- the real values from the form ---
+  const real: Record<string, unknown> = {};
+  const skip = new Set(IN_OWN_COLUMN);
   for (const [ours, theirs] of Object.entries(STANDARD)) {
     const v = values[ours]?.trim();
-    if (v) record[theirs] = v;
-    mapped.add(ours);
+    if (v) real[theirs] = v;
   }
   // Every form asks for a mobile number. Zoho Leads keeps Phone and Mobile as
   // separate fields; Phone is the one in the default list view, Mobile is the
   // one a salesperson on WhatsApp looks for. Fill both.
-  if (values.phone?.trim()) record.Mobile = values.phone.trim();
-
+  if (values.phone?.trim()) real.Mobile = values.phone.trim();
   if (cfg.customFields) {
     for (const [ours, theirs] of Object.entries(CUSTOM)) {
       const v = values[ours]?.trim();
-      if (v) record[theirs] = v;
-      mapped.add(ours);
+      if (v) real[theirs] = v;
+      skip.add(ours);
+    }
+  }
+  const name = values.name?.trim() ?? "";
+  if (name) {
+    const [first, ...rest] = name.split(/\s+/);
+    if (rest.length) {
+      real.First_Name = first;
+      real.Last_Name = rest.join(" ");
+    } else {
+      real.Last_Name = name;
     }
   }
 
-  // Zoho rejects a lead without Last_Name or Company. The micro-form asks for
-  // neither reliably, so derive both rather than lose the lead outright.
-  const name = values.name?.trim() ?? "";
-  const company = values.company?.trim() ?? "";
-  record.Last_Name = name || company || "Website enquiry";
-  if (name && name.includes(" ")) {
-    const [first, ...restName] = name.split(/\s+/);
-    record.First_Name = first;
-    record.Last_Name = restName.join(" ");
+  const block = enquiryBlock(entries, source, skip);
+  const email = values.email?.trim() ?? "";
+
+  // --- 1. is this a returning customer? ---
+  let existing: { id: string; Description?: string } | null = null;
+  let lookupFailed = !email;
+  if (email) {
+    try {
+      const res = await zohoFetch(
+        cfg,
+        token,
+        `/Leads/search?email=${encodeURIComponent(email)}`,
+        { method: "GET" }
+      );
+      if (res.status === 204) {
+        existing = null; // no lead with this email
+      } else if (res.ok) {
+        const json = (await res.json()) as {
+          data?: { id: string; Description?: string }[];
+        };
+        existing = json.data?.[0] ?? null;
+      } else {
+        lookupFailed = true;
+        console.error("[zoho] lead search failed:", res.status);
+      }
+    } catch (err) {
+      lookupFailed = true;
+      console.error("[zoho] lead search threw:", err);
+    }
   }
-  // Company is optional on every form now, and Zoho requires it. Falling back
-  // to the person's name made a lead read as a firm called "Meena Iyer";
-  // "Not given" tells sales to ask.
-  record.Company = company || "Not given";
-  record.Lead_Source = cfg.leadSource;
-  if (cfg.ownerId) record.Owner = cfg.ownerId;
-
-  record.Description = description(entries, context, mapped);
-
-  const duplicateField = values.email?.trim() ? "Email" : "Phone";
 
   try {
-    const res = await fetch(
-      `https://${cfg.hosts.api}/crm/${cfg.version}/Leads/upsert`,
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Zoho-oauthtoken ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          data: [record],
-          duplicate_check_fields: [duplicateField],
+    // --- 2a. returning customer: add, never overwrite ---
+    if (existing && !lookupFailed) {
+      const previous = existing.Description?.trim();
+      const description = (
+        previous ? `${block}\n\n\n${previous}` : block
+      ).slice(0, DESCRIPTION_MAX);
+      const res = await zohoFetch(cfg, token, `/Leads/${existing.id}`, {
+        method: "PUT",
+        body: {
+          data: [{ ...real, Description: description }],
           trigger: ["workflow"],
-        }),
-        cache: "no-store",
-        signal: AbortSignal.timeout(8000),
+        },
+      });
+      if (res.status === 401) return { ok: false, reason: "auth" };
+      const row = await firstRow(res);
+      if (row?.code === "SUCCESS") {
+        return { ok: true, id: row.details?.id ?? existing.id, action: "updated" };
       }
-    );
-
-    // A 401 means the cached token went stale early (an admin revoked it, or
-    // the instance slept past expiry). Drop it so the next call re-exchanges.
-    if (res.status === 401) {
-      cached = null;
-      return { ok: false, reason: "auth" };
+      console.error("[zoho] lead update rejected:", row?.code, row?.message);
+      return { ok: false, reason: "api" };
     }
 
-    const json = (await res.json()) as {
-      data?: { code?: string; details?: { id?: string }; message?: string }[];
+    // Zoho requires Last_Name and Company to create a lead. Placeholders are
+    // used only here — on create — so they can never overwrite real data.
+    const created = {
+      ...real,
+      Last_Name: real.Last_Name ?? "Website enquiry",
+      Company: real.Company ?? "Not given",
+      Lead_Source: cfg.leadSource,
+      Description: block,
+      ...(cfg.ownerId ? { Owner: cfg.ownerId } : {}),
     };
-    const row = json.data?.[0];
+
+    // --- 2b. new customer ---
+    if (!lookupFailed) {
+      const res = await zohoFetch(cfg, token, `/Leads`, {
+        method: "POST",
+        body: { data: [created], trigger: ["workflow"] },
+      });
+      if (res.status === 401) return { ok: false, reason: "auth" };
+      const row = await firstRow(res);
+      if (row?.code === "SUCCESS" && row.details?.id) {
+        return { ok: true, id: row.details.id, action: "created" };
+      }
+      console.error("[zoho] lead create rejected:", row?.code, row?.message);
+      return { ok: false, reason: "api" };
+    }
+
+    // --- 2c. lookup unavailable: the upsert that is known to work ---
+    const res = await zohoFetch(cfg, token, `/Leads/upsert`, {
+      method: "POST",
+      body: {
+        data: [created],
+        duplicate_check_fields: [email ? "Email" : "Phone"],
+        trigger: ["workflow"],
+      },
+    });
+    if (res.status === 401) return { ok: false, reason: "auth" };
+    const row = await firstRow(res);
     if (row?.code === "SUCCESS" && row.details?.id) {
-      return { ok: true, id: row.details.id };
+      return { ok: true, id: row.details.id, action: "upserted" };
     }
     console.error("[zoho] upsert rejected:", row?.code, row?.message);
     return { ok: false, reason: "api" };
   } catch (err) {
-    console.error("[zoho] upsert threw:", err);
+    console.error("[zoho] request threw:", err);
     return { ok: false, reason: "network" };
   }
 }

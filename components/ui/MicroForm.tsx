@@ -5,6 +5,7 @@ import { submitInquiry, type InquiryState } from "@/app/actions";
 import { Arrow } from "./Arrow";
 import { siteConfig } from "@/lib/site-config";
 import { ConsentCheckbox } from "./ConsentCheckbox";
+import { FormSource } from "./FormSource";
 
 /**
  * Three-field inline enquiry form.
@@ -83,6 +84,7 @@ export function MicroForm({
 
       {/* names the page this lead came from, so the email says what prompted it */}
       <input type="hidden" name="context" value={context} />
+      <FormSource form="Quick enquiry form" />
 
       {/* bots fill hidden fields; humans do not */}
       <input

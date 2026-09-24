@@ -6,6 +6,7 @@ import { Arrow } from "./Arrow";
 import { questionnaireSteps, type Field } from "@/lib/questionnaire";
 import { siteConfig } from "@/lib/site-config";
 import { ConsentCheckbox } from "./ConsentCheckbox";
+import { FormSource } from "./FormSource";
 
 /**
  * The chemical questionnaire, in four steps.
@@ -190,7 +191,7 @@ export function QuestionnaireForm() {
         aria-hidden="true"
         className="absolute left-[-9999px] h-px w-px opacity-0"
       />
-      <input type="hidden" name="context" value="Chemical questionnaire" />
+      <FormSource form="Chemical questionnaire" />
 
       {(clientError || (state && state.message && !state.ok)) && (
         <p role="alert" className="mt-5 text-[13.5px] font-medium text-[#9a3412]">

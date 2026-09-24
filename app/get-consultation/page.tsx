@@ -204,7 +204,7 @@ export default function GetConsultationPage() {
               Tell us about your line. Every enquiry is answered within 24
               hours.
             </p>
-            <InquiryForm variant="contact" />
+            <InquiryForm variant="contact" formName="Free consultation form" />
             <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 border-t border-line-2 pt-5 text-[13px] text-muted-3">
               <a
                 href={`mailto:${siteConfig.contact.email}`}

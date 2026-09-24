@@ -47,6 +47,23 @@ const FIELD_ORDER = [
   ...questionnaireFields.map((f) => f.name),
 ];
 
+/**
+ * Full URL of the page a form was sent from. The path comes from the form; the
+ * host comes from the request, so it reads correctly on staging and on
+ * powerclean.in alike. Anything that is not a plain site path is dropped
+ * rather than trusted into the CRM.
+ */
+async function pageUrl(path: string): Promise<string | undefined> {
+  if (!/^\/[\w\-/.%]*$/.test(path) || path.length > 200) return undefined;
+  try {
+    const h = await headers();
+    const host = h.get("x-forwarded-host") ?? h.get("host");
+    return host ? `https://${host}${path}` : path;
+  } catch {
+    return path;
+  }
+}
+
 /** Identifies the submitter for throttling. Best-effort — see lib/rate-limit. */
 async function clientKey(): Promise<string> {
   try {
@@ -131,18 +148,24 @@ export async function submitInquiry(
   }
 
   const summary = entries.map((e) => `${e.label}: ${e.value}`).join("\n");
-  const context = String(formData.get("context") ?? "").trim();
+  const context = String(formData.get("context") ?? "").trim().slice(0, 120);
+  // Which form, and the page it sat on. Every form sends both as hidden fields
+  // so the CRM record says exactly where the enquiry came from — the main
+  // enquiry form used to send neither, and landed as "Enquiry from the Power
+  // Clean website".
+  const form = String(formData.get("form") ?? "").trim().slice(0, 80) || "Website form";
+  const page = await pageUrl(String(formData.get("page") ?? ""));
   const who = String(
     formData.get("company") || formData.get("name") || "website"
   ).trim();
-  const subject = `Enquiry from ${who}${context ? ` — ${context}` : ""}`;
+  const subject = `Enquiry from ${who} — ${form}${context ? `: ${context}` : ""}`;
   const body = `${summary}\n\n— Sent from powerclean website`;
   const mailto = `mailto:${siteConfig.contact.email}?subject=${encodeURIComponent(
     subject
   )}&body=${encodeURIComponent(body)}`;
 
   const delivered = zohoConfigured()
-    ? (await createZohoLead({ values, entries, context })).ok
+    ? (await createZohoLead({ values, entries, source: { form, page, context } })).ok
     : false;
 
   // Saved in the CRM: send the visitor to a confirmation page with nothing to
@@ -154,7 +177,11 @@ export async function submitInquiry(
   // Same enquiry, pre-filled for WhatsApp. Previously every "Send on WhatsApp"
   // button opened a blank chat, so a visitor who had just filled the form in
   // had to type it all again — most would not.
-  const whatsapp = whatsappEnquiry({ summary, context, delivered });
+  const whatsapp = whatsappEnquiry({
+    summary,
+    context: context ? `${form}: ${context}` : form,
+    delivered,
+  });
 
   return {
     ok: true,

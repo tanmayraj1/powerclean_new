@@ -171,7 +171,7 @@ export default function RequestCleanupPage() {
               Describe the part and the soil. We will confirm what to send and
               where, usually the same day.
             </p>
-            <InquiryForm variant="contact" />
+            <InquiryForm variant="contact" formName="Request a Cleanup form" />
             <div className="mt-6 border-t border-line-2 pt-5 text-[13px] leading-[1.7] text-muted-3">
               <span className="mb-1.5 block font-mono text-[10.5px] uppercase tracking-[0.1em] text-green-deep">
                 Send components to

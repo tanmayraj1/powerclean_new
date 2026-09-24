@@ -101,7 +101,7 @@ export default function ContactPage() {
               Tell us about your process — parts, soils, current chemistry —
               and we&apos;ll respond with a matched approach.
             </p>
-            <InquiryForm variant="contact" />
+            <InquiryForm variant="contact" formName="Contact page form" />
           </Reveal>
         </div>
       </div>

@@ -7,6 +7,7 @@ import { Magnetic } from "@/components/motion/Magnetic";
 import { Arrow } from "./Arrow";
 import { InlineContact } from "./InlineContact";
 import { ConsentCheckbox } from "./ConsentCheckbox";
+import { FormSource } from "./FormSource";
 import { siteConfig } from "@/lib/site-config";
 
 type FieldDef = {
@@ -20,6 +21,8 @@ type FieldDef = {
 type InquiryFormProps = {
   /** which field set to render — Home CTA banner vs Contact page */
   variant: "home" | "contact";
+  /** how this placement is named in the CRM, e.g. "Contact page form" */
+  formName?: string;
 };
 
 /**
@@ -50,7 +53,7 @@ const CONTACT_FIELDS: FieldDef[] = [
  * Consultation / contact form — client-validated with slide-in messages,
  * wired to the stubbed `submitInquiry` server action.
  */
-export function InquiryForm({ variant }: InquiryFormProps) {
+export function InquiryForm({ variant, formName }: InquiryFormProps) {
   const [state, formAction, pending] = useActionState<InquiryState, FormData>(
     submitInquiry,
     null
@@ -145,6 +148,10 @@ export function InquiryForm({ variant }: InquiryFormProps) {
           </div>
         ))}
       </div>
+      <FormSource
+        form={formName ?? (variant === "home" ? "Home page consultation form" : "Enquiry form")}
+      />
+
       {/* bots fill hidden fields; humans do not */}
       <input
         type="text"
