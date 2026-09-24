@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/seo";
+import { isIndexablePath, isProductionHost } from "@/lib/indexing";
 import { products } from "@/lib/products";
 import { articles } from "@/lib/articles";
 import { blogPosts } from "@/lib/blog";
@@ -23,7 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority,
   });
 
-  return [
+  const all: MetadataRoute.Sitemap = [
     page("/", 1, "weekly"),
     page("/products", 0.9, "weekly"),
     page("/products/quick-view", 0.85, "monthly"),
@@ -79,4 +80,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...solutions.map((s) => page(`/solutions/${s.slug}`, 0.8)),
     ...products.map((p) => page(`/products/${p.slug}`, 0.7)),
   ];
+
+  // While the site is served from a host other than powerclean.in, list only
+  // the sections search engines are allowed to index. Submitting a noindex URL
+  // is not harmful in itself, but it fills Search Console with "Submitted URL
+  // marked noindex" errors that hide the real ones.
+  if (isProductionHost(new URL(SITE_URL).host)) return all;
+  return all.filter((entry) => isIndexablePath(new URL(entry.url).pathname));
 }
