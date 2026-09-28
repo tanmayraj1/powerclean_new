@@ -34,7 +34,7 @@ export function organizationJsonLd() {
     brand: { "@type": "Brand", name: "Power Clean" },
     slogan: siteConfig.motto,
     url: SITE_URL,
-    logo: `${SITE_URL}/logo.png`,
+    logo: `${SITE_URL}/logo.webp`,
     email: siteConfig.contact.email,
     telephone: siteConfig.contact.phones[0],
     foundingDate: "2011",
@@ -174,7 +174,7 @@ export function articleJsonLd({
     publisher: {
       "@type": "Organization",
       name: SITE_NAME,
-      logo: { "@type": "ImageObject", url: `${SITE_URL}/logo.png` },
+      logo: { "@type": "ImageObject", url: `${SITE_URL}/logo.webp` },
     },
   };
 }

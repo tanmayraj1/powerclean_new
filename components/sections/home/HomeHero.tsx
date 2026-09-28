@@ -33,6 +33,7 @@ export function HomeHero() {
           sizes="100vw"
           quality={85}
           priority
+          unoptimized
           className="object-cover object-center"
         />
         {/* Scrim: keeps the headline and stat card readable over the photo and

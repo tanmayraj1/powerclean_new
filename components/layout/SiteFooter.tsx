@@ -47,7 +47,7 @@ export function SiteFooter() {
         <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] items-start gap-10">
           <div>
             <Image
-              src="/logo.png"
+              src="/logo.webp"
               alt="Power Clean — industrial cleaning chemicals by Roovel Solutions"
               width={173}
               height={52}

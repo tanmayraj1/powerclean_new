@@ -18,7 +18,6 @@ type Stage = "counting" | "rings" | "exit" | "done";
 export function IntroCurtain() {
   const reduced = usePrefersReducedMotion();
   const [stage, setStage] = useState<Stage | null>(null);
-  const [count, setCount] = useState(0);
   const started = useRef(false);
 
   useEffect(() => {
@@ -43,7 +42,9 @@ export function IntroCurtain() {
   // lock the page while the curtain is up (shared, ref-counted)
   useScrollLock(running);
 
-  // 000 → 100 counter (1050ms, ease-out cubic)
+  const countRef = useRef<HTMLDivElement>(null);
+
+  // 000 → 100 counter (600ms, ease-out cubic)
   useEffect(() => {
     if (stage !== "counting") return;
     const d = 600;
@@ -51,7 +52,11 @@ export function IntroCurtain() {
     let raf = 0;
     const frame = (n: number) => {
       const p = Math.min(1, (n - s) / d);
-      setCount(Math.round((1 - Math.pow(1 - p, 3)) * 100));
+      if (countRef.current) {
+        countRef.current.textContent = String(
+          Math.round((1 - Math.pow(1 - p, 3)) * 100)
+        ).padStart(3, "0");
+      }
       if (p < 1) raf = requestAnimationFrame(frame);
       else setStage("rings");
     };
@@ -113,15 +118,16 @@ export function IntroCurtain() {
             ))}
           </div>
           <Image
-            src="/logo.png"
+            src="/logo.webp"
             alt="Power Clean — industrial cleaning chemicals by Roovel Solutions"
             width={253}
             height={76}
             className="h-[76px] w-auto brightness-0 invert"
-            loading="eager"
+            priority
+            unoptimized
           />
-          <div className="font-mono text-[64px] font-semibold tracking-[-0.02em] text-white">
-            {String(count).padStart(3, "0")}
+          <div ref={countRef} className="font-mono text-[64px] font-semibold tracking-[-0.02em] text-white">
+            000
           </div>
           <div className="font-mono text-[11px] font-medium tracking-[0.3em] text-white/80">
             CONCENTRATION READOUT · % ACTIVE

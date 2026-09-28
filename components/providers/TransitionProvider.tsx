@@ -115,7 +115,7 @@ export function TransitionProvider({ children }: { children: ReactNode }) {
               transition={{ duration: 0.3, delay: 0.25 }}
             >
               <Image
-                src="/logo.png"
+                src="/logo.webp"
                 alt=""
                 width={240}
                 height={72}
@@ -139,7 +139,7 @@ export function TransitionProvider({ children }: { children: ReactNode }) {
             }}
           >
             <Image
-              src="/logo.png"
+              src="/logo.webp"
               alt=""
               width={240}
               height={72}

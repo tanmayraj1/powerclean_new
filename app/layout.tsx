@@ -137,6 +137,15 @@ export default function RootLayout({
       lang="en-IN"
       className={`${poppins.variable} ${plexMono.variable} h-full antialiased`}
     >
+      <head>
+        <link
+          rel="preload"
+          as="image"
+          href="/hero-bg.webp"
+          type="image/webp"
+          fetchPriority="high"
+        />
+      </head>
       <body className="flex min-h-full flex-col overflow-x-clip">
         <JsonLd
           data={[

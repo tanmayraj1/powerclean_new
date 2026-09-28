@@ -169,7 +169,7 @@ export function SiteNav() {
           {/* logo */}
           <TransitionLink href="/" className="flex shrink-0 items-center">
             <Image
-              src="/logo.png"
+              src="/logo.webp"
               alt="Power Clean — industrial cleaning chemicals by Roovel Solutions"
               width={153}
               height={46}
