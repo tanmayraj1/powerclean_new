@@ -47,7 +47,7 @@ export function Facility() {
           <div className="relative h-[240px] overflow-hidden rounded-card">
             <ImageSlot
               brief="Photo — R&D lab, technician testing a formulation"
-              src="/lab-beaker.png"
+              src="/lab-beaker.webp"
               alt="Power Clean industrial degreaser being measured in a beaker in the applications lab"
               sizes="(max-width: 940px) 100vw, 50vw"
               className="absolute inset-0"

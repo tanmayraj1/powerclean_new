@@ -1,10 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { poppins, plexMono } from "./fonts";
+import { LazyCustomCursor as CustomCursor } from "@/components/providers/LazyCustomCursor";
 import { LenisProvider } from "@/components/providers/LenisProvider";
 import { TransitionProvider } from "@/components/providers/TransitionProvider";
 import { IntroCurtain } from "@/components/providers/IntroCurtain";
-import { CustomCursor } from "@/components/providers/CustomCursor";
 import { SiteNav } from "@/components/layout/SiteNav";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { QuickContact } from "@/components/layout/QuickContact";

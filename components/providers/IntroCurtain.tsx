@@ -46,7 +46,7 @@ export function IntroCurtain() {
   // 000 → 100 counter (1050ms, ease-out cubic)
   useEffect(() => {
     if (stage !== "counting") return;
-    const d = 1050;
+    const d = 600;
     const s = performance.now();
     let raf = 0;
     const frame = (n: number) => {
@@ -62,7 +62,7 @@ export function IntroCurtain() {
   // rings expand while the 620ms hold runs, then the panel wipes up
   useEffect(() => {
     if (stage !== "rings") return;
-    const t = setTimeout(() => setStage("exit"), 620);
+    const t = setTimeout(() => setStage("exit"), 350);
     return () => clearTimeout(t);
   }, [stage]);
 
@@ -75,7 +75,7 @@ export function IntroCurtain() {
   // running when rAF does not, so this always fires.
   useEffect(() => {
     if (!running) return;
-    const t = setTimeout(() => setStage("done"), 4000);
+    const t = setTimeout(() => setStage("done"), 2500);
     return () => clearTimeout(t);
   }, [running]);
 

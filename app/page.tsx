@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { SITE_URL, howToJsonLd } from "@/lib/seo";
 import { deploySteps } from "@/lib/solutions";
@@ -9,9 +10,7 @@ import { SolutionsGrid } from "@/components/sections/home/SolutionsGrid";
 import { Statement } from "@/components/sections/home/Statement";
 import { Facility } from "@/components/sections/home/Facility";
 import { Process } from "@/components/sections/home/Process";
-import { CaseStudies } from "@/components/sections/home/CaseStudies";
 import { CtaFormBanner } from "@/components/sections/home/CtaFormBanner";
-import { Testimonials } from "@/components/sections/home/Testimonials";
 import { Resources } from "@/components/sections/home/Resources";
 import { HomeFaq } from "@/components/sections/home/HomeFaq";
 import { WhyPowerClean } from "@/components/sections/home/WhyPowerClean";
@@ -19,6 +18,21 @@ import { WashProcesses } from "@/components/sections/home/WashProcesses";
 import { ApplicationsIndex } from "@/components/sections/home/ApplicationsIndex";
 import { ReplaceSolvents } from "@/components/sections/home/ReplaceSolvents";
 import { RippleDivider } from "@/components/ui/RippleDivider";
+
+/* Heavy below-fold client components — dynamic import keeps their GSAP/motion
+   JS out of the initial bundle, improving Speed Index on mobile. */
+const CaseStudies = dynamic(
+  () =>
+    import("@/components/sections/home/CaseStudies").then(
+      (m) => m.CaseStudies,
+    ),
+);
+const Testimonials = dynamic(
+  () =>
+    import("@/components/sections/home/Testimonials").then(
+      (m) => m.Testimonials,
+    ),
+);
 
 export const metadata: Metadata = {
   title:

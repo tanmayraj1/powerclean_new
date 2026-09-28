@@ -25,15 +25,14 @@ export function HomeHero() {
       <div className="relative flex min-h-[min(84vh,720px)] overflow-hidden rounded-section bg-[linear-gradient(135deg,#23273f_0%,#292F6E_45%,#3a4188_100%)]">
         {/* Hero photograph — LCP image, so it loads eagerly at high priority. */}
         <Image
-          src="/hero-bg.png"
+          src="/hero-bg.webp"
           // the site's LCP image and its most valuable image-search surface —
           // it carries the brand lockup, so it is content, not wallpaper
           alt="Steel gear splashing through water, branded Power Clean industrial degreaser"
           fill
           sizes="100vw"
-          quality={90}
-          loading="eager"
-          fetchPriority="high"
+          quality={85}
+          priority
           className="object-cover object-center"
         />
         {/* Scrim: keeps the headline and stat card readable over the photo and

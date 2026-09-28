@@ -143,7 +143,7 @@ of shipments with SDS &amp; dosing guidance
         >
           <ImageSlot
             brief="Macro photo — foam breaking down grime on brushed steel"
-            src="/parts-cleaned.png"
+            src="/parts-cleaned.webp"
             alt="Precision-cleaned machined components — aluminium housing, copper connecting rod and stator — after a Power Clean wash cycle"
             sizes="(max-width: 940px) 100vw, 33vw"
             className="absolute inset-0"
