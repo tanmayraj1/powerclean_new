@@ -1,20 +1,19 @@
 import { siteConfig } from "./site-config";
 
 /**
- * Canonical site URL — the final production domain.
+ * Canonical site URL — the live production domain.
  *
  * Everything derives from this: canonicals, OG and Twitter URLs, the sitemap,
  * RSS, llms.txt / llms-full.txt and every schema `@id`. Override it with
  * NEXT_PUBLIC_SITE_URL on a preview deployment; production should use the
  * default so nothing points at a Vercel preview hostname.
  *
- * IMPORTANT: pick ONE host and make the other 301 to it. This is the apex
- * (powerclean.in). If DNS ends up serving www as the primary instead, change
- * this string and redirect the apex — never let both resolve without a
- * redirect, or every page competes with a duplicate of itself.
+ * Currently the new site lives on new.powerclean.in while the old site stays
+ * on powerclean.in. When DNS is cut over, change this to https://powerclean.in
+ * and 301-redirect the subdomain.
  */
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://powerclean.in";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://new.powerclean.in";
 
 export const SITE_NAME = "Power Clean";
 
