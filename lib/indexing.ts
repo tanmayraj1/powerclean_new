@@ -40,7 +40,7 @@ export const INDEXABLE_PREFIXES = [
 
 /** Hosts that are the real site, where everything may be indexed. */
 export const PRODUCTION_HOSTS = (
-  process.env.INDEXABLE_HOSTS ?? "powerclean.in,www.powerclean.in"
+  process.env.INDEXABLE_HOSTS ?? "powerclean.in,www.powerclean.in,new.powerclean.in"
 )
   .split(",")
   .map((h) => h.trim().toLowerCase())
