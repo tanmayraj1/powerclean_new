@@ -96,13 +96,17 @@ const nextConfig: NextConfig = {
        * powerclean.in points at this project, sending new.powerclean.in to it
        * would hand every visitor to the OLD site. Set REDIRECT_SUBDOMAIN=1 in
        * Vercel only once the apex is serving this project.
+       *
+       * Points at www, not the apex: www is the primary domain in Vercel, so
+       * sending the subdomain to the apex cost a second hop on every one of
+       * the 130 subdomain URLs Google has indexed.
        */
       ...(process.env.REDIRECT_SUBDOMAIN === "1"
         ? [
             {
               source: "/:path*",
               has: [{ type: "host" as const, value: "new.powerclean.in" }],
-              destination: "https://powerclean.in/:path*",
+              destination: "https://www.powerclean.in/:path*",
               permanent: true,
             },
           ]
